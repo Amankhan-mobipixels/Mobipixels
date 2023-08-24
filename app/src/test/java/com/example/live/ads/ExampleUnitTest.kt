@@ -1,4 +1,4 @@
-package com.skytek.live.ads
+package com.example.live.ads
 
 import org.junit.Test
 

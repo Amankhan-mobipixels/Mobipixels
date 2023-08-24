@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.skytek.live.ads'
+    namespace 'com.example.live'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.skytek.live.ads"
+        applicationId "com.example.live"
         minSdk 21
         targetSdk 33
         versionCode 1

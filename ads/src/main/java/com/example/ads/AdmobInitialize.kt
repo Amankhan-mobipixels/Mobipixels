@@ -1,4 +1,4 @@
-package com.skytek.live.ads
+package com.example.ads
 
 import android.app.Application
 import com.google.android.gms.ads.MobileAds

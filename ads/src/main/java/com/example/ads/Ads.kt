@@ -1,4 +1,4 @@
-package com.skytek.live.ads
+package com.example.ads
 
 import android.app.Activity
 import android.os.Bundle
@@ -30,7 +30,7 @@ var mInterstitialAd:InterstitialAd? = null
 
 fun loadInterstitialAd(ctx: Activity, id: String, callback: (loaded:Boolean,failed:Boolean) -> Unit) {
 
-    if (mInterstitialAd!=null){
+    if (mInterstitialAd !=null){
         callback(true, false)
         return
     }
@@ -47,7 +47,7 @@ fun loadInterstitialAd(ctx: Activity, id: String, callback: (loaded:Boolean,fail
 }
 
     fun showInterstitialAd(ctx: Activity, callback: (showed:Boolean,dismissed:Boolean,error:Boolean) -> Unit) {
-        if (mInterstitialAd==null) {
+        if (mInterstitialAd ==null) {
             callback(false, false,true)
             return
         }

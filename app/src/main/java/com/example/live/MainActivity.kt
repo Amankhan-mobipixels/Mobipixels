@@ -1,10 +1,16 @@
-package com.skytek.live.ads
+package com.example.live
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
-import com.skytek.live.ads.databinding.ActivityMainBinding
+import com.example.ads.loadAdvanceNativeAd
+import com.example.ads.loadBannerAd
+import com.example.ads.loadCollapsibleBannerAd
+import com.example.ads.loadInterstitialAd
+import com.example.ads.loadShowInterstitialAd
+import com.example.ads.loadSmallNativeAd
+import com.example.ads.showInterstitialAd
+import com.example.live.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

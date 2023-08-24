@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace 'com.skytek.live.ads'
+    namespace 'com.example.ads'
     compileSdk 33
 
     defaultConfig {
