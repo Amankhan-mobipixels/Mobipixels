@@ -23,7 +23,7 @@ How to use:
 
         loadInterstitialAd(this, getString(R.string.interstitial_ad)) { loaded, failed ->
             if (loaded) Log.d("adddddd", "loaded")
-            else if (failed) Log.d("adddddd", "failed")
+            if (failed) Log.d("adddddd", "failed")
         }
 
         showInterstitialAd(this) { showed, dismissed, error ->
