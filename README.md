@@ -1,9 +1,7 @@
 # Admob-Ads
-//add maven in your project level gradle
-
+add maven in your project level gradle
 ````
 allprojects {
-
 	repositories {
 		...
 		maven { url 'https://jitpack.io' 
@@ -11,8 +9,7 @@ allprojects {
 	}
 }
 ````
-// add dependency in module level gradle
-
+add dependency in module level gradle
 ````
 dependencies:
 {
@@ -40,6 +37,10 @@ How to use:
         }
 
         loadBannerAd(this,binding.banner,getString(R.string.banner_id))
+	
         loadSmallNativeAd(this,binding.nativeSmall,getString(R.string.native_ad))
+	
         loadAdvanceNativeAd(this,binding.nativeAdvance,getString(R.string.native_ad))
+	
         loadCollapsibleBannerAd(this,binding.collapsibleBanner,getString(R.string.collapsible_id))
+	
