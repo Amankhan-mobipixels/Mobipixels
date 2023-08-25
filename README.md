@@ -36,6 +36,14 @@ How to use:
             if (dismissed) Log.d("adddddd", "dismissed")
         }
 
+        loadShowRewardedAd(this,getString(R.string.rewarded_ad)){loaded, failed, showed, complete,dismissed ->
+            if (loaded) Log.d("adddddd", "loaded")
+            if (failed) Log.d("adddddd", "failed")
+            if (showed) Log.d("adddddd", "showed")
+            if (complete) Log.d("adddddd", "complete")
+            if (dismissed) Log.d("adddddd", "dismissed")
+        }
+
         loadBannerAd(this,binding.banner,getString(R.string.banner_id))
 	
         loadSmallNativeAd(this,binding.nativeSmall,getString(R.string.native_ad))
