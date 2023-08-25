@@ -36,6 +36,18 @@ How to use:
             if (dismissed) Log.d("adddddd", "dismissed")
         }
 
+      loadRewardedAd(this,getString(R.string.rewarded_ad)){loaded, failed ->
+            if (loaded) Log.d("adddddd", "loaded")
+            if (failed) Log.d("adddddd", "failed")
+        }
+	
+        showRewardedAd(this){showed, completed, dismissed, error ->
+            if (showed) Log.d("adddddd", "showed")
+            if (completed) Log.d("adddddd", "complete")
+            if (dismissed) Log.d("adddddd", "dismissed") 
+            if (error) Log.d("adddddd", "error")
+        }
+	
         loadShowRewardedAd(this,getString(R.string.rewarded_ad)){loaded, failed, showed, complete,dismissed ->
             if (loaded) Log.d("adddddd", "loaded")
             if (failed) Log.d("adddddd", "failed")
