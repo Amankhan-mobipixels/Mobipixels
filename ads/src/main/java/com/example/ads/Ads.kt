@@ -3,6 +3,7 @@ package com.example.ads
 import android.app.Activity
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
@@ -19,16 +20,19 @@ import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.OnUserEarnedRewardListener
 import com.google.android.gms.ads.admanager.AdManagerAdRequest
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.gms.ads.nativead.MediaView
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
+import com.google.android.gms.ads.rewarded.RewardedAd
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 
 var mInterstitialAd:InterstitialAd? = null
 
-fun loadInterstitialAd(ctx: Activity, id: String, callback: (loaded:Boolean,failed:Boolean) -> Unit) {
+    fun loadInterstitialAd(ctx: Activity, id: String, callback: (loaded:Boolean,failed:Boolean) -> Unit) {
 
     if (mInterstitialAd !=null){
         callback(true, false)
@@ -45,7 +49,6 @@ fun loadInterstitialAd(ctx: Activity, id: String, callback: (loaded:Boolean,fail
         }
     })
 }
-
     fun showInterstitialAd(ctx: Activity, callback: (showed:Boolean,dismissed:Boolean,error:Boolean) -> Unit) {
         if (mInterstitialAd ==null) {
             callback(false, false,true)
@@ -54,19 +57,18 @@ fun loadInterstitialAd(ctx: Activity, id: String, callback: (loaded:Boolean,fail
         mInterstitialAd?.show(ctx)
         mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdDismissedFullScreenContent() {
-                callback(true, false,false)
                 super.onAdDismissedFullScreenContent()
+                callback(true, false,false)
             }
 
             override fun onAdShowedFullScreenContent() {
+                super.onAdShowedFullScreenContent()
                 callback(false, true,false)
                 mInterstitialAd = null
-                super.onAdShowedFullScreenContent()
             }
         }
     }
-
-     fun loadShowInterstitialAd(ctx: Activity, id: String, callback: (loaded:Boolean,failed:Boolean,showed:Boolean,dismissed:Boolean) -> Unit) {
+    fun loadShowInterstitialAd(ctx: Activity, id: String, callback: (loaded:Boolean,failed:Boolean,showed:Boolean,dismissed:Boolean) -> Unit) {
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(ctx, id, adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdLoaded(interstitialAd: InterstitialAd) {
@@ -90,6 +92,82 @@ fun loadInterstitialAd(ctx: Activity, id: String, callback: (loaded:Boolean,fail
             }
         })
     }
+
+     private var rewardedAd: RewardedAd? = null
+     fun loadRewardedAd(ctx: Activity,id:String,callback: (loaded:Boolean,failed:Boolean) -> Unit){
+         if (rewardedAd !=null){
+             callback(true, false)
+             return
+         }
+
+       var adRequest = AdRequest.Builder().build()
+       RewardedAd.load(ctx,id, adRequest, object : RewardedAdLoadCallback() {
+        override fun onAdFailedToLoad(adError: LoadAdError) {
+            callback(false,true)
+        }
+        override fun onAdLoaded(ad: RewardedAd) {
+            rewardedAd =ad
+            callback(true,false)
+
+        }
+    })
+}
+     fun showRewardedAd(ctx: Activity,callback: (showed: Boolean,completed:Boolean,dismissed:Boolean,error:Boolean) -> Unit){
+         if (rewardedAd ==null) {
+             callback(false, false,false,true)
+             return
+         }
+         rewardedAd?.show(ctx, OnUserEarnedRewardListener { rewardItem ->
+             callback(false,true,false,false)
+             // Handle the reward.
+             val rewardAmount = rewardItem.amount
+             val rewardType = rewardItem.type
+             Log.d("hjjh", "User earned the reward.")
+         })
+
+         rewardedAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
+             override fun onAdShowedFullScreenContent() {
+                 super.onAdShowedFullScreenContent()
+                     rewardedAd = null
+                     callback(true,false,false,false)
+             }
+
+                override fun onAdDismissedFullScreenContent() {
+                    super.onAdDismissedFullScreenContent()
+                    callback(false,false,true,false)
+                }
+
+        }
+}
+     fun loadShowRewardedAd(ctx: Activity,id:String,callback: (loaded:Boolean,failed:Boolean,showed: Boolean,completed:Boolean,dismissed:Boolean) -> Unit){
+    var adRequest = AdRequest.Builder().build()
+    RewardedAd.load(ctx,id, adRequest, object : RewardedAdLoadCallback() {
+        override fun onAdFailedToLoad(adError: LoadAdError) {
+            callback(false,true,false,false,false)
+        }
+        override fun onAdLoaded(ad: RewardedAd) {
+            callback(true,false,false,false,false)
+            ad.show(ctx, OnUserEarnedRewardListener { rewardItem ->
+                callback(false,false,false,true,false)
+                // Handle the reward.
+                val rewardAmount = rewardItem.amount
+                val rewardType = rewardItem.type
+                Log.d("hjjh", "User earned the reward.")
+            })
+
+            ad?.fullScreenContentCallback = object: FullScreenContentCallback() {
+                override fun onAdShowedFullScreenContent() {
+                    callback(false,false,true,false,false)
+                }
+
+                override fun onAdDismissedFullScreenContent() {
+                    super.onAdDismissedFullScreenContent()
+                    callback(false,false,false,false,true)
+                }
+            }
+        }
+    })
+}
 
      fun loadBannerAd(activity: Activity, view: FrameLayout, id: String) {
         val adView = AdView(activity)
@@ -309,3 +387,4 @@ fun loadInterstitialAd(ctx: Activity, id: String, callback: (loaded:Boolean,fail
         }
         adView.setNativeAd(nativeAd)
     }
+

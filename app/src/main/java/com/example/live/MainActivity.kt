@@ -7,9 +7,12 @@ import com.example.ads.loadAdvanceNativeAd
 import com.example.ads.loadBannerAd
 import com.example.ads.loadCollapsibleBannerAd
 import com.example.ads.loadInterstitialAd
+import com.example.ads.loadRewardedAd
 import com.example.ads.loadShowInterstitialAd
+import com.example.ads.loadShowRewardedAd
 import com.example.ads.loadSmallNativeAd
 import com.example.ads.showInterstitialAd
+import com.example.ads.showRewardedAd
 import com.example.live.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,22 +23,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        loadInterstitialAd(this, getString(R.string.interstitial_ad)) { loaded, failed ->
-            if (loaded) Log.d("adddddd", "loaded")
-            else if (failed) Log.d("adddddd", "failed")
-        }
-
-        showInterstitialAd(this) { showed, dismissed, error ->
-            if (showed) Log.d("adddddd", "showed")
-            if (dismissed) Log.d("adddddd", "dismissed")
-            if (error) Log.d("adddddd", "error")
-        }
-
-        loadShowInterstitialAd(this, getString(R.string.interstitial_ad)) { loaded, failed, showed, dismissed ->
+        loadRewardedAd(this,getString(R.string.rewarded_ad)){loaded, failed ->
             if (loaded) Log.d("adddddd", "loaded")
             if (failed) Log.d("adddddd", "failed")
+        }
+        showRewardedAd(this){showed, completed, dismissed, error ->
             if (showed) Log.d("adddddd", "showed")
+            if (completed) Log.d("adddddd", "complete")
             if (dismissed) Log.d("adddddd", "dismissed")
+            if (error) Log.d("adddddd", "error")
         }
 
         loadBannerAd(this,binding.banner,getString(R.string.banner_id))
