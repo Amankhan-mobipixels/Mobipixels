@@ -13,8 +13,11 @@ add dependency in module level gradle
 ````
 dependencies:
 {
-implementation 'com.github.Amankhan-mobipixels:Admob-Ads:1.0.4'
+implementation 'com.github.Amankhan-mobipixels:Admob-Ads:1.0.6'
 }
+````
+Initialize Admob SDK:
+MobileAds.initialize(this) {}
 ````
 How to use:
 
