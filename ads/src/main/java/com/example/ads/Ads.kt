@@ -1,6 +1,7 @@
 package com.example.ads
 
 import android.app.Activity
+import android.graphics.Color
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
@@ -8,10 +9,9 @@ import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.RatingBar
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
 import com.google.ads.mediation.admob.AdMobAdapter
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdLoader
@@ -32,93 +32,93 @@ import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 
 var mInterstitialAd:InterstitialAd? = null
 
-    fun loadInterstitialAd(ctx: Activity, id: String, callback: (loaded:Boolean,failed:Boolean) -> Unit) {
+    fun loadInterstitialAd(ctx: Activity, id: String, callback: ((loaded:Boolean,failed:Boolean) -> Unit)? = null) {
 
     if (mInterstitialAd !=null){
-        callback(true, false)
+        callback?.invoke(true, false)
         return
     }
     val adRequest = AdRequest.Builder().build()
     InterstitialAd.load(ctx, id, adRequest, object : InterstitialAdLoadCallback() {
         override fun onAdLoaded(interstitialAd: InterstitialAd) {
             mInterstitialAd = interstitialAd
-            callback(true, false)
+            callback?.invoke(true, false)
         }
         override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-            callback(false, true)
+            callback?.invoke(false, true)
         }
     })
 }
-    fun showInterstitialAd(ctx: Activity, callback: (showed:Boolean,dismissed:Boolean,error:Boolean) -> Unit) {
+    fun showInterstitialAd(ctx: Activity, callback: ((showed:Boolean,dismissed:Boolean,error:Boolean) -> Unit)? = null) {
         if (mInterstitialAd ==null) {
-            callback(false, false,true)
+            callback?.invoke(false, false, true)
             return
         }
         mInterstitialAd?.show(ctx)
         mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdDismissedFullScreenContent() {
                 super.onAdDismissedFullScreenContent()
-                callback(true, false,false)
+                callback?.invoke(true, false, false)
             }
 
             override fun onAdShowedFullScreenContent() {
                 super.onAdShowedFullScreenContent()
-                callback(false, true,false)
+                callback?.invoke(false, true, false)
                 mInterstitialAd = null
             }
         }
     }
-    fun loadShowInterstitialAd(ctx: Activity, id: String, callback: (loaded:Boolean,failed:Boolean,showed:Boolean,dismissed:Boolean) -> Unit) {
+    fun loadShowInterstitialAd(ctx: Activity, id: String, callback: ((loaded:Boolean,failed:Boolean,showed:Boolean,dismissed:Boolean) -> Unit)? = null) {
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(ctx, id, adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                callback(true,false,false,false)
+                callback?.invoke(true, false, false, false)
                 interstitialAd.show(ctx)
                 interstitialAd.fullScreenContentCallback = object : FullScreenContentCallback() {
                     override fun onAdDismissedFullScreenContent() {
-                        callback(false,false,false,true)
+                        callback?.invoke(false, false, false, true)
                         super.onAdDismissedFullScreenContent()
                     }
 
                     override fun onAdShowedFullScreenContent() {
-                        callback(false,false,true,false)
+                        callback?.invoke(false, false, true, false)
                         super.onAdShowedFullScreenContent()
                     }
                 }
             }
 
             override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                callback(false,true,false,false)
+                callback?.invoke(false, true, false, false)
             }
         })
     }
 
      private var rewardedAd: RewardedAd? = null
-     fun loadRewardedAd(ctx: Activity,id:String,callback: (loaded:Boolean,failed:Boolean) -> Unit){
+     fun loadRewardedAd(ctx: Activity,id:String,callback: ((loaded:Boolean,failed:Boolean) -> Unit)? = null){
          if (rewardedAd !=null){
-             callback(true, false)
+             callback?.invoke(true, false)
              return
          }
 
        var adRequest = AdRequest.Builder().build()
        RewardedAd.load(ctx,id, adRequest, object : RewardedAdLoadCallback() {
         override fun onAdFailedToLoad(adError: LoadAdError) {
-            callback(false,true)
+            callback?.invoke(false, true)
         }
         override fun onAdLoaded(ad: RewardedAd) {
             rewardedAd =ad
-            callback(true,false)
+            callback?.invoke(true, false)
 
         }
     })
 }
-     fun showRewardedAd(ctx: Activity,callback: (showed: Boolean,completed:Boolean,dismissed:Boolean,error:Boolean) -> Unit){
+     fun showRewardedAd(ctx: Activity,callback: ((showed: Boolean,completed:Boolean,dismissed:Boolean,error:Boolean) -> Unit)? = null){
          if (rewardedAd ==null) {
-             callback(false, false,false,true)
+             callback?.invoke(false, false, false, true)
              return
          }
          rewardedAd?.show(ctx, OnUserEarnedRewardListener { rewardItem ->
-             callback(false,true,false,false)
+             callback?.invoke(false, true, false, false)
              // Handle the reward.
              val rewardAmount = rewardItem.amount
              val rewardType = rewardItem.type
@@ -129,40 +129,40 @@ var mInterstitialAd:InterstitialAd? = null
              override fun onAdShowedFullScreenContent() {
                  super.onAdShowedFullScreenContent()
                      rewardedAd = null
-                     callback(true,false,false,false)
+                 callback?.invoke(true, false, false, false)
              }
 
                 override fun onAdDismissedFullScreenContent() {
                     super.onAdDismissedFullScreenContent()
-                    callback(false,false,true,false)
+                    callback?.invoke(false, false, true, false)
                 }
 
         }
 }
-     fun loadShowRewardedAd(ctx: Activity,id:String,callback: (loaded:Boolean,failed:Boolean,showed: Boolean,completed:Boolean,dismissed:Boolean) -> Unit){
+     fun loadShowRewardedAd(ctx: Activity,id:String,callback: ((loaded:Boolean,failed:Boolean,showed: Boolean,completed:Boolean,dismissed:Boolean) -> Unit)? = null){
     var adRequest = AdRequest.Builder().build()
     RewardedAd.load(ctx,id, adRequest, object : RewardedAdLoadCallback() {
         override fun onAdFailedToLoad(adError: LoadAdError) {
-            callback(false,true,false,false,false)
+            callback?.invoke(false, true, false, false, false)
         }
         override fun onAdLoaded(ad: RewardedAd) {
-            callback(true,false,false,false,false)
+            callback?.invoke(true, false, false, false, false)
             ad.show(ctx, OnUserEarnedRewardListener { rewardItem ->
-                callback(false,false,false,true,false)
+                callback?.invoke(false, false, false, true, false)
                 // Handle the reward.
                 val rewardAmount = rewardItem.amount
                 val rewardType = rewardItem.type
                 Log.d("hjjh", "User earned the reward.")
             })
 
-            ad?.fullScreenContentCallback = object: FullScreenContentCallback() {
+            ad.fullScreenContentCallback = object: FullScreenContentCallback() {
                 override fun onAdShowedFullScreenContent() {
-                    callback(false,false,true,false,false)
+                    callback?.invoke(false, false, true, false, false)
                 }
 
                 override fun onAdDismissedFullScreenContent() {
                     super.onAdDismissedFullScreenContent()
-                    callback(false,false,false,false,true)
+                    callback?.invoke(false, false, false, false, true)
                 }
             }
         }
@@ -196,7 +196,7 @@ var mInterstitialAd:InterstitialAd? = null
         adView.loadAd(adRequest)
     }
 
-     private fun getAdSize(activity: Activity): AdSize? {
+     private fun getAdSize(activity: Activity): AdSize {
         // Step 2 - Determine the screen width (less decorations) to use for the ad width.
         val display = activity.windowManager.defaultDisplay
         val outMetrics = DisplayMetrics()
@@ -209,140 +209,56 @@ var mInterstitialAd:InterstitialAd? = null
 
     }
 
-     fun loadSmallNativeAd(ctx: Activity, nativeAdContainer: FrameLayout, id: String) {
+     fun loadNativeAd(ctx: Activity, nativeAdContainer: FrameLayout, id: String,adType: AdType,
+                      buttonColor:String,backgroundColor:String,callback: ((loaded:Boolean,failed:Boolean) -> Unit)?=null) {
         val builder = AdLoader.Builder(ctx, id)
         builder.forNativeAd { nativeAd ->
-            val nativeView = ctx.layoutInflater.inflate(R.layout.native_small, null) as NativeAdView
-            smallNativeAdView(nativeAd, nativeView)
+           val nativeView:NativeAdView = when(adType){
+                AdType.NativeSmall -> {
+                    ctx.layoutInflater.inflate(R.layout.native_small, null) as NativeAdView
+                }
+
+                AdType.NativeAdvance -> {
+                    ctx.layoutInflater.inflate(R.layout.native_advance, null) as NativeAdView
+                }
+
+                else -> {
+                    NativeAdView(ctx)
+                }
+            }
+            NativeAdView(nativeAd, nativeView,buttonColor,backgroundColor,adType)
             nativeAdContainer.removeAllViews()
             nativeAdContainer.addView(nativeView)
             nativeAdContainer.visibility = View.VISIBLE
         }
         val adLoader = builder.withAdListener(object : AdListener() {
-            fun onAdFailedToLoad(errorCode: Int) {}
-            override fun onAdClicked() {
-                // Log the click event or other custom behavior.
+            override fun onAdLoaded() {
+                callback?.invoke(true, false)
+            }
+
+            override fun onAdFailedToLoad(p0: LoadAdError) {
+                callback?.invoke(false, true)
             }
         }).build()
         adLoader.loadAd(AdManagerAdRequest.Builder().build())
     }
-
-    private fun smallNativeAdView(nativeAd: NativeAd, adView: NativeAdView) {
+    private fun NativeAdView(nativeAd: NativeAd, adView: NativeAdView,buttonColor:String, backgroundColor:String,adType: AdType) {
+        adView.findViewById<LinearLayout>(R.id.background).setBackgroundColor(Color.parseColor(backgroundColor))
+        if(adType == AdType.NativeAdvance){
+            adView.mediaView = adView.findViewById<View>(R.id.ad_media) as MediaView
+            adView.mediaView!!.mediaContent = nativeAd.mediaContent
+        }
 
         adView.headlineView = adView.findViewById(R.id.ad_headline)
         adView.bodyView = adView.findViewById(R.id.ad_body)
         adView.callToActionView = adView.findViewById(R.id.ad_call_to_action)
         adView.iconView = adView.findViewById(R.id.ad_app_icon)
-        adView.starRatingView = adView.findViewById(R.id.ad_stars)
-        adView.priceView = adView.findViewById(R.id.ad_price)
-        val constraint: ConstraintLayout = adView.findViewById(R.id.constraint)
-        val ad_body = adView.findViewById<TextView>(R.id.ad_body)
-        val ad_headline = adView.findViewById<TextView>(R.id.ad_headline)
-
-        (adView.headlineView as TextView).text = nativeAd.headline
-        if (nativeAd.body == null) {
-            adView.bodyView?.visibility = View.INVISIBLE
-        } else {
-            adView.bodyView?.visibility = View.VISIBLE
-            (adView.bodyView as TextView).text = nativeAd.body
-        }
-        if (nativeAd.callToAction == null) {
-            adView.callToActionView?.visibility = View.INVISIBLE
-        } else {
-            adView.callToActionView?.visibility = View.VISIBLE
-            (adView.callToActionView as Button).text = nativeAd.callToAction
-        }
-        if (nativeAd.starRating == null) {
-            adView.starRatingView?.visibility = View.GONE
-        } else {
-            (adView.starRatingView as RatingBar).rating = nativeAd.starRating!!.toFloat()
-            adView.starRatingView?.visibility = View.VISIBLE
-        }
-        if (nativeAd.price == null) {
-            adView.priceView?.visibility = View.GONE
-        } else {
-            adView.priceView?.visibility = View.VISIBLE
-            (adView.priceView as TextView).text = nativeAd.price
-        }
-        if (nativeAd.icon == null) {
-            adView.iconView?.visibility = View.GONE
-            val constraintSet = ConstraintSet()
-            constraintSet.clone(constraint)
-            constraintSet.connect(
-                R.id.ad_headline,
-                ConstraintSet.TOP,
-                constraint.id,
-                ConstraintSet.TOP,
-                24
-            )
-            constraintSet.connect(
-                R.id.ad_headline,
-                ConstraintSet.START,
-                ConstraintSet.PARENT_ID,
-                ConstraintSet.START,
-                32
-            )
-            constraintSet.connect(
-                R.id.ad_body,
-                ConstraintSet.START,
-                ConstraintSet.PARENT_ID,
-                ConstraintSet.START,
-                32
-            )
-            constraintSet.connect(
-                R.id.ad_body,
-                ConstraintSet.TOP,
-                R.id.ad_headline,
-                ConstraintSet.BOTTOM,
-                3
-            )
-            ad_headline.textSize = 16f
-            ad_body.textSize = 14f
-            constraintSet.applyTo(constraint)
-        } else {
-            (adView.iconView as ImageView).setImageDrawable(
-                nativeAd.icon?.drawable
-            )
-            adView.iconView?.visibility = View.VISIBLE
-        }
 
 
-        // This method tells the Google Mobile Ads SDK that you have finished populating your
-        // native ad view with this native ad.
-        adView.setNativeAd(nativeAd)
-    }
-
-     fun loadAdvanceNativeAd(ctx: Activity, nativeAdContainer: FrameLayout, id: String) {
-        val builder = AdLoader.Builder(ctx, id)
-        builder.forNativeAd { nativeAd ->
-            val nativeView =
-                ctx.layoutInflater.inflate(R.layout.native_advance, null) as NativeAdView
-            advanceNativeAdView(nativeAd, nativeView)
-            nativeAdContainer.removeAllViews()
-            nativeAdContainer.addView(nativeView)
-            nativeAdContainer.visibility = View.VISIBLE
-        }
-        val adLoader = builder.withAdListener(object : AdListener() {
-            fun onAdFailedToLoad(errorCode: Int) {}
-            override fun onAdClicked() {
-                // Log the click event or other custom behavior.
-            }
-        }).build()
-        adLoader.loadAd(AdManagerAdRequest.Builder().build())
-    }
-
-    private fun advanceNativeAdView(nativeAd: NativeAd, adView: NativeAdView) {
-        adView.mediaView = adView.findViewById<View>(R.id.ad_media) as MediaView
-        adView.headlineView = adView.findViewById(R.id.ad_headline)
-        adView.bodyView = adView.findViewById(R.id.ad_body)
-        adView.callToActionView = adView.findViewById(R.id.ad_call_to_action)
-        adView.iconView = adView.findViewById(R.id.ad_app_icon)
-        adView.priceView = adView.findViewById(R.id.ad_price)
-        adView.advertiserView = adView.findViewById(R.id.ad_advertiser)
-        adView.storeView = adView.findViewById(R.id.ad_store)
-        adView.starRatingView = adView.findViewById(R.id.ad_stars)
         (adView.headlineView as TextView?)!!.text = nativeAd.headline
-        adView.mediaView!!.mediaContent = nativeAd.mediaContent
+        (adView.headlineView as TextView?)!!.isSelected = true
+        (adView.headlineView as TextView?)!!.setTextColor(Color.parseColor(buttonColor))
+
         if (nativeAd.body == null) {
             adView.bodyView!!.visibility = View.INVISIBLE
         } else {
@@ -354,36 +270,13 @@ var mInterstitialAd:InterstitialAd? = null
         } else {
             adView.callToActionView!!.visibility = View.VISIBLE
             (adView.callToActionView as Button?)!!.text = nativeAd.callToAction
+            (adView.callToActionView as Button?)!!.setBackgroundColor(Color.parseColor(buttonColor))
         }
         if (nativeAd.icon == null) {
             adView.iconView!!.visibility = View.GONE
         } else {
             (adView.iconView as ImageView?)!!.setImageDrawable(nativeAd.icon!!.drawable)
             adView.iconView!!.visibility = View.VISIBLE
-        }
-        if (nativeAd.price == null) {
-            adView.priceView!!.visibility = View.INVISIBLE
-        } else {
-            adView.priceView!!.visibility = View.VISIBLE
-            (adView.priceView as TextView?)!!.text = nativeAd.price
-        }
-        if (nativeAd.store == null) {
-            adView.storeView!!.visibility = View.INVISIBLE
-        } else {
-            adView.storeView!!.visibility = View.VISIBLE
-            (adView.storeView as TextView?)!!.text = nativeAd.store
-        }
-        if (nativeAd.starRating == null) {
-            adView.starRatingView!!.visibility = View.INVISIBLE
-        } else {
-            (adView.starRatingView as RatingBar?)!!.rating = nativeAd.starRating!!.toFloat()
-            adView.starRatingView!!.visibility = View.VISIBLE
-        }
-        if (nativeAd.advertiser == null) {
-            adView.advertiserView!!.visibility = View.INVISIBLE
-        } else {
-            (adView.advertiserView as TextView?)!!.text = nativeAd.advertiser
-            adView.advertiserView!!.visibility = View.VISIBLE
         }
         adView.setNativeAd(nativeAd)
     }

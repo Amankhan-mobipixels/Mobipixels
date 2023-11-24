@@ -3,16 +3,9 @@ package com.example.live
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.ads.loadAdvanceNativeAd
-import com.example.ads.loadBannerAd
-import com.example.ads.loadCollapsibleBannerAd
-import com.example.ads.loadInterstitialAd
-import com.example.ads.loadRewardedAd
-import com.example.ads.loadShowInterstitialAd
-import com.example.ads.loadShowRewardedAd
-import com.example.ads.loadSmallNativeAd
-import com.example.ads.showInterstitialAd
-import com.example.ads.showRewardedAd
+import com.example.ads.AdType
+import com.example.ads.GDPRMessage
+import com.example.ads.loadNativeAd
 import com.example.live.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -23,20 +16,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        loadRewardedAd(this,getString(R.string.rewarded_ad)){loaded, failed ->
-            if (loaded) Log.d("adddddd", "loaded")
-            if (failed) Log.d("adddddd", "failed")
-        }
-        showRewardedAd(this){showed, completed, dismissed, error ->
-            if (showed) Log.d("adddddd", "showed")
-            if (completed) Log.d("adddddd", "complete")
-            if (dismissed) Log.d("adddddd", "dismissed")
-            if (error) Log.d("adddddd", "error")
-        }
+//        val consent = GDPRMessage(this)
+//        consent.consentMessageRequest()
+//        consent.getConsent{
+//                Log.d("Fdsfsdfsdsavt", it.toString())
+//            }
 
-        loadBannerAd(this,binding.banner,getString(R.string.banner_id))
-        loadSmallNativeAd(this,binding.nativeSmall,getString(R.string.native_ad))
-        loadAdvanceNativeAd(this,binding.nativeAdvance,getString(R.string.native_ad))
-        loadCollapsibleBannerAd(this,binding.collapsibleBanner,getString(R.string.collapsible_id))
+//        loadBannerAd(this,binding.banner,getString(R.string.banner_id))
+        loadNativeAd(this,binding.nativeSmall,getString(R.string.native_ad),AdType.NativeSmall,"#0730F7","#2857649A"){
+            loaded, failed ->
+        }
+        loadNativeAd(this,binding.nativeAdvance,getString(R.string.native_ad),AdType.NativeAdvance,"#FF9902","#469F7941")
+//        loadCollapsibleBannerAd(this,binding.collapsibleBanner,getString(R.string.collapsible_id))
     }
 }
