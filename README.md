@@ -13,7 +13,7 @@ add dependency in module level gradle
 ````
 dependencies:
 {
-implementation 'com.github.Amankhan-mobipixels:Admob-Ads:1.0.6'
+implementation 'com.github.Amankhan-mobipixels:Admob-Ads:1.1.0'
 }
 ````
 Initialize Admob SDK
@@ -22,49 +22,25 @@ MobileAds.initialize(this) {}
 ````
 How to use:
 
-        loadInterstitialAd(this, getString(R.string.interstitial_ad)) { loaded, failed ->
-            if (loaded) Log.d("adddddd", "loaded")
-            if (failed) Log.d("adddddd", "failed")
-        }
+        loadInterstitialAd(this, getString(R.string.interstitial_ad))
 
-        showInterstitialAd(this) { showed, dismissed, error ->
-            if (showed) Log.d("adddddd", "showed")
-            if (dismissed) Log.d("adddddd", "dismissed")
-            if (error) Log.d("adddddd", "error")
-        }
+        showInterstitialAd(this)
 
-        loadShowInterstitialAd(this, getString(R.string.interstitial_ad)) { loaded, failed, showed, dismissed ->
-            if (loaded) Log.d("adddddd", "loaded")
-            if (failed) Log.d("adddddd", "failed")
-            if (showed) Log.d("adddddd", "showed")
-            if (dismissed) Log.d("adddddd", "dismissed")
-        }
+        loadShowInterstitialAd(this, getString(R.string.interstitial_ad))
 
-      loadRewardedAd(this,getString(R.string.rewarded_ad)){loaded, failed ->
-            if (loaded) Log.d("adddddd", "loaded")
-            if (failed) Log.d("adddddd", "failed")
-        }
+        loadRewardedAd(this,getString(R.string.rewarded_ad))
+       
+	showRewardedAd(this)
 	
-        showRewardedAd(this){showed, completed, dismissed, error ->
-            if (showed) Log.d("adddddd", "showed")
-            if (completed) Log.d("adddddd", "complete")
-            if (dismissed) Log.d("adddddd", "dismissed") 
-            if (error) Log.d("adddddd", "error")
-        }
-	
-        loadShowRewardedAd(this,getString(R.string.rewarded_ad)){loaded, failed, showed, complete,dismissed ->
-            if (loaded) Log.d("adddddd", "loaded")
-            if (failed) Log.d("adddddd", "failed")
-            if (showed) Log.d("adddddd", "showed")
-            if (complete) Log.d("adddddd", "complete")
-            if (dismissed) Log.d("adddddd", "dismissed")
-        }
+        loadShowRewardedAd(this,getString(R.string.rewarded_ad))
 
         loadBannerAd(this,binding.banner,getString(R.string.banner_id))
-	
-        loadSmallNativeAd(this,binding.nativeSmall,getString(R.string.native_ad))
-	
-        loadAdvanceNativeAd(this,binding.nativeAdvance,getString(R.string.native_ad))
-	
+
         loadCollapsibleBannerAd(this,binding.collapsibleBanner,getString(R.string.collapsible_id))
+
+        loadNativeAd(this,binding.nativeSmall,getString(R.string.native_ad),AdType.NativeSmall,"#0730F7","#2857649A",)
+       
+        loadNativeAd(this,binding.nativeAdvance,getString(R.string.native_ad),AdType.NativeAdvance,"#FF9902","#469F7941")
+       
+   
 	
