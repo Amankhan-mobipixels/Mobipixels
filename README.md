@@ -16,9 +16,14 @@ dependencies:
 implementation 'com.github.Amankhan-mobipixels:Admob-Ads:1.1.2'
 }
 ````
-Initialize Admob SDK
+get user consent on splash or mainscreen
 ````
-MobileAds.initialize(this) {}
+//if consent is true load your ad
+val consent = GDPRMessage(this)
+        consent.consentMessageRequest()
+        consent.getConsent{
+               if (it)  // LoadAd
+            }
 ````
 How to use:
 
