@@ -35,7 +35,7 @@ How to use:
 
         loadRewardedAd(this,getString(R.string.rewarded_ad))
        
-	showRewardedAd(this)
+         showRewardedAd(this)
 	
         loadShowRewardedAd(this,getString(R.string.rewarded_ad))
 
