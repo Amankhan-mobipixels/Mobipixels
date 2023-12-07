@@ -58,12 +58,12 @@ var mInterstitialAd:InterstitialAd? = null
         mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdDismissedFullScreenContent() {
                 super.onAdDismissedFullScreenContent()
-                callback?.invoke(true, false, false)
+                callback?.invoke(false, true, false)
             }
 
             override fun onAdShowedFullScreenContent() {
                 super.onAdShowedFullScreenContent()
-                callback?.invoke(false, true, false)
+                callback?.invoke(true, false, false)
                 mInterstitialAd = null
             }
         }
