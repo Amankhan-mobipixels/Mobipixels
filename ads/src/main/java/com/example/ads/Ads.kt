@@ -1,7 +1,9 @@
 package com.example.ads
 
 import android.app.Activity
+import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
@@ -10,8 +12,8 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.RatingBar
 import android.widget.TextView
+import androidx.lifecycle.Lifecycle
 import com.google.ads.mediation.admob.AdMobAdapter
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdLoader
@@ -74,6 +76,7 @@ var mInterstitialAd:InterstitialAd? = null
             override fun onAdLoaded(interstitialAd: InterstitialAd) {
                 callback?.invoke(true, false, false, false)
                 interstitialAd.show(ctx)
+
                 interstitialAd.fullScreenContentCallback = object : FullScreenContentCallback() {
                     override fun onAdDismissedFullScreenContent() {
                         callback?.invoke(false, false, false, true)
@@ -209,8 +212,8 @@ var mInterstitialAd:InterstitialAd? = null
 
     }
 
-     fun loadNativeAd(ctx: Activity, nativeAdContainer: FrameLayout, id: String,adType: AdType,
-                      buttonColor:String,backgroundColor:String,callback: ((loaded:Boolean,failed:Boolean) -> Unit)?=null) {
+     fun loadNativeAd(ctx: Activity, nativeAdContainer: FrameLayout, id: String, adType: AdType,textColor: String? = null,
+                      buttonColor:String? = null, backgroundColor:String? = null,adIcon:AdIcon?=null, callback: ((loaded:Boolean, failed:Boolean) -> Unit)?=null) {
         val builder = AdLoader.Builder(ctx, id)
         builder.forNativeAd { nativeAd ->
            val nativeView:NativeAdView = when(adType){
@@ -226,7 +229,7 @@ var mInterstitialAd:InterstitialAd? = null
                     NativeAdView(ctx)
                 }
             }
-            NativeAdView(nativeAd, nativeView,buttonColor,backgroundColor,adType)
+            nativeAdView(ctx,nativeAd, nativeView,adType,textColor,buttonColor,backgroundColor,adIcon)
             nativeAdContainer.removeAllViews()
             nativeAdContainer.addView(nativeView)
             nativeAdContainer.visibility = View.VISIBLE
@@ -242,8 +245,21 @@ var mInterstitialAd:InterstitialAd? = null
         }).build()
         adLoader.loadAd(AdManagerAdRequest.Builder().build())
     }
-    private fun NativeAdView(nativeAd: NativeAd, adView: NativeAdView,buttonColor:String, backgroundColor:String,adType: AdType) {
-        adView.findViewById<LinearLayout>(R.id.background).setBackgroundColor(Color.parseColor(backgroundColor))
+    private fun nativeAdView(context: Context,nativeAd: NativeAd, adView: NativeAdView,adType: AdType, textColor:String?,
+                             buttonColor:String?, backgroundColor:String?,adIcon: AdIcon?) {
+
+        if (backgroundColor!= null) adView.findViewById<LinearLayout>(R.id.background).setBackgroundColor(Color.parseColor(backgroundColor))
+
+        if (adIcon!=null){
+            if (adIcon == AdIcon.White) {
+                adView.findViewById<TextView>(R.id.icon_ad).background = context.getDrawable(R.drawable.ad_text_background_white)
+                adView.findViewById<TextView>(R.id.icon_ad).setTextColor(Color.WHITE)
+            }
+                else {
+                    adView.findViewById<TextView>(R.id.icon_ad).background = context.getDrawable(R.drawable.ad_text_background_black)
+                adView.findViewById<TextView>(R.id.icon_ad).setTextColor(Color.BLACK)
+            }
+        }
         if(adType == AdType.NativeAdvance){
             adView.mediaView = adView.findViewById<View>(R.id.ad_media) as MediaView
             adView.mediaView!!.mediaContent = nativeAd.mediaContent
@@ -257,20 +273,22 @@ var mInterstitialAd:InterstitialAd? = null
 
         (adView.headlineView as TextView?)!!.text = nativeAd.headline
         (adView.headlineView as TextView?)!!.isSelected = true
-        (adView.headlineView as TextView?)!!.setTextColor(Color.parseColor(buttonColor))
+        if (textColor!= null) (adView.headlineView as TextView?)!!.setTextColor(Color.parseColor(textColor))
 
         if (nativeAd.body == null) {
             adView.bodyView!!.visibility = View.INVISIBLE
         } else {
             adView.bodyView!!.visibility = View.VISIBLE
             (adView.bodyView as TextView?)!!.text = nativeAd.body
+            if (textColor!= null)  (adView.bodyView as TextView?)!!.setTextColor(Color.parseColor(textColor))
         }
         if (nativeAd.callToAction == null) {
             adView.callToActionView!!.visibility = View.INVISIBLE
         } else {
             adView.callToActionView!!.visibility = View.VISIBLE
             (adView.callToActionView as Button?)!!.text = nativeAd.callToAction
-            (adView.callToActionView as Button?)!!.setBackgroundColor(Color.parseColor(buttonColor))
+           if (buttonColor!= null) (adView.callToActionView as Button?)!!.setBackgroundColor(Color.parseColor(buttonColor))
+            if (textColor!= null) (adView.callToActionView as Button?)!!.setTextColor(Color.parseColor(textColor))
         }
         if (nativeAd.icon == null) {
             adView.iconView!!.visibility = View.GONE
