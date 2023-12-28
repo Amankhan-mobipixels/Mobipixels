@@ -48,7 +48,7 @@ How to use:
         loadNativeAd(this,binding.nativeAdvance,getString(R.string.native_ad),AdType.NativeAdvance,"#FF9902","#469F7941")
 
  	                                                or
-        loadNativeAd(this,binding.nativeSmall,getString(R.string.native_ad),AdType.NativeSmall,"textColor = "#ffffff", backgroundColor = "#FF9902", buttonColor = "#086EBF", adIcon = AdIcon.White)  //available after 1.1.4 library version
+        loadNativeAd(this,binding.nativeSmall,getString(R.string.native_ad),AdType.NativeSmall,textColor = "#ffffff", backgroundColor = "#FF9902", buttonColor = "#086EBF", adIcon = AdIcon.White)  //available after 1.1.4 library version
 
 
        
