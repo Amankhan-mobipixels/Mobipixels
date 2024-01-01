@@ -42,8 +42,6 @@ How to use:
         loadBannerAd(this,binding.banner,getString(R.string.banner_id))
 
         loadCollapsibleBannerAd(this,binding.collapsibleBanner,getString(R.string.collapsible_id))
-
-        loadNativeAd(this,binding.nativeSmall,getString(R.string.native_ad),AdType.NativeSmall,"#0730F7","#2857649A",)
 	
         loadNativeAd(this,binding.nativeAdvance,getString(R.string.native_ad),AdType.NativeAdvance)
 
