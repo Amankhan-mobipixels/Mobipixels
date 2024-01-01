@@ -13,7 +13,7 @@ add dependency in module level gradle
 ````
 dependencies:
 {
-implementation 'com.github.Amankhan-mobipixels:Admob-Ads:1.1.6'
+implementation 'com.github.Amankhan-mobipixels:Admob-Ads:1.1.7'
 }
 ````
 get user consent on splash or mainscreen
@@ -45,7 +45,7 @@ How to use:
 
         loadNativeAd(this,binding.nativeSmall,getString(R.string.native_ad),AdType.NativeSmall,"#0730F7","#2857649A",)
 	
-        loadNativeAd(this,binding.nativeAdvance,getString(R.string.native_ad),AdType.NativeAdvance,"#FF9902","#469F7941")
+        loadNativeAd(this,binding.nativeAdvance,getString(R.string.native_ad),AdType.NativeAdvance)
 
  	                                                or
         loadNativeAd(this,binding.nativeSmall,getString(R.string.native_ad),AdType.NativeSmall,textColor = "#ffffff", backgroundColor = "#FF9902", buttonColor = "#086EBF", adIcon = AdIcon.White)  //available after 1.1.4 library version
