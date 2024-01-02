@@ -1,14 +1,13 @@
 package com.example.live
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ads.AdIcon
-import com.example.ads.AdType
-import com.example.ads.loadInterstitialAd
+import com.example.ads.BannerAdType
+import com.example.ads.NativeAdType
+import com.example.ads.ShimmerColor
+import com.example.ads.loadBannerAd
 import com.example.ads.loadNativeAd
-import com.example.ads.loadShowInterstitialAd
 import com.example.ads.showInterstitialAd
 import com.example.live.databinding.ActivityMainBinding
 
@@ -26,14 +25,14 @@ class MainActivity : AppCompatActivity() {
 //                Log.d("Fdsfsdfsdsavt", it.toString())
 //            }
 
-        loadInterstitialAd(this, getString(R.string.interstitial_ad)){
-            loaded, failed ->
-            if (loaded) {
-                Log.d("checkcheck", "loaded")
-
-            }
-            if (failed) Log.d("checkcheck", "failed")
-        }
+//        loadInterstitialAd(this, getString(R.string.interstitial_ad)){
+//            loaded, failed ->
+//            if (loaded) {
+//                Log.d("checkcheck", "loaded")
+//
+//            }
+//            if (failed) Log.d("checkcheck", "failed")
+//        }
 
 //        loadInterstitialAd(this, getString(R.string.interstitial_ad)){
 //            loaded, failed ->
@@ -51,13 +50,36 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
 
-//        loadBannerAd(this,binding.banner,getString(R.string.banner_id))
-        loadNativeAd(this,binding.nativeSmall,getString(R.string.native_ad),AdType.NativeSmall)
-        loadNativeAd(this,binding.nativeAdvance,getString(R.string.native_ad),AdType.NativeAdvance,
-            textColor = "#ffffff", backgroundColor = "#FF9902", buttonColor = "#086EBF", adIcon = AdIcon.White)
-//        loadCollapsibleBannerAd(this,binding.collapsibleBanner,getString(R.string.collapsible_id))
+        loadBannerAd(this,binding.banner,getString(R.string.banner_id),BannerAdType.Banner)
+            .shimmerEffect(true)
+            .shimmerBackgroundColor("#000000")
+            .shimmerColor(ShimmerColor.White)
+            .load()
+        loadNativeAd(this, binding.nativeAdvance, getString(R.string.native_ad), NativeAdType.NativeAdvance)
+            .backgroundColor("#000000")
+            .textColor("#ffffff")
+            .buttonColor("#ffffff")
+            .adIcon(AdIcon.White)
+            .shimmerEffect(true)
+            .shimmerBackgroundColor("#000000")
+            .shimmerColor(ShimmerColor.White)
+            .callback { loaded, failed ->
+                // Callback logic here
+            }
+            .load()
 
-
+        loadNativeAd(this, binding.nativeSmall, getString(R.string.native_ad), NativeAdType.NativeSmall)
+            .backgroundColor("#000000")
+            .textColor("#ffffff")
+            .buttonColor("#000000")
+            .adIcon(AdIcon.White)
+            .shimmerEffect(true)
+            .shimmerBackgroundColor("#000000")
+            .shimmerColor(ShimmerColor.White)
+            .callback { loaded, failed ->
+                // Callback logic here
+            }
+            .load()
 
     }
 

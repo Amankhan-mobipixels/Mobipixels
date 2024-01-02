@@ -1,34 +1,19 @@
 package com.example.ads
 
 import android.app.Activity
-import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
-import android.view.View
-import android.widget.Button
 import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.lifecycle.Lifecycle
 import com.google.ads.mediation.admob.AdMobAdapter
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdLoader
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.OnUserEarnedRewardListener
-import com.google.android.gms.ads.admanager.AdManagerAdRequest
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import com.google.android.gms.ads.nativead.MediaView
-import com.google.android.gms.ads.nativead.NativeAd
-import com.google.android.gms.ads.nativead.NativeAdView
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 
@@ -172,130 +157,45 @@ var mInterstitialAd:InterstitialAd? = null
     })
 }
 
-     fun loadBannerAd(activity: Activity, view: FrameLayout, id: String) {
-        val adView = AdView(activity)
-        adView.adUnitId = id
-        view.addView(adView)
-        val adRequest = AdRequest.Builder().build()
-        val adSize: AdSize? = getAdSize(activity)
-        // Step 4 - Set the adaptive ad size on the ad view.
-        adView.setAdSize(adSize!!)
-        // Step 5 - Start loading the ad in the background.
-        adView.loadAd(adRequest)
-    }
-
-     fun loadCollapsibleBannerAd(activity: Activity, view: FrameLayout, id: String) {
-        val adView = AdView(activity)
-        adView.adUnitId = id
-        view.addView(adView)
-        val extras = Bundle()
-        extras.putString("collapsible", "bottom")
-        val adRequest =
-            AdRequest.Builder().addNetworkExtrasBundle(AdMobAdapter::class.java, extras).build()
-        val adSize: AdSize? = getAdSize(activity)
-        // Step 4 - Set the adaptive ad size on the ad view.
-        adView.setAdSize(adSize!!)
-        // Step 5 - Start loading the ad in the background.
-        adView.loadAd(adRequest)
-    }
-
-     private fun getAdSize(activity: Activity): AdSize {
-        // Step 2 - Determine the screen width (less decorations) to use for the ad width.
-        val display = activity.windowManager.defaultDisplay
-        val outMetrics = DisplayMetrics()
-        display.getMetrics(outMetrics)
-        val widthPixels = outMetrics.widthPixels.toFloat()
-        val density = outMetrics.density
-        val adWidth = (widthPixels / density).toInt()
-        // Step 3 - Get adaptive ad size and return for setting on the ad view.
-        return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(activity, adWidth)
-
-    }
-
-     fun loadNativeAd(ctx: Activity, nativeAdContainer: FrameLayout, id: String, adType: AdType,textColor: String? = null,
-                      buttonColor:String? = null, backgroundColor:String? = null,adIcon:AdIcon?=null, callback: ((loaded:Boolean, failed:Boolean) -> Unit)?=null) {
-        val builder = AdLoader.Builder(ctx, id)
-        builder.forNativeAd { nativeAd ->
-           val nativeView:NativeAdView = when(adType){
-                AdType.NativeSmall -> {
-                    ctx.layoutInflater.inflate(R.layout.native_small, null) as NativeAdView
-                }
-
-                AdType.NativeAdvance -> {
-                    ctx.layoutInflater.inflate(R.layout.native_advance, null) as NativeAdView
-                }
-
-                else -> {
-                    NativeAdView(ctx)
-                }
-            }
-            nativeAdView(ctx,nativeAd, nativeView,adType,textColor,buttonColor,backgroundColor,adIcon)
-            nativeAdContainer.removeAllViews()
-            nativeAdContainer.addView(nativeView)
-            nativeAdContainer.visibility = View.VISIBLE
-        }
-        val adLoader = builder.withAdListener(object : AdListener() {
-            override fun onAdLoaded() {
-                callback?.invoke(true, false)
-            }
-
-            override fun onAdFailedToLoad(p0: LoadAdError) {
-                callback?.invoke(false, true)
-            }
-        }).build()
-        adLoader.loadAd(AdManagerAdRequest.Builder().build())
-    }
-    private fun nativeAdView(context: Context,nativeAd: NativeAd, adView: NativeAdView,adType: AdType, textColor:String?,
-                             buttonColor:String?, backgroundColor:String?,adIcon: AdIcon?) {
-
-        if (backgroundColor!= null) adView.findViewById<LinearLayout>(R.id.background).setBackgroundColor(Color.parseColor(backgroundColor))
-
-        if (adIcon!=null){
-            if (adIcon == AdIcon.White) {
-                adView.findViewById<TextView>(R.id.icon_ad).background = context.getDrawable(R.drawable.ad_text_background_white)
-                adView.findViewById<TextView>(R.id.icon_ad).setTextColor(Color.WHITE)
-            }
-                else {
-                    adView.findViewById<TextView>(R.id.icon_ad).background = context.getDrawable(R.drawable.ad_text_background_black)
-                adView.findViewById<TextView>(R.id.icon_ad).setTextColor(Color.BLACK)
-            }
-        }
-        if(adType == AdType.NativeAdvance){
-            adView.mediaView = adView.findViewById<View>(R.id.ad_media) as MediaView
-            adView.mediaView!!.mediaContent = nativeAd.mediaContent
-        }
-
-        adView.headlineView = adView.findViewById(R.id.ad_headline)
-        adView.bodyView = adView.findViewById(R.id.ad_body)
-        adView.callToActionView = adView.findViewById(R.id.ad_call_to_action)
-        adView.iconView = adView.findViewById(R.id.ad_app_icon)
+//     fun loadBannerAd(activity: Activity, view: FrameLayout, id: String) {
+//        val adView = AdView(activity)
+//        adView.adUnitId = id
+//        view.addView(adView)
+//        val adRequest = AdRequest.Builder().build()
+//        val adSize: AdSize? = getAdSize(activity)
+//        // Step 4 - Set the adaptive ad size on the ad view.
+//        adView.setAdSize(adSize!!)
+//        // Step 5 - Start loading the ad in the background.
+//        adView.loadAd(adRequest)
+//    }
+//
+//     fun loadCollapsibleBannerAd(activity: Activity, view: FrameLayout, id: String) {
+//        val adView = AdView(activity)
+//        adView.adUnitId = id
+//        view.addView(adView)
+//        val extras = Bundle()
+//        extras.putString("collapsible", "bottom")
+//        val adRequest =
+//            AdRequest.Builder().addNetworkExtrasBundle(AdMobAdapter::class.java, extras).build()
+//        val adSize: AdSize? = getAdSize(activity)
+//        // Step 4 - Set the adaptive ad size on the ad view.
+//        adView.setAdSize(adSize!!)
+//        // Step 5 - Start loading the ad in the background.
+//        adView.loadAd(adRequest)
+//    }
+//
+//     private fun getAdSize(activity: Activity): AdSize {
+//        // Step 2 - Determine the screen width (less decorations) to use for the ad width.
+//        val display = activity.windowManager.defaultDisplay
+//        val outMetrics = DisplayMetrics()
+//        display.getMetrics(outMetrics)
+//        val widthPixels = outMetrics.widthPixels.toFloat()
+//        val density = outMetrics.density
+//        val adWidth = (widthPixels / density).toInt()
+//        // Step 3 - Get adaptive ad size and return for setting on the ad view.
+//        return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(activity, adWidth)
+//
+//    }
 
 
-        (adView.headlineView as TextView?)!!.text = nativeAd.headline
-        (adView.headlineView as TextView?)!!.isSelected = true
-        if (textColor!= null) (adView.headlineView as TextView?)!!.setTextColor(Color.parseColor(textColor))
-
-        if (nativeAd.body == null) {
-            adView.bodyView!!.visibility = View.INVISIBLE
-        } else {
-            adView.bodyView!!.visibility = View.VISIBLE
-            (adView.bodyView as TextView?)!!.text = nativeAd.body
-            if (textColor!= null)  (adView.bodyView as TextView?)!!.setTextColor(Color.parseColor(textColor))
-        }
-        if (nativeAd.callToAction == null) {
-            adView.callToActionView!!.visibility = View.INVISIBLE
-        } else {
-            adView.callToActionView!!.visibility = View.VISIBLE
-            (adView.callToActionView as Button?)!!.text = nativeAd.callToAction
-           if (buttonColor!= null) (adView.callToActionView as Button?)!!.setBackgroundColor(Color.parseColor(buttonColor))
-            if (textColor!= null) (adView.callToActionView as Button?)!!.setTextColor(Color.parseColor(textColor))
-        }
-        if (nativeAd.icon == null) {
-            adView.iconView!!.visibility = View.GONE
-        } else {
-            (adView.iconView as ImageView?)!!.setImageDrawable(nativeAd.icon!!.drawable)
-            adView.iconView!!.visibility = View.VISIBLE
-        }
-        adView.setNativeAd(nativeAd)
-    }
 

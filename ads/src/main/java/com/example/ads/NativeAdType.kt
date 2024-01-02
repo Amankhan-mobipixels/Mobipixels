@@ -1,6 +1,6 @@
 package com.example.ads
 
-enum class AdType {
+enum class NativeAdType {
     NativeSmall,
     NativeAdvance
 }

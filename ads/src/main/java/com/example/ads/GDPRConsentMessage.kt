@@ -49,8 +49,7 @@ class GDPRMessage(activity: Activity){
             UserMessagingPlatform.loadAndShowConsentFormIfRequired(activity) {
                 //loadAndShowError callback called immediately if consent is not required and if consent status
                 // is required the SDK loads a form and then The callback is called after the form is dismissed
-                    loadAndShowError ->
-                Log.w("Consent gathering fail", String.format("%s: %s", loadAndShowError?.errorCode, loadAndShowError?.message))
+                    loadAndShowError -> Log.w("Consent gathering fail", String.format("%s: %s", loadAndShowError?.errorCode, loadAndShowError?.message))
                 // Consent has been gathered.
                 if (consentInformation.canRequestAds()) {
                     consentGranted(callback)
@@ -70,6 +69,8 @@ class GDPRMessage(activity: Activity){
         }
 
     }
+
+
     private fun consentGranted(callback: (consentGranted: Boolean) -> Unit) {
         if (consentGrantedCalled.getAndSet(true)) {
             return
