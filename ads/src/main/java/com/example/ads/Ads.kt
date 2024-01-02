@@ -157,45 +157,6 @@ var mInterstitialAd:InterstitialAd? = null
     })
 }
 
-//     fun loadBannerAd(activity: Activity, view: FrameLayout, id: String) {
-//        val adView = AdView(activity)
-//        adView.adUnitId = id
-//        view.addView(adView)
-//        val adRequest = AdRequest.Builder().build()
-//        val adSize: AdSize? = getAdSize(activity)
-//        // Step 4 - Set the adaptive ad size on the ad view.
-//        adView.setAdSize(adSize!!)
-//        // Step 5 - Start loading the ad in the background.
-//        adView.loadAd(adRequest)
-//    }
-//
-//     fun loadCollapsibleBannerAd(activity: Activity, view: FrameLayout, id: String) {
-//        val adView = AdView(activity)
-//        adView.adUnitId = id
-//        view.addView(adView)
-//        val extras = Bundle()
-//        extras.putString("collapsible", "bottom")
-//        val adRequest =
-//            AdRequest.Builder().addNetworkExtrasBundle(AdMobAdapter::class.java, extras).build()
-//        val adSize: AdSize? = getAdSize(activity)
-//        // Step 4 - Set the adaptive ad size on the ad view.
-//        adView.setAdSize(adSize!!)
-//        // Step 5 - Start loading the ad in the background.
-//        adView.loadAd(adRequest)
-//    }
-//
-//     private fun getAdSize(activity: Activity): AdSize {
-//        // Step 2 - Determine the screen width (less decorations) to use for the ad width.
-//        val display = activity.windowManager.defaultDisplay
-//        val outMetrics = DisplayMetrics()
-//        display.getMetrics(outMetrics)
-//        val widthPixels = outMetrics.widthPixels.toFloat()
-//        val density = outMetrics.density
-//        val adWidth = (widthPixels / density).toInt()
-//        // Step 3 - Get adaptive ad size and return for setting on the ad view.
-//        return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(activity, adWidth)
-//
-//    }
 
 
 
