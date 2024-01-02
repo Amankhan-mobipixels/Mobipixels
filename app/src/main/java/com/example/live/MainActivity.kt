@@ -34,21 +34,7 @@ class MainActivity : AppCompatActivity() {
 //            if (failed) Log.d("checkcheck", "failed")
 //        }
 
-//        loadInterstitialAd(this, getString(R.string.interstitial_ad)){
-//            loaded, failed ->
-//            if (loaded) Log.d("checkcheck", "loaded")
-//            if (failed) Log.d("checkcheck", "failed")
-////            if (showed) Log.d("checkcheck", "showed")
-////            if (dismissed) Log.d("checkcheck", "dismissed")
-//        }
-//        findViewById<Button>(R.id.ad).setOnClickListener{
-//            showInterstitialAd(this){
-//                    showed, dismissed, error ->
-//                if (showed) Log.d("checkcheck", "showed")
-//                if (dismissed) Log.d("checkcheck", "dismissed")
-//                if (error) Log.d("checkcheck", "error")
-//            }
-//        }
+
 
         loadBannerAd(this,binding.banner,getString(R.string.banner_id),BannerAdType.Banner)
             .shimmerEffect(true)
