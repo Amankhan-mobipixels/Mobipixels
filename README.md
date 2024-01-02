@@ -13,7 +13,7 @@ add dependency in module level gradle
 ````
 dependencies:
 {
-implementation 'com.github.Amankhan-mobipixels:Admob-Ads:1.1.7'
+implementation 'com.github.Amankhan-mobipixels:Admob-Ads:1.2.0'
 }
 ````
 get user consent on splash or mainscreen
@@ -35,20 +35,30 @@ How to use:
 
         loadRewardedAd(this,getString(R.string.rewarded_ad))
        
-         showRewardedAd(this)
+        showRewardedAd(this)
 	
         loadShowRewardedAd(this,getString(R.string.rewarded_ad))
 
-        loadBannerAd(this,binding.banner,getString(R.string.banner_id))
-
-        loadCollapsibleBannerAd(this,binding.collapsibleBanner,getString(R.string.collapsible_id))
-	
-        loadNativeAd(this,binding.nativeAdvance,getString(R.string.native_ad),AdType.NativeAdvance)
-
- 	                                                or
-        loadNativeAd(this,binding.nativeSmall,getString(R.string.native_ad),AdType.NativeSmall,textColor = "#ffffff", backgroundColor = "#FF9902", buttonColor = "#086EBF", adIcon = AdIcon.White)  //available after 1.1.4 library version
-
-
-       
+        loadBannerAd(this,binding.banner,getString(R.string.banner_id),BannerAdType.Banner)
+            .shimmerEffect(true)
+            .shimmerBackgroundColor("#000000")
+            .shimmerColor(ShimmerColor.White)
+            .callback{
+                loaded, failed ->  
+            }
+            .load()
+	    
+	loadNativeAd(this, binding.nativeAdvance, getString(R.string.native_ad), NativeAdType.NativeAdvance)
+            .backgroundColor("#000000")
+            .textColor("#ffffff")
+            .buttonColor("#ffffff")
+            .adIcon(AdIcon.White)
+            .shimmerEffect(true)
+            .shimmerBackgroundColor("#000000")
+            .shimmerColor(ShimmerColor.White)
+            .callback { loaded, failed ->
+                // Callback logic here
+            }
+            .load()
    
 	
