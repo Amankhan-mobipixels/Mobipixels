@@ -23,7 +23,7 @@
         android:layout_margin="2dp"/>
     <FrameLayout
 
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/collapsible_banner"
         android:id="@+id/native_advance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

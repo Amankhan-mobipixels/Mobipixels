@@ -21,7 +21,7 @@ class AdNative(private val ctx: Activity, private val nativeAdContainer: FrameLa
     private var textColor: String? = null
     private var buttonColor: String? = null
     private var backgroundColor: String? = null
-    private var adIcon: AdIcon? = null
+    private var adIcon: NativeAdIcon? = null
     private var shimmerEffect: Boolean = false
     private var shimmerColor: ShimmerColor? = null
     private var shimmerBackgroundColor: String? = null
@@ -42,7 +42,7 @@ class AdNative(private val ctx: Activity, private val nativeAdContainer: FrameLa
         return this
     }
 
-    fun adIcon(icon: AdIcon): AdNative {
+    fun adIcon(icon: NativeAdIcon): AdNative {
         adIcon = icon
         return this
     }
@@ -120,11 +120,11 @@ class AdNative(private val ctx: Activity, private val nativeAdContainer: FrameLa
         adLoader.loadAd(AdManagerAdRequest.Builder().build())
     }
     private fun nativeAdView(context: Context, nativeAd: NativeAd, adView: NativeAdView, nativeAdType: NativeAdType, textColor:String?, backgroundColor :String?,
-                             buttonColor:String?, adIcon: AdIcon?) {
+                             buttonColor:String?, adIcon: NativeAdIcon?) {
         if (backgroundColor!= null) adView.findViewById<LinearLayout>(R.id.nativeBackground).setBackgroundColor(
             Color.parseColor(backgroundColor))
         if (adIcon!=null){
-            if (adIcon == AdIcon.White) {
+            if (adIcon == NativeAdIcon.White) {
                 adView.findViewById<TextView>(R.id.icon_ad).background = context.getDrawable(R.drawable.ad_text_background_white)
                 adView.findViewById<TextView>(R.id.icon_ad).setTextColor(Color.WHITE)
             }

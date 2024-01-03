@@ -1,6 +1,6 @@
 package com.example.ads
 
-enum class AdIcon {
+enum class NativeAdIcon {
     Black,
     White
 }

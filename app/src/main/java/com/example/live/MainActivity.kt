@@ -1,9 +1,11 @@
 package com.example.live
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.ads.AdIcon
+import com.example.ads.NativeAdIcon
 import com.example.ads.BannerAdType
+import com.example.ads.GDPRMessage
 import com.example.ads.NativeAdType
 import com.example.ads.ShimmerColor
 import com.example.ads.loadBannerAd
@@ -20,12 +22,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 //        val consent = GDPRMessage(this)
-//        consent.consentMessageRequest()
+//        consent.consentMessageRequest("551C6DD69736913D8C23756B69E049E9",true)
 //        consent.getConsent{
-//                Log.d("Fdsfsdfsdsavt", it.toString())
-//            }
+//            Log.d("Fdsfsdfsdsavt", it.toString())
+//        }
 
-//        loadInterstitialAd(this, getString(R.string.interstitial_ad)){
+
+//        loadInterstitialAd(this,"ca-app-pub-3940256099942544/1033173712"){
 //            loaded, failed ->
 //            if (loaded) {
 //                Log.d("checkcheck", "loaded")
@@ -35,17 +38,28 @@ class MainActivity : AppCompatActivity() {
 //        }
 
 
+//
 
-        loadBannerAd(this,binding.banner,getString(R.string.banner_id),BannerAdType.Banner)
+        loadBannerAd(this,binding.banner,"ca-app-pub-3940256099942544/6300978111",BannerAdType.Banner)
             .shimmerEffect(true)
             .shimmerBackgroundColor("#000000")
             .shimmerColor(ShimmerColor.White)
-            .load()
-        loadNativeAd(this, binding.nativeAdvance, getString(R.string.native_ad), NativeAdType.NativeAdvance)
+            .callback{
+                loaded, failed ->
+            }.load()
+        loadBannerAd(this,binding.collapsibleBanner,"ca-app-pub-3940256099942544/2014213617",BannerAdType.CollapsibleBanner)
+            .shimmerEffect(true)
+            .shimmerBackgroundColor("#000000")
+            .shimmerColor(ShimmerColor.White)
+            .callback{
+                loaded, failed ->
+            }.load()
+
+        loadNativeAd(this, binding.nativeAdvance, "ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeAdvance)
             .backgroundColor("#000000")
             .textColor("#ffffff")
             .buttonColor("#ffffff")
-            .adIcon(AdIcon.White)
+            .adIcon(NativeAdIcon.White)
             .shimmerEffect(true)
             .shimmerBackgroundColor("#000000")
             .shimmerColor(ShimmerColor.White)
@@ -54,11 +68,11 @@ class MainActivity : AppCompatActivity() {
             }
             .load()
 
-        loadNativeAd(this, binding.nativeSmall, getString(R.string.native_ad), NativeAdType.NativeSmall)
+        loadNativeAd(this, binding.nativeSmall,"ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeSmall)
             .backgroundColor("#000000")
             .textColor("#ffffff")
             .buttonColor("#000000")
-            .adIcon(AdIcon.White)
+            .adIcon(NativeAdIcon.White)
             .shimmerEffect(true)
             .shimmerBackgroundColor("#000000")
             .shimmerColor(ShimmerColor.White)

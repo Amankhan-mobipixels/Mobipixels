@@ -73,8 +73,10 @@ class GDPRMessage(activity: Activity){
 
     private fun consentGranted(callback: (consentGranted: Boolean) -> Unit) {
         if (consentGrantedCalled.getAndSet(true)) {
+            Log.d("dsafgdfgdf", "badCall")
             return
         }
+        Log.d("dsafgdfgdf", "goodCall")
         callback(true)
     }
 }
