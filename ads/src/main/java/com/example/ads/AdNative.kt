@@ -75,12 +75,12 @@ class AdNative(private val ctx: Activity, private val nativeAdContainer: FrameLa
 
         if (shimmerEffect) {
             if (nativeAdType == NativeAdType.NativeAdvance) {
-                nativeAdContainer.minimumHeight = 620
+                nativeAdContainer.minimumHeight = 610
                 nativeAdContainer.layoutParams.width = FrameLayout.LayoutParams.MATCH_PARENT
                 shimmerNative(ctx, nativeAdContainer,nativeAdType,shimmerColor,shimmerBackgroundColor)
             }
             if (nativeAdType == NativeAdType.NativeSmall) {
-                nativeAdContainer.minimumHeight = 220
+                nativeAdContainer.minimumHeight = 210
                 nativeAdContainer.layoutParams.width = FrameLayout.LayoutParams.MATCH_PARENT
                 shimmerNative(ctx, nativeAdContainer,nativeAdType,shimmerColor,shimmerBackgroundColor)
             }
