@@ -43,7 +43,7 @@ class AdBanner(private val ctx: Activity, private val BannerAdContainer: FrameLa
         }
 
         BannerAdContainer.visibility = View.VISIBLE
-        BannerAdContainer.minimumHeight = 150
+        BannerAdContainer.minimumHeight = 120
         BannerAdContainer.layoutParams.width = FrameLayout.LayoutParams.MATCH_PARENT
         BannerAdContainer.removeAllViews()
 
