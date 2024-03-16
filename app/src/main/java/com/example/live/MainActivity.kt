@@ -57,8 +57,8 @@ class MainActivity : AppCompatActivity() {
 
         loadNativeAd(this, binding.nativeAdvance, "ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeAdvance)
             .backgroundColor("#000000")
-            .textColor("#ffffff")
-            .buttonColor("#ffffff")
+            .textColorButton("#ffffff")
+            .colorButton("#ffffff")
             .adIcon(NativeAdIcon.White)
             .shimmerEffect(true)
             .shimmerBackgroundColor("#000000")
@@ -70,8 +70,8 @@ class MainActivity : AppCompatActivity() {
 
         loadNativeAd(this, binding.nativeSmall,"ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeSmall)
             .backgroundColor("#000000")
-            .textColor("#ffffff")
-            .buttonColor("#000000")
+            .textColorButton("#ffffff")
+            .colorButton("#ffffff")
             .adIcon(NativeAdIcon.White)
             .shimmerEffect(true)
             .shimmerBackgroundColor("#000000")
