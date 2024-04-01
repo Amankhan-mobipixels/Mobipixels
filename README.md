@@ -25,6 +25,10 @@ val consent = GDPRMessage(this)
                if (it)  // LoadAd
             }
 ````
+updateApp(UpdateType.Force)
+````
+In-app updates
+````
 How to use:
 
         loadInterstitialAd(this, getString(R.string.interstitial_ad))
