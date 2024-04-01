@@ -10,7 +10,7 @@ import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
 
 
-fun Activity.updateAPP(updateType: UpdateType) {
+fun Activity.updateApp(updateType: UpdateType) {
     val type = if (updateType == UpdateType.Flexible) 0 else 1
     val appUpdateManager = AppUpdateManagerFactory.create(this)
 

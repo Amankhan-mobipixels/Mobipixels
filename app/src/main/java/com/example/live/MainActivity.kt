@@ -1,18 +1,16 @@
 package com.example.live
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ads.NativeAdIcon
 import com.example.ads.BannerAdType
-import com.example.ads.GDPRMessage
 import com.example.ads.NativeAdType
 import com.example.ads.ShimmerColor
 import com.example.ads.UpdateType
 import com.example.ads.loadBannerAd
 import com.example.ads.loadNativeAd
 import com.example.ads.showInterstitialAd
-import com.example.ads.updateAPP
+import com.example.ads.updateApp
 import com.example.live.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -84,7 +82,7 @@ class MainActivity : AppCompatActivity() {
             .load()
 
 
-        updateAPP(UpdateType.Flexible)
+        updateApp(UpdateType.Flexible)
     }
 
     override fun onResume() {
