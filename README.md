@@ -25,9 +25,9 @@ val consent = GDPRMessage(this)
                if (it)  // LoadAd
             }
 ````
-updateApp(UpdateType.Force)
-````
 In-app updates
+````
+updateApp(UpdateType.Force)
 ````
 How to use:
 
