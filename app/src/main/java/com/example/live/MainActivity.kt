@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.ads.NativeAdIcon
 import com.example.ads.BannerAdType
 import com.example.ads.NativeAdType
+import com.example.ads.NativeButtonUp
 import com.example.ads.ShimmerColor
 import com.example.ads.UpdateType
+import com.example.ads.isOnline
 import com.example.ads.loadBannerAd
 import com.example.ads.loadNativeAd
 import com.example.ads.showInterstitialAd
@@ -20,6 +22,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        isOnline(this@MainActivity)
 
 //        val consent = GDPRMessage(this)
 //        consent.consentMessageRequest("551C6DD69736913D8C23756B69E049E9",true)
@@ -58,8 +62,10 @@ class MainActivity : AppCompatActivity() {
         loadNativeAd(this, binding.nativeAdvance, "ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeAdvance)
             .backgroundColor("#000000")
             .textColorButton("#ffffff")
-            .colorButton("#ffffff")
+            .colorButton("#ff5800")
+            .buttonroundness(30)
             .adIcon(NativeAdIcon.White)
+            .nativebuttonup(NativeButtonUp.Up)
             .shimmerEffect(true)
             .shimmerBackgroundColor("#000000")
             .shimmerColor(ShimmerColor.White)
@@ -71,7 +77,9 @@ class MainActivity : AppCompatActivity() {
         loadNativeAd(this, binding.nativeSmall,"ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeSmall)
             .backgroundColor("#000000")
             .textColorButton("#ffffff")
-            .colorButton("#ffffff")
+            .colorButton("#ff0058")
+            .nativebuttonup(NativeButtonUp.Down)
+            .buttonroundness(30)
             .adIcon(NativeAdIcon.White)
             .shimmerEffect(true)
             .shimmerBackgroundColor("#000000")
