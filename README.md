@@ -60,7 +60,6 @@ How to use:
             .backgroundColor("#07DA11")
             .buttonPosition(NativeButtonPosition.Bottom)
             .buttonRoundness(30)
-            .buttonRoundnessB(30)
             .shimmerEffect(true)
             .shimmerBackgroundColor("#000000")
             .shimmerColor(ShimmerColor.White)
