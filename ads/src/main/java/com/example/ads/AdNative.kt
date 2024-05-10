@@ -33,6 +33,7 @@ class AdNative(private val ctx: Activity, private val nativeAdContainer: FrameLa
     private var shimmerBackgroundColor: String? = null
     private var callback: ((loaded: Boolean, failed: Boolean) -> Unit)? = null
 
+
     fun textColorTitle(color: String): AdNative {
         textColorTitle = color
         return this
