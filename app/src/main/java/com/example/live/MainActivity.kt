@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.ads.NativeAdIcon
 import com.example.ads.BannerAdType
 import com.example.ads.NativeAdType
-import com.example.ads.NativeButtonUp
+import com.example.ads.NativeButtonPosition
 import com.example.ads.ShimmerColor
 import com.example.ads.UpdateType
 import com.example.ads.isOnline
@@ -63,9 +63,9 @@ class MainActivity : AppCompatActivity() {
             .backgroundColor("#000000")
             .textColorButton("#ffffff")
             .colorButton("#ff5800")
-            .buttonroundness(30)
+            .buttonRoundness(30)
             .adIcon(NativeAdIcon.White)
-            .nativebuttonup(NativeButtonUp.Up)
+            .buttonPosition(NativeButtonPosition.Top)
             .shimmerEffect(true)
             .shimmerBackgroundColor("#000000")
             .shimmerColor(ShimmerColor.White)
@@ -78,8 +78,8 @@ class MainActivity : AppCompatActivity() {
             .backgroundColor("#000000")
             .textColorButton("#ffffff")
             .colorButton("#ff0058")
-            .nativebuttonup(NativeButtonUp.Down)
-            .buttonroundness(30)
+            .buttonPosition(NativeButtonPosition.Bottom)
+            .buttonRoundness(30)
             .adIcon(NativeAdIcon.White)
             .shimmerEffect(true)
             .shimmerBackgroundColor("#000000")

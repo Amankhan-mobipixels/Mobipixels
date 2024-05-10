@@ -17,7 +17,6 @@ import com.google.android.gms.ads.admanager.AdManagerAdRequest
 import com.google.android.gms.ads.nativead.MediaView
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
-import com.google.android.material.internal.ViewUtils.dpToPx
 
 class AdNative(private val ctx: Activity, private val nativeAdContainer: FrameLayout, private val id: String, private val nativeAdType: NativeAdType) {
     private var textColorTitle: String? = null
@@ -25,9 +24,9 @@ class AdNative(private val ctx: Activity, private val nativeAdContainer: FrameLa
     private var textColorButton: String? = null
     private var colorButton: String? = null
     private var backgroundColor: String? = null
-    private var buttonroundness: Int = 5
+    private var buttonRoundness: Int = 0
     private var adIcon: NativeAdIcon? = null
-    private var buttonup: NativeButtonUp? = null
+    private var buttonPosition: NativeButtonPosition? = null
     private var shimmerEffect: Boolean = false
     private var shimmerColor: ShimmerColor? = null
     private var shimmerBackgroundColor: String? = null
@@ -46,8 +45,8 @@ class AdNative(private val ctx: Activity, private val nativeAdContainer: FrameLa
         textColorButton = color
         return this
     }
-    fun buttonroundness(buttonround: Int): AdNative {
-        buttonroundness = buttonround
+    fun buttonRoundness(buttonround: Int): AdNative {
+        buttonRoundness = buttonround
         return this
     }
     fun colorButton(color: String): AdNative {
@@ -64,8 +63,8 @@ class AdNative(private val ctx: Activity, private val nativeAdContainer: FrameLa
         adIcon = icon
         return this
     }
-    fun nativebuttonup(icon: NativeButtonUp): AdNative {
-        buttonup = icon
+    fun buttonPosition(position: NativeButtonPosition): AdNative {
+        buttonPosition = position
         return this
     }
     fun shimmerEffect(effect: Boolean): AdNative {
@@ -112,18 +111,18 @@ class AdNative(private val ctx: Activity, private val nativeAdContainer: FrameLa
         builder.forNativeAd { nativeAd ->
             val nativeView: NativeAdView = when(nativeAdType){
                 NativeAdType.NativeSmall -> {
-                    if (buttonup == NativeButtonUp.Up){
-                        ctx.layoutInflater.inflate(R.layout.native_small_buttonup, null) as NativeAdView
+                    if (buttonPosition == NativeButtonPosition.Top){
+                        ctx.layoutInflater.inflate(R.layout.native_small_button_top, null) as NativeAdView
                     }else {
-                        ctx.layoutInflater.inflate(R.layout.native_small, null) as NativeAdView
+                        ctx.layoutInflater.inflate(R.layout.native_small_button_bottom, null) as NativeAdView
                     }
                 }
 
                 NativeAdType.NativeAdvance -> {
-                    if (buttonup == NativeButtonUp.Up){
-                        ctx.layoutInflater.inflate(R.layout.native_advance_buttonup, null) as NativeAdView
+                    if (buttonPosition == NativeButtonPosition.Top){
+                        ctx.layoutInflater.inflate(R.layout.native_advance_button_top, null) as NativeAdView
                     }else {
-                        ctx.layoutInflater.inflate(R.layout.native_advance, null) as NativeAdView
+                        ctx.layoutInflater.inflate(R.layout.native_advance_button_bottom, null) as NativeAdView
                     }
 
                 }
@@ -132,7 +131,7 @@ class AdNative(private val ctx: Activity, private val nativeAdContainer: FrameLa
                     NativeAdView(ctx)
                 }
             }
-            nativeAdView(ctx,nativeAd, nativeView,nativeAdType,textColorTitle,textColorDescription,textColorButton,backgroundColor,colorButton,adIcon,buttonroundness!!)
+            nativeAdView(ctx,nativeAd, nativeView,nativeAdType,textColorTitle,textColorDescription,textColorButton,backgroundColor,colorButton,adIcon,buttonRoundness!!)
             nativeAdContainer.removeAllViews()
             nativeAdContainer.addView(nativeView)
         }
@@ -151,7 +150,7 @@ class AdNative(private val ctx: Activity, private val nativeAdContainer: FrameLa
         adLoader.loadAd(AdManagerAdRequest.Builder().build())
     }
     private fun nativeAdView(context: Context, nativeAd: NativeAd, adView: NativeAdView, nativeAdType: NativeAdType, textColorTitle:String?,textColorDescription:String?,textColorButton:String?, backgroundColor :String?,
-                             colorButton:String?, adIcon: NativeAdIcon? , buttonroundness:Int) {
+                             colorButton:String?, adIcon: NativeAdIcon? , buttonRoundness:Int) {
         if (backgroundColor!= null) adView.findViewById<LinearLayout>(R.id.nativeBackground).setBackgroundColor(
             Color.parseColor(backgroundColor))
         if (adIcon!=null){
@@ -193,8 +192,7 @@ class AdNative(private val ctx: Activity, private val nativeAdContainer: FrameLa
             (adView.callToActionView as Button?)!!.text = nativeAd.callToAction
 
             val backgroundDrawable = GradientDrawable()
-            backgroundDrawable.cornerRadius =
-                buttonroundness.dpToPx(context).toFloat() // Adjust the corner radius as needed
+            backgroundDrawable.cornerRadius = buttonRoundness.dpToPx(context).toFloat() // Adjust the corner radius as needed
             if (colorButton != null) backgroundDrawable.setColor(Color.parseColor(colorButton))
             adView.callToActionView!!.background = backgroundDrawable // Set the custom background
 
