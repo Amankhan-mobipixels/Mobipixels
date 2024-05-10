@@ -13,7 +13,7 @@ add dependency in module level gradle
 ````
 dependencies:
 {
-implementation 'com.github.Amankhan-mobipixels:Admob-Ads:1.2.7'
+implementation 'com.github.Amankhan-mobipixels:Admob-Ads:1.2.8'
 }
 ````
 get user consent on splash or mainscreen
@@ -58,7 +58,8 @@ How to use:
             .textColorButton("#AB0AF1")
             .colorButton("#D6D311")
             .backgroundColor("#07DA11")
-            .adIcon(NativeAdIcon.White)
+            .buttonPosition(NativeButtonPosition.Bottom)
+            .buttonRoundness(30)
             .shimmerEffect(true)
             .shimmerBackgroundColor("#000000")
             .shimmerColor(ShimmerColor.White)
