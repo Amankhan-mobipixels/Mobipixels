@@ -16,20 +16,20 @@ dependencies:
 implementation 'com.github.Amankhan-mobipixels:Admob-Ads:1.2.8'
 }
 ````
-get user consent on splash or mainscreen
+get user consent on splash or mainscreen (for European Economic Area (EEA) and the UK)
 ````
 //if consent is true load your ad
 val consent = GDPRMessage(this)
         consent.consentMessageRequest()
         consent.getConsent{
-               if (it)  // LoadAd
+             //load ad here
             }
 ````
-In-app updates
+How to use In-app updates
 ````
 updateApp(UpdateType.Force)
 ````
-How to use:
+How to use ADS:
 
         loadInterstitialAd(this, getString(R.string.interstitial_ad))
 
