@@ -1,5 +1,5 @@
 # Admob-Ads
-add maven in your project level gradle
+**add maven in your project level gradle**
 ````
 allprojects {
 	repositories {
@@ -9,14 +9,14 @@ allprojects {
 	}
 }
 ````
-add dependency in module level gradle
+**add dependency in module level gradle**
 ````
 dependencies:
 {
 implementation 'com.github.Amankhan-mobipixels:Admob-Ads:1.2.9'
 }
 ````
-get user consent on splash or mainscreen (for European Economic Area (EEA) and the UK)
+**get user consent on splash or mainscreen (for European Economic Area (EEA) and the UK)**
 ````
 //if consent is true load your ad
 val consent = GDPRMessage(this)
@@ -25,13 +25,13 @@ val consent = GDPRMessage(this)
              //load ad here
             }
 ````
-How to use In-app updates
+**How to use In-app updates**
 ````
  updateApp(UpdateType.Force){ onCancel ->
             finishAffinity()
         }
 ````
-How to use firebase functionalities
+**How to use Firebase functionalities**
 ````
 // In your root-level (project-level) Gradle file add
 
@@ -43,16 +43,20 @@ plugins {
 
 plugins {
   id("com.google.gms.google-services")
-
 }
 
+After adding these dependencies Firebase analytics added by default for built-in events of your app
 ````
-How to use In-app review
+**How to use Firebase custom events**
+````
+ fireEvent("DownloadComplete")
+````
+**How to use In-app review**
 ````
 Activity:  inAppReview()
 fragment:  requireActivity().inAppReview()
 ````
-How to use ADS
+**How to use ADS**
 
         loadInterstitialAd(this, getString(R.string.interstitial_ad))
 
