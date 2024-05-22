@@ -13,7 +13,7 @@ allprojects {
 ````
 dependencies:
 {
-implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.0.0'
+implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.0.1'
 }
 ````
 **get user consent on splash or mainscreen (for European Economic Area (EEA) and the UK)**
@@ -78,7 +78,8 @@ After adding these dependencies Crashlytics and Firebase analytics added by defa
 // subscribeToTopic string is for fire notification on firebase with this topic name will immediate receive to user
 //notificationIcon shows at the time of notification in app
 // make sure you have post notification permission for android 13 and above
-initializeFirebaseMessaging(subscribeToTopic,notificationIcon)
+
+initializeFirebaseMessaging(subscribeToTopic)
 ````
 **How to use In-app review**
 ````
