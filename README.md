@@ -30,14 +30,11 @@ How to use In-app updates
 updateApp(UpdateType.Force)
 ````
 How to use In-app review
-
-**Activity**
-
 ````
 **Activity**:  inAppReview()
 **fragment**:  requireActivity().inAppReview()
 ````
-How to use ADS:
+How to use ADS
 
         loadInterstitialAd(this, getString(R.string.interstitial_ad))
 
