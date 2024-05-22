@@ -78,6 +78,16 @@ plugins {
 ````
 **How to use Firebase Messaging**
 ````
+// add this in menefist under application tag
+
+     <service
+            android:name="com.mobipixels.aman.firebase.Messaging"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
 // subscribeToTopic string is for fire notification on firebase with this topic name will immediate receive to user
 //notificationIcon shows at the time of notification in app
  
