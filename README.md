@@ -85,7 +85,8 @@ fragment:  requireActivity().inAppReview()
 
         MobileAds.initialize(this)  //initialize ads in application class or onCreate of splash screen 
 	
-       // you can also use mediation but you will initialize adapter for initialization instead of (MobileAds.initialize(this)) and the platform dependencies you want mediation with
+       // you can also use mediation but you will initialize adapter for initialization instead of (MobileAds.initialize(this)) and the platform dependencies you want mediation with.
+       
 
         loadInterstitialAd(this, getString(R.string.interstitial_ad))
 
