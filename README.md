@@ -1,5 +1,5 @@
 # Admob-Ads
-add maven in your project level gradle
+**add maven in your project level gradle**
 ````
 allprojects {
 	repositories {
@@ -9,27 +9,89 @@ allprojects {
 	}
 }
 ````
-add dependency in module level gradle
+**add dependency in module level gradle**
 ````
 dependencies:
 {
-implementation 'com.github.Amankhan-mobipixels:Admob-Ads:1.2.8'
+implementation 'com.github.Amankhan-mobipixels:Admob-Ads:1.2.9'
 }
 ````
-get user consent on splash or mainscreen
+**get user consent on splash or mainscreen (for European Economic Area (EEA) and the UK)**
 ````
 //if consent is true load your ad
 val consent = GDPRMessage(this)
         consent.consentMessageRequest()
         consent.getConsent{
-               if (it)  // LoadAd
+             //load ad here
             }
 ````
-In-app updates
+**How to use In-app updates**
 ````
-updateApp(UpdateType.Force)
+ updateApp(UpdateType.Force){ onCancel ->
+            finishAffinity()
+        }
 ````
-How to use:
+**How to use Firebase functionalities with default Crashlytics**
+````
+Must add 'google-services.json' file before application run
+
+// In your root-level (project-level) Gradle file add
+
+plugins {
+    // Make sure that you have the AGP plugin 8.1+ dependency
+    id("com.android.application") version "8.1.4" apply false
+
+    // Make sure that you have the Google services Gradle plugin 4.4.1+ dependency
+    id("com.google.gms.google-services") version "4.4.1" apply false
+
+    // Add the dependency for the Crashlytics Gradle plugin
+    id("com.google.firebase.crashlytics") version "3.0.1" apply false
+}
+
+//In your module (app-level) Gradle file add
+
+plugins {
+  // Make sure that you have the Google services Gradle plugin
+  id("com.google.gms.google-services")
+
+  // Add the Crashlytics Gradle plugin
+  id("com.google.firebase.crashlytics")
+}
+
+After adding these dependencies Crashlytics and Firebase analytics added by default for built-in events of your app
+````
+**How to use Firebase custom events**
+````
+ fireEvent("DownloadComplete")
+````
+**How to use Firebase Messaging**
+````
+// add this in menefist under application tag
+
+     <service
+            android:name="com.mobi.pixels.firebase.Messaging"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+// subscribeToTopic string is for fire notification on firebase with this topic name will immediate receive to user
+//notificationIcon shows at the time of notification in app
+ 
+initializeFirebaseMessaging(subscribeToTopic,notificationIcon)
+````
+**How to use In-app review**
+````
+Activity:  inAppReview()
+fragment:  requireActivity().inAppReview()
+````
+**How to use ADS**
+
+        MobileAds.initialize(this)  //initialize ads in application class or onCreate of splash screen 
+	
+       // you can also use mediation but you will initialize adapter for initialization instead of (MobileAds.initialize(this)) and the platform dependencies you want mediation with.
+       
 
         loadInterstitialAd(this, getString(R.string.interstitial_ad))
 
