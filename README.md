@@ -13,7 +13,7 @@ add dependency in module level gradle
 ````
 dependencies:
 {
-implementation 'com.github.Amankhan-mobipixels:Admob-Ads:1.2.8'
+implementation 'com.github.Amankhan-mobipixels:Admob-Ads:1.2.9'
 }
 ````
 get user consent on splash or mainscreen (for European Economic Area (EEA) and the UK)
