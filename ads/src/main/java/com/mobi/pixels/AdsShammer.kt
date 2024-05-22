@@ -1,4 +1,4 @@
-package com.example.ads
+package com.mobi.pixels
 
 import android.app.Activity
 import android.graphics.Color
@@ -7,11 +7,16 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.example.ads.R
+import com.mobi.pixels.enums.NativeAdType
+import com.mobi.pixels.enums.ShimmerColor
 import com.google.android.gms.ads.nativead.MediaView
 
 fun shimmerNative(activity: Activity, container:FrameLayout, nativeAdType: NativeAdType, shimmerColor: ShimmerColor?, shimmerBackgroundColor:String?){
-    if (nativeAdType == NativeAdType.NativeAdvance) container.addView(activity.layoutInflater.inflate(R.layout.shammer_native_advance, null))
-    else if (nativeAdType == NativeAdType.NativeSmall) container.addView(activity.layoutInflater.inflate(R.layout.shammer_native_small, null))
+    if (nativeAdType == NativeAdType.NativeAdvance) container.addView(activity.layoutInflater.inflate(
+        R.layout.shammer_native_advance, null))
+    else if (nativeAdType == NativeAdType.NativeSmall) container.addView(activity.layoutInflater.inflate(
+        R.layout.shammer_native_small, null))
     if (shimmerBackgroundColor!= null) container.findViewById<LinearLayout>(R.id.shimmerBackground).setBackgroundColor(Color.parseColor(shimmerBackgroundColor))
     var color:String? = null
     when (shimmerColor) {

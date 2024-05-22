@@ -1,4 +1,4 @@
-package com.example.ads
+package com.mobi.pixels
 
 import android.app.Activity
 import android.util.Log

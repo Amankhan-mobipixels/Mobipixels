@@ -6,6 +6,5 @@
     <application
         android:hardwareAccelerated="true"
         android:largeHeap="true">
-
     </application>
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.ads
+package com.mobi.pixels.enums
 
 enum class NativeAdType {
     NativeSmall,

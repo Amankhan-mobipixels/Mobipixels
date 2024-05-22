@@ -2,17 +2,20 @@ package com.example.live
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.ads.NativeAdIcon
-import com.example.ads.BannerAdType
-import com.example.ads.NativeAdType
-import com.example.ads.NativeButtonPosition
-import com.example.ads.ShimmerColor
-import com.example.ads.UpdateType
-import com.example.ads.isOnline
-import com.example.ads.loadBannerAd
-import com.example.ads.loadNativeAd
-import com.example.ads.showInterstitialAd
-import com.example.ads.updateApp
+import com.mobi.pixels.enums.NativeAdIcon
+import com.mobi.pixels.enums.BannerAdType
+import com.mobi.pixels.enums.NativeAdType
+import com.mobi.pixels.enums.NativeButtonPosition
+import com.mobi.pixels.enums.ShimmerColor
+import com.mobi.pixels.enums.UpdateType
+import com.mobi.pixels.firebase.fireEvent
+import com.mobi.pixels.firebase.initializeFirebaseMessaging
+import com.mobi.pixels.inAppReview
+import com.mobi.pixels.isOnline
+import com.mobi.pixels.loadBannerAd
+import com.mobi.pixels.loadNativeAd
+import com.mobi.pixels.showInterstitialAd
+import com.mobi.pixels.updateApp
 import com.example.live.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -44,14 +47,15 @@ class MainActivity : AppCompatActivity() {
 
 //
 
-        loadBannerAd(this,binding.banner,"ca-app-pub-3940256099942544/6300978111",BannerAdType.Banner)
+        loadBannerAd(this,binding.banner,"ca-app-pub-3940256099942544/6300978111", BannerAdType.Banner)
             .shimmerEffect(true)
             .shimmerBackgroundColor("#000000")
             .shimmerColor(ShimmerColor.White)
             .callback{
                 loaded, failed ->
             }.load()
-        loadBannerAd(this,binding.collapsibleBanner,"ca-app-pub-3940256099942544/2014213617",BannerAdType.CollapsibleBanner)
+        loadBannerAd(this,binding.collapsibleBanner,"ca-app-pub-3940256099942544/2014213617",
+            BannerAdType.CollapsibleBanner)
             .shimmerEffect(true)
             .shimmerBackgroundColor("#000000")
             .shimmerColor(ShimmerColor.White)
@@ -90,7 +94,13 @@ class MainActivity : AppCompatActivity() {
             .load()
 
 
-        updateApp(UpdateType.Flexible)
+        updateApp(UpdateType.Force){ onCancel ->
+            finishAffinity()
+        }
+
+//        inAppReview()
+//        fireEvent("DownloadComplete")
+//        initializeFirebaseMessaging("AppName", com.example.ads.R.drawable.ad_text_background_black)
     }
 
     override fun onResume() {

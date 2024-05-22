@@ -1,10 +1,12 @@
-package com.example.ads
+package com.mobi.pixels
 
 import android.app.Activity
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.View
 import android.widget.FrameLayout
+import com.mobi.pixels.enums.BannerAdType
+import com.mobi.pixels.enums.ShimmerColor
 import com.google.ads.mediation.admob.AdMobAdapter
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest

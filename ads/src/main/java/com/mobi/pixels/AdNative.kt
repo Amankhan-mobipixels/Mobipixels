@@ -1,4 +1,4 @@
-package com.example.ads
+package com.mobi.pixels
 
 import android.app.Activity
 import android.content.Context
@@ -10,6 +10,11 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.example.ads.R
+import com.mobi.pixels.enums.NativeAdIcon
+import com.mobi.pixels.enums.NativeAdType
+import com.mobi.pixels.enums.NativeButtonPosition
+import com.mobi.pixels.enums.ShimmerColor
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdLoader
 import com.google.android.gms.ads.LoadAdError
@@ -149,8 +154,8 @@ class AdNative(private val ctx: Activity, private val nativeAdContainer: FrameLa
         }).build()
         adLoader.loadAd(AdManagerAdRequest.Builder().build())
     }
-    private fun nativeAdView(context: Context, nativeAd: NativeAd, adView: NativeAdView, nativeAdType: NativeAdType, textColorTitle:String?,textColorDescription:String?,textColorButton:String?, backgroundColor :String?,
-                             colorButton:String?, adIcon: NativeAdIcon? , buttonRoundness:Int) {
+    private fun nativeAdView(context: Context, nativeAd: NativeAd, adView: NativeAdView, nativeAdType: NativeAdType, textColorTitle:String?, textColorDescription:String?, textColorButton:String?, backgroundColor :String?,
+                             colorButton:String?, adIcon: NativeAdIcon?, buttonRoundness:Int) {
         if (backgroundColor!= null) adView.findViewById<LinearLayout>(R.id.nativeBackground).setBackgroundColor(
             Color.parseColor(backgroundColor))
         if (adIcon!=null){

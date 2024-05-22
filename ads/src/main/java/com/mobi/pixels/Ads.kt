@@ -1,14 +1,8 @@
-package com.example.ads
+package com.mobi.pixels
 
 import android.app.Activity
-import android.os.Bundle
-import android.util.DisplayMetrics
 import android.util.Log
-import android.widget.FrameLayout
-import com.google.ads.mediation.admob.AdMobAdapter
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdSize
-import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.OnUserEarnedRewardListener
