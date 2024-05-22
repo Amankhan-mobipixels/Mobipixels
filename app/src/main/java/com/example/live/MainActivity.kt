@@ -17,6 +17,8 @@ import com.mobi.pixels.loadNativeAd
 import com.mobi.pixels.showInterstitialAd
 import com.mobi.pixels.updateApp
 import com.example.live.databinding.ActivityMainBinding
+import com.google.android.gms.ads.MobileAds
+import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -25,9 +27,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+   MobileAds.initialize(this)
         isOnline(this@MainActivity)
-
 //        val consent = GDPRMessage(this)
 //        consent.consentMessageRequest("551C6DD69736913D8C23756B69E049E9",true)
 //        consent.getConsent{
@@ -98,9 +99,9 @@ class MainActivity : AppCompatActivity() {
             finishAffinity()
         }
 
-//        inAppReview()
-//        fireEvent("DownloadComplete")
-//        initializeFirebaseMessaging("AppName", com.example.ads.R.drawable.ad_text_background_black)
+        inAppReview()
+        fireEvent("successfull")
+        initializeFirebaseMessaging("demo")
     }
 
     override fun onResume() {

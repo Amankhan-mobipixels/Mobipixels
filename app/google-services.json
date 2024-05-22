@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "145561740648",
+    "project_id": "library-demo-8eb6a",
+    "storage_bucket": "library-demo-8eb6a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:145561740648:android:f2f032b4c5a23a11df62dd",
+        "android_client_info": {
+          "package_name": "com.example.live"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChcMjuqJkDXElG9k6fzTm1QHgi0sPFdQ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
