@@ -51,6 +51,31 @@ After adding these dependencies Firebase analytics added by default for built-in
 ````
  fireEvent("DownloadComplete")
 ````
+**How to use Firebase crashlytics**
+````
+// In your root-level (project-level) Gradle file add
+
+plugins {
+    // Make sure that you have the AGP plugin 8.1+ dependency
+    id("com.android.application") version "8.1.4" apply false
+
+    // Make sure that you have the Google services Gradle plugin 4.4.1+ dependency
+    id("com.google.gms.google-services") version "4.4.1" apply false
+
+    // Add the dependency for the Crashlytics Gradle plugin
+    id("com.google.firebase.crashlytics") version "3.0.1" apply false
+}
+
+//In your module (app-level) Gradle file add
+
+plugins {
+  // Make sure that you have the Google services Gradle plugin
+  id("com.google.gms.google-services")
+
+  // Add the Crashlytics Gradle plugin
+  id("com.google.firebase.crashlytics")
+}
+````
 **How to use In-app review**
 ````
 Activity:  inAppReview()
