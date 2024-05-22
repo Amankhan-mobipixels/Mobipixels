@@ -27,7 +27,9 @@ val consent = GDPRMessage(this)
 ````
 How to use In-app updates
 ````
-updateApp(UpdateType.Force)
+ updateApp(UpdateType.Force){ onCancel ->
+            finishAffinity()
+        }
 ````
 How to use In-app review
 ````
