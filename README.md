@@ -67,7 +67,6 @@ After adding these dependencies Crashlytics and Firebase analytics added by defa
 **How to use Firebase Messaging**
 ````
 // add this in menefist under application tag
-
      <service
             android:name="com.mobi.pixels.firebase.Messaging"
             android:exported="false" >
@@ -78,7 +77,7 @@ After adding these dependencies Crashlytics and Firebase analytics added by defa
 
 // subscribeToTopic string is for fire notification on firebase with this topic name will immediate receive to user
 //notificationIcon shows at the time of notification in app
- 
+// make sure you have post notification permission for android 13 and above
 initializeFirebaseMessaging(subscribeToTopic,notificationIcon)
 ````
 **How to use In-app review**
