@@ -31,27 +31,7 @@ val consent = GDPRMessage(this)
             finishAffinity()
         }
 ````
-**How to use Firebase functionalities**
-````
-// In your root-level (project-level) Gradle file add
-
-plugins {
-  id("com.google.gms.google-services") version "4.4.1" apply false
-}
-
-//In your module (app-level) Gradle file add
-
-plugins {
-  id("com.google.gms.google-services")
-}
-
-After adding these dependencies Firebase analytics added by default for built-in events of your app
-````
-**How to use Firebase custom events**
-````
- fireEvent("DownloadComplete")
-````
-**How to use Firebase crashlytics**
+**How to use Firebase functionalities with default Crashlytics**
 ````
 // In your root-level (project-level) Gradle file add
 
@@ -75,6 +55,12 @@ plugins {
   // Add the Crashlytics Gradle plugin
   id("com.google.firebase.crashlytics")
 }
+
+After adding these dependencies Crashlytics and Firebase analytics added by default for built-in events of your app
+````
+**How to use Firebase custom events**
+````
+ fireEvent("DownloadComplete")
 ````
 **How to use Firebase Messaging**
 ````
