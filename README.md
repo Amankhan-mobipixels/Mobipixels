@@ -33,6 +33,8 @@ val consent = GDPRMessage(this)
 ````
 **How to use Firebase functionalities with default Crashlytics**
 ````
+Must add 'google-services.json' file before application run
+
 // In your root-level (project-level) Gradle file add
 
 plugins {
