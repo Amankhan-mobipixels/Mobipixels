@@ -81,7 +81,7 @@ plugins {
 // add this in menefist under application tag
 
      <service
-            android:name="com.mobipixels.aman.firebase.Messaging"
+            android:name="com.mobi.pixels.firebase.Messaging"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
