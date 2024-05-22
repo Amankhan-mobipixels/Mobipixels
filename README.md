@@ -30,6 +30,9 @@ How to use In-app updates
 updateApp(UpdateType.Force)
 ````
 How to use In-app review
+
+**Activity**
+
 ````
 **Activity**:  inAppReview()
 **fragment**:  requireActivity().inAppReview()
