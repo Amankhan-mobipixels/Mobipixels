@@ -31,8 +31,8 @@ updateApp(UpdateType.Force)
 ````
 How to use In-app review
 ````
-**Activity**:  inAppReview()
-**fragment**:  requireActivity().inAppReview()
+Activity:  inAppReview()
+fragment:  requireActivity().inAppReview()
 ````
 How to use ADS
 
