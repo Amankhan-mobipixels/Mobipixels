@@ -33,12 +33,14 @@ How to use In-app updates
 ````
 How to use firebase functionalities
 ````
- // In your root-level (project-level) Gradle file add
+// In your root-level (project-level) Gradle file add
+
 plugins {
   id("com.google.gms.google-services") version "4.4.1" apply false
 }
 
 //In your module (app-level) Gradle file add
+
 plugins {
   id("com.google.gms.google-services")
 
