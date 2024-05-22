@@ -62,7 +62,7 @@ After adding these dependencies Crashlytics and Firebase analytics added by defa
 ````
 **How to use Firebase custom events**
 ````
- fireEvent("DownloadComplete")
+ fireEvent(this.javaClass.name) // get the name of current screen running
 ````
 **How to use Firebase Messaging**
 ````
