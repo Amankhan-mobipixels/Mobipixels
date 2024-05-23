@@ -81,6 +81,15 @@ After adding these dependencies Crashlytics and Firebase analytics added by defa
 
 initializeFirebaseMessaging(subscribeToTopic)
 ````
+**How to use Remote Config**
+````
+ InitializeRemoteConfig{
+            val isInterEnabled = Firebase.remoteConfig.getBoolean("splashAd")
+            val interValue = Firebase.remoteConfig.getString("splash")
+            Log.d("fgjhdf", isInterEnabled.toString())
+            Log.d("fgjhdf", interValue)
+        }
+````
 **How to use In-app review**
 ````
 Activity:  inAppReview()
