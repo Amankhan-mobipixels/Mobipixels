@@ -1,6 +1,7 @@
 package com.example.live
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.mobi.pixels.enums.NativeAdIcon
 import com.mobi.pixels.enums.BannerAdType
@@ -18,6 +19,9 @@ import com.mobi.pixels.showInterstitialAd
 import com.mobi.pixels.updateApp
 import com.example.live.databinding.ActivityMainBinding
 import com.google.android.gms.ads.MobileAds
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.mobi.pixels.firebase.InitializeRemoteConfig
 import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +31,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        InitializeRemoteConfig{
+            val isInterEnabled = Firebase.remoteConfig.getBoolean("splashAd")
+            val interValue = Firebase.remoteConfig.getString("splash")
+            Log.d("fgjhdf", isInterEnabled.toString())
+            Log.d("fgjhdf", interValue)
+        }
+
+
    MobileAds.initialize(this)
         isOnline(this@MainActivity)
 //        val consent = GDPRMessage(this)

@@ -37,7 +37,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.Amankhan-mobipixels'
                 artifactId = 'MobiPixels'
-                version = '2.0.1'
+                version = '2.0.2'
             }
         }
     }
@@ -58,4 +58,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-messaging-ktx'
+    api 'com.google.firebase:firebase-config-ktx'
 }

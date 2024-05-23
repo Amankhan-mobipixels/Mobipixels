@@ -37,7 +37,9 @@ fun Context.initializeFirebaseMessaging(subscribeToTopic:String) {
                 Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show()
             }
         }
+
     channelId = subscribeToTopic
+
     startService(
         Intent(this, Messaging::class.java)
     )
