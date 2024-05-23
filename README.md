@@ -1,4 +1,4 @@
-# Admob-Ads
+# MobiPixels
 **add maven in your project level gradle**
 ````
 allprojects {
