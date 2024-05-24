@@ -34,7 +34,6 @@ fun Context.initializeFirebaseMessaging(subscribeToTopic:String) {
     FirebaseMessaging.getInstance().subscribeToTopic(subscribeToTopic)
         .addOnCompleteListener { task ->
             if (!task.isSuccessful) {
-                Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show()
             }
         }
 
