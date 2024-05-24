@@ -79,7 +79,7 @@ After adding these dependencies Crashlytics and Firebase analytics added by defa
 //notificationIcon shows at the time of notification in app
 // make sure you have post notification permission for android 13 and above
 
-initializeFirebaseMessaging(subscribeToTopic)
+context.initializeFirebaseMessaging(subscribeToTopic)
 ````
 **How to use Remote Config**
 ````
