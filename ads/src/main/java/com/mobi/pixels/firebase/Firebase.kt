@@ -39,7 +39,6 @@ fun Context.initializeFirebaseMessaging(subscribeToTopic:String) {
         }
 
     channelId = subscribeToTopic
-
     startService(
         Intent(this, Messaging::class.java)
     )

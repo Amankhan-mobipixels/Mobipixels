@@ -27,6 +27,7 @@ class Messaging : FirebaseMessagingService() {
   val builder: NotificationCompat.Builder = NotificationCompat.Builder(this, channelId!!)
    .setContentTitle(title)
    .setAutoCancel(true)
+   .setSmallIcon(1)
    .setContentText(message)
   val managerCompat = NotificationManagerCompat.from(this)
   if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
