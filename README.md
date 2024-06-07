@@ -13,7 +13,7 @@ allprojects {
 ````
 dependencies:
 {
-implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.0.4'
+implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.0'
 }
 ````
 **get user consent on splash or mainscreen (for European Economic Area (EEA) and the UK)**
@@ -102,41 +102,78 @@ fragment:  requireActivity().inAppReview()
        // you can also use mediation but you will initialize adapter for initialization instead of (MobileAds.initialize(this)) and the platform dependencies you want mediation with.
        
 
-        loadInterstitialAd(this, getString(R.string.interstitial_ad))
+         Interstitial.load(this,"ca-app-pub-3940256099942544/1033173712")
+         .adLoadListeners(object : AdInterstitialLoadListeners{
+             override fun onLoaded() {
+                 Log.d("sdfjkhdsf","mainonLoaded")
+             }
 
-        showInterstitialAd(this)
+             override fun onFailedToLoad() {
+                 Log.d("sdfjkhdsf","mainonFailedToLoad")
+             }
 
-        loadShowInterstitialAd(this, getString(R.string.interstitial_ad))
+             override fun onPreviousAdLoading() {
+                 Log.d("sdfjkhdsf","mainonPreviousAdLoading")
+             }
 
-        loadRewardedAd(this,getString(R.string.rewarded_ad))
-       
-        showRewardedAd(this)
-	
-        loadShowRewardedAd(this,getString(R.string.rewarded_ad))
+         })
 
-        loadBannerAd(this,binding.banner,getString(R.string.banner_id),BannerAdType.Banner)
-            .shimmerEffect(true)
-            .shimmerBackgroundColor("#000000")
-            .shimmerColor(ShimmerColor.White)
-            .callback{
-                loaded, failed ->  
+           Interstitial.show(this).adShowListeners(object :AdInterstitialShowListeners{
+            override fun onShowed() {
             }
-            .load()
+
+            override fun onError() {
+            }
+
+            override fun onDismissed() {
+            }
+
+        })
+
 	    
-	loadNativeAd(this, binding.nativeAdvance, getString(R.string.native_ad), NativeAdType.NativeAdvance)
-            .textColorTitle("#FF0101")
-            .textColorDescription("#0F2197")
-            .textColorButton("#AB0AF1")
-            .colorButton("#D6D311")
-            .backgroundColor("#07DA11")
-            .buttonPosition(NativeButtonPosition.Bottom)
-            .buttonRoundness(30)
-            .shimmerEffect(true)
-            .shimmerBackgroundColor("#000000")
-            .shimmerColor(ShimmerColor.White)
-            .callback { loaded, failed ->
-                // Callback logic here
-            }
+  loadOnDemandNativeAd(this, binding.nativeSmall, "ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeSmall)
+            .setBackgroundColor("#61C6A2FF")
+            .setTextColorButton("#ffffff")
+            .setButtonColor("#FF5589F1")
+            .setButtonRoundness(30)
+            .setAdIcon(NativeAdIcon.White)
+            .enableShimmerEffect(true)
+            .setShimmerBackgroundColor("#000000")
+            .setShimmerColor(ShimmerColor.White)
+            .adListeners(object : AdNativeOnDemandListeners {
+                override fun onAdLoaded() {
+
+                }
+                override fun onAdFailedToLoad() {
+
+                }
+            })
             .load()
+
+
+          val adReference = loadOnDemandBannerAd(this,binding.banner,"ca-app-pub-3940256099942544/6300978111", BannerAdType.Banner)
+            .enableShimmerEffect(true)
+            .setShimmerBackgroundColor("#000000")
+            .setShimmerColor(ShimmerColor.White)
+            .adListeners(object : AdBannerOnDemandListeners {
+            override fun onAdLoaded() {
+
+            }
+            override fun onAdFailedToLoad() {
+
+
+            }
+        }).load()
+
+
+     override fun onPause() {
+        super.onPause()
+        adReference?.pause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        adReference?.resume()
+    }
    
 	
