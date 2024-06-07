@@ -130,6 +130,8 @@ fragment:  requireActivity().inAppReview()
 
         })
 
+
+
   loadOnDemandNativeAd(this, binding.nativeSmall, "ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeSmall)
             .setBackgroundColor("#61C6A2FF")
             .setTextColorButton("#ffffff")
