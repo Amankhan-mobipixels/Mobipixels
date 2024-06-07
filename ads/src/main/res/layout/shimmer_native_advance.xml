@@ -1,4 +1,5 @@
 <com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/shimmer_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -51,14 +52,13 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginHorizontal="10dp"
             android:background="#C2C2C2" />
-
-        <Button
+        <androidx.cardview.widget.CardView
             android:id="@+id/ad_call_to_action"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="2dp"
-            android:backgroundTint="#C2C2C2" />
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="#C2C2C2"
+            app:cardCornerRadius="20dp"/>
 
     </LinearLayout>
 

@@ -3,30 +3,27 @@ package com.example.live
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.mobi.pixels.enums.NativeAdIcon
 import com.mobi.pixels.enums.BannerAdType
-import com.mobi.pixels.enums.NativeAdType
-import com.mobi.pixels.enums.NativeButtonPosition
 import com.mobi.pixels.enums.ShimmerColor
-import com.mobi.pixels.enums.UpdateType
-import com.mobi.pixels.firebase.fireEvent
-import com.mobi.pixels.firebase.initializeFirebaseMessaging
-import com.mobi.pixels.inAppReview
 import com.mobi.pixels.isOnline
-import com.mobi.pixels.loadBannerAd
-import com.mobi.pixels.loadNativeAd
-import com.mobi.pixels.showInterstitialAd
-import com.mobi.pixels.updateApp
 import com.example.live.databinding.ActivityMainBinding
+import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.mobi.pixels.adBannerOnDemand.AdBannerOnDemandListeners
+import com.mobi.pixels.adBannerOnDemand.loadOnDemandBannerAd
+import com.mobi.pixels.adInterstitial.AdInterstitialLoadListeners
+import com.mobi.pixels.adInterstitial.Interstitial
+import com.mobi.pixels.adNativeOnDemand.AdNativeOnDemandListeners
+import com.mobi.pixels.adNativeOnDemand.loadOnDemandNativeAd
+import com.mobi.pixels.enums.NativeAdIcon
+import com.mobi.pixels.enums.NativeAdType
 import com.mobi.pixels.firebase.InitializeRemoteConfig
-import java.io.IOException
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
     private lateinit var binding: ActivityMainBinding
-
+    var adReference:AdView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -47,77 +44,108 @@ class MainActivity : AppCompatActivity() {
 //            Log.d("Fdsfsdfsdsavt", it.toString())
 //        }
 
+     Interstitial.load(this,"ca-app-pub-3940256099942544/1033173712")
+         .adLoadListeners(object : AdInterstitialLoadListeners{
+             override fun onLoaded() {
+                 Log.d("sdfjkhdsf","mainonLoaded")
+             }
 
-//        loadInterstitialAd(this,"ca-app-pub-3940256099942544/1033173712"){
-//            loaded, failed ->
-//            if (loaded) {
-//                Log.d("checkcheck", "loaded")
+             override fun onFailedToLoad() {
+                 Log.d("sdfjkhdsf","mainonFailedToLoad")
+             }
+
+             override fun onPreviousAdLoading() {
+                 Log.d("sdfjkhdsf","mainonPreviousAdLoading")
+             }
+
+         })
+
+
+
+//         adReference = loadOnDemandBannerAd(this,binding.banner,"ca-app-pub-3940256099942544/6300978111", BannerAdType.Banner)
+//            .enableShimmerEffect(true)
+//            .setShimmerBackgroundColor("#000000")
+//            .setShimmerColor(ShimmerColor.White)
+//            .adListeners(object : AdBannerOnDemandListeners {
+//            override fun onAdLoaded() {
 //
 //            }
-//            if (failed) Log.d("checkcheck", "failed")
-//        }
-
-
+//            override fun onAdFailedToLoad() {
 //
+//
+//            }
+//        }).load()
 
-        loadBannerAd(this,binding.banner,"ca-app-pub-3940256099942544/6300978111", BannerAdType.Banner)
-            .shimmerEffect(true)
-            .shimmerBackgroundColor("#000000")
-            .shimmerColor(ShimmerColor.White)
-            .callback{
-                loaded, failed ->
-            }.load()
-        loadBannerAd(this,binding.collapsibleBanner,"ca-app-pub-3940256099942544/2014213617",
-            BannerAdType.CollapsibleBanner)
-            .shimmerEffect(true)
-            .shimmerBackgroundColor("#000000")
-            .shimmerColor(ShimmerColor.White)
-            .callback{
-                loaded, failed ->
-            }.load()
+//        loadOnDemandBannerAd(this,binding.collapsibleBanner,"ca-app-pub-3940256099942544/6300978111", BannerAdType.CollapsibleBanner)
+//            .enableShimmerEffect(true)
+//            .setShimmerBackgroundColor("#000000")
+//            .setShimmerColor(ShimmerColor.White)
+//            .adListeners(object : AdBannerOnDemandListeners {
+//                override fun onAdLoaded() {
+//
+//                }
+//                override fun onAdFailedToLoad() {
+//
+//
+//                }
+//            }).load()
 
-        loadNativeAd(this, binding.nativeAdvance, "ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeAdvance)
-            .backgroundColor("#000000")
-            .textColorButton("#ffffff")
-            .colorButton("#ff5800")
-            .buttonRoundness(30)
-            .adIcon(NativeAdIcon.White)
-            .buttonPosition(NativeButtonPosition.Top)
-            .shimmerEffect(true)
-            .shimmerBackgroundColor("#000000")
-            .shimmerColor(ShimmerColor.White)
-            .callback { loaded, failed ->
-                // Callback logic here
-            }
+        loadOnDemandNativeAd(this, binding.nativeSmall, "ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeSmall)
+            .setBackgroundColor("#61C6A2FF")
+            .setTextColorButton("#ffffff")
+            .setButtonColor("#FF5589F1")
+            .setButtonRoundness(30)
+            .setAdIcon(NativeAdIcon.White)
+            .enableShimmerEffect(true)
+            .setShimmerBackgroundColor("#000000")
+            .setShimmerColor(ShimmerColor.White)
+            .adListeners(object : AdNativeOnDemandListeners {
+                override fun onAdLoaded() {
+
+                }
+                override fun onAdFailedToLoad() {
+
+                }
+            })
             .load()
 
-        loadNativeAd(this, binding.nativeSmall,"ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeSmall)
-            .backgroundColor("#000000")
-            .textColorButton("#ffffff")
-            .colorButton("#ff0058")
-            .buttonPosition(NativeButtonPosition.Bottom)
-            .buttonRoundness(30)
-            .adIcon(NativeAdIcon.White)
-            .shimmerEffect(true)
-            .shimmerBackgroundColor("#000000")
-            .shimmerColor(ShimmerColor.White)
-            .callback { loaded, failed ->
-                // Callback logic here
-            }
+        loadOnDemandNativeAd(this, binding.nativeAdvance, "ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeAdvance)
+            .setBackgroundColor("#61C6A2FF")
+            .setTextColorButton("#ffffff")
+            .setButtonColor("#FF5589F1")
+            .setButtonRoundness(30)
+            .setAdIcon(NativeAdIcon.White)
+            .enableShimmerEffect(true)
+            .setShimmerBackgroundColor("#000000")
+            .setShimmerColor(ShimmerColor.White)
+            .adListeners(object : AdNativeOnDemandListeners {
+                override fun onAdLoaded() {
+
+                }
+                override fun onAdFailedToLoad() {
+
+                }
+            })
             .load()
 
 
-        updateApp(UpdateType.Force){ onCancel ->
-            finishAffinity()
-        }
+//        updateApp(UpdateType.Force){ onCancel ->
+//            finishAffinity()
+//        }
+//
+//        inAppReview()
+//        fireEvent("successfull")
+//        initializeFirebaseMessaging("demo")
+    }
 
-        inAppReview()
-        fireEvent("successfull")
-        initializeFirebaseMessaging("demo")
+    override fun onPause() {
+        super.onPause()
+        adReference?.pause()
     }
 
     override fun onResume() {
         super.onResume()
-        showInterstitialAd(this)
+        adReference?.resume()
     }
+
 }
