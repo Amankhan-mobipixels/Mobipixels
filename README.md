@@ -139,6 +139,7 @@ fragment:  requireActivity().inAppReview()
             .enableShimmerEffect(true)
             .setShimmerBackgroundColor("#000000")
             .setShimmerColor(ShimmerColor.White)
+	    
             .adListeners(object : AdNativeOnDemandListeners {
                 override fun onAdLoaded() {
 
