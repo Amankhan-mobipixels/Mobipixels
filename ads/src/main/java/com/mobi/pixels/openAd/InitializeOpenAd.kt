@@ -20,7 +20,7 @@ import com.mobi.pixels.adInterstitial.Interstitial
 import com.mobi.pixels.adRewarded.Rewarded
 import java.util.Date
 
-class InitializeOpenAd(val context: Context) : Application.ActivityLifecycleCallbacks,
+class InitializeOpenAd(val context: Context, val adUnit:String) : Application.ActivityLifecycleCallbacks,
     DefaultLifecycleObserver {
     private var appOpenAd: AppOpenAd? = null
     private var currentActivity: Activity? = null
@@ -63,7 +63,7 @@ class InitializeOpenAd(val context: Context) : Application.ActivityLifecycleCall
             }
         }
         val request = AdRequest.Builder().build()
-        AppOpenAd.load(context, "ca-app-pub-3940256099942544/9257395921", request, loadCallback)
+        AppOpenAd.load(context, adUnit, request, loadCallback)
     }
 
     private fun showAdIfAvailable() {
