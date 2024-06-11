@@ -13,7 +13,7 @@ allprojects {
 ````
 dependencies:
 {
-implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.0'
+implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.1'
 }
 ````
 **get user consent on splash or mainscreen (for European Economic Area (EEA) and the UK)**
@@ -101,6 +101,13 @@ fragment:  requireActivity().inAppReview()
 	
        // you can also use mediation but you will initialize adapter for initialization instead of (MobileAds.initialize(this)) and the platform dependencies you want mediation with.
        
+
+      class MyApplication:Application(){
+           override fun onCreate() {
+            super.onCreate()
+             InitializeOpenAd(this@MyApplication)
+           }
+         }
 
          Interstitial.load(this,"ca-app-pub-3940256099942544/1033173712")
          .adLoadListeners(object : AdInterstitialLoadListeners{
