@@ -102,6 +102,7 @@ fragment:  requireActivity().inAppReview()
        // you can also use mediation but you will initialize adapter for initialization instead of (MobileAds.initialize(this)) and the platform dependencies you want mediation with.
        
 
+// Open App Ad
       class MyApplication:Application(){
            override fun onCreate() {
             super.onCreate()
@@ -109,6 +110,8 @@ fragment:  requireActivity().inAppReview()
            }
          }
 
+
+// Interstitial AD
          Interstitial.load(this,"ca-app-pub-3940256099942544/1033173712")
          .adLoadListeners(object : AdInterstitialLoadListeners{
              override fun onLoaded() {
@@ -138,7 +141,7 @@ fragment:  requireActivity().inAppReview()
         })
 
 
-
+     // Native AD
            loadOnDemandNativeAd(this, binding.nativeSmall, "ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeSmall)
             .setBackgroundColor("#61C6A2FF")
             .setTextColorButton("#ffffff")
@@ -156,7 +159,7 @@ fragment:  requireActivity().inAppReview()
             })
             .load()
 
-
+ // Banner AD
           val adReference = loadOnDemandBannerAd(this,binding.banner,"ca-app-pub-3940256099942544/6300978111", BannerAdType.Banner)
             .enableShimmerEffect(true)
             .setShimmerBackgroundColor("#000000")
