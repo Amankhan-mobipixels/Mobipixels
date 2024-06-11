@@ -18,8 +18,9 @@ object Rewarded {
     var loadListener: AdRewardedLoadListeners? = null
     var showListener: AdRewardedShowListeners? = null
     var isPreviousAdLoading = false
+    var isShowingRewardedAd = false
 
-    fun loadRewardedAd(ctx: Activity, id: String) = apply{
+    fun load(ctx: Activity, id: String) = apply{
         if (rewardedAd !=null){
             loadListener?.onLoaded()
             return@apply
@@ -50,7 +51,7 @@ object Rewarded {
     }
 
 
-    fun showRewardedAd(ctx: Activity) = apply{
+    fun show(ctx: Activity) = apply{
         if (rewardedAd ==null) {
             showListener?.onError()
             return@apply
@@ -60,11 +61,14 @@ object Rewarded {
 
             override fun onAdDismissedFullScreenContent() {
                 super.onAdDismissedFullScreenContent()
+                isShowingRewardedAd = false
                 showListener?.onDismissed()
+
             }
             override fun onAdShowedFullScreenContent() {
                 super.onAdShowedFullScreenContent()
                 rewardedAd = null
+                isShowingRewardedAd = true
                 showListener?.onShowed()
 
             }

@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/shimmerBackground"
-        android:padding="5dp">
+        android:padding="10dp">
 
         <View
             android:id="@+id/ad_app_icon"

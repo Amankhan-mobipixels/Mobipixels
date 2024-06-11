@@ -13,6 +13,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
         var LoadListener: AdInterstitialLoadListeners? = null
         var ShowListener: AdInterstitialShowListeners? = null
         var isPreviousAdLoading = false
+        var isShowingInterstitialAd = false
 
         fun load(ctx: Activity, id: String) = apply {
             if (mInterstitialAd != null) {
@@ -50,11 +51,14 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
             mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
                 override fun onAdDismissedFullScreenContent() {
                     super.onAdDismissedFullScreenContent()
+                    isShowingInterstitialAd = false
                     ShowListener?.onDismissed()
+
                 }
 
                 override fun onAdShowedFullScreenContent() {
                     super.onAdShowedFullScreenContent()
+                    isShowingInterstitialAd = true
                     mInterstitialAd = null
                     ShowListener?.onShowed()
 
