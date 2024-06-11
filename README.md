@@ -13,7 +13,7 @@ allprojects {
 ````
 dependencies:
 {
-implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.1'
+implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.2'
 }
 ````
 **get user consent on splash or mainscreen (for European Economic Area (EEA) and the UK)**
@@ -106,7 +106,7 @@ fragment:  requireActivity().inAppReview()
       class MyApplication:Application(){
            override fun onCreate() {
             super.onCreate()
-             InitializeOpenAd(this@MyApplication)
+             InitializeOpenAd(this@MyApplication,unitId)
            }
          }
 
