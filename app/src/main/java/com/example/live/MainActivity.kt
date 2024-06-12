@@ -45,22 +45,22 @@ class MainActivity : AppCompatActivity(){
 //        consent.getConsent{
 //            Log.d("Fdsfsdfsdsavt", it.toString())
 //        }
-
-     Interstitial.load(this,"ca-app-pub-3940256099942544/1033173712")
-         .adLoadListeners(object : AdInterstitialLoadListeners{
-             override fun onLoaded() {
-                 Interstitial.show(this@MainActivity)
-             }
-
-             override fun onFailedToLoad() {
-                 Log.d("sdfjkhdsf","mainonFailedToLoad")
-             }
-
-             override fun onPreviousAdLoading() {
-                 Log.d("sdfjkhdsf","mainonPreviousAdLoading")
-             }
-
-         })
+//
+//     Interstitial.load(this,"ca-app-pub-3940256099942544/1033173712")
+//         .adLoadListeners(object : AdInterstitialLoadListeners{
+//             override fun onLoaded() {
+//                 Interstitial.show(this@MainActivity)
+//             }
+//
+//             override fun onFailedToLoad() {
+//                 Log.d("sdfjkhdsf","mainonFailedToLoad")
+//             }
+//
+//             override fun onPreviousAdLoading() {
+//                 Log.d("sdfjkhdsf","mainonPreviousAdLoading")
+//             }
+//
+//         })
 
 //
 //
@@ -101,8 +101,8 @@ class MainActivity : AppCompatActivity(){
             .setButtonRoundness(30)
             .setAdIcon(NativeAdIcon.White)
             .enableShimmerEffect(true)
-            .setShimmerBackgroundColor("#000000")
-            .setShimmerColor(ShimmerColor.White)
+            .setShimmerBackgroundColor("#ffffff")
+            .setShimmerColor(ShimmerColor.Black)
             .adListeners(object : AdNativeOnDemandListeners {
                 override fun onAdLoaded() {
 
@@ -120,8 +120,8 @@ class MainActivity : AppCompatActivity(){
             .setButtonRoundness(10)
             .setAdIcon(NativeAdIcon.White)
             .enableShimmerEffect(true)
-            .setShimmerBackgroundColor("#000000")
-            .setShimmerColor(ShimmerColor.White)
+            .setShimmerBackgroundColor("#ffffff")
+            .setShimmerColor(ShimmerColor.Black)
             .adListeners(object : AdNativeOnDemandListeners {
                 override fun onAdLoaded() {
 

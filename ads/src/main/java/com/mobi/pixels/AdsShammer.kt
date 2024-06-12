@@ -1,6 +1,7 @@
 package com.mobi.pixels
 
 import android.app.Activity
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.view.View
 import android.widget.FrameLayout
@@ -38,11 +39,9 @@ fun shimmerNative(
         if (nativeAdType == NativeAdType.NativeAdvance) { val media = container.findViewById<View>(R.id.ad_media) as MediaView
             media.setBackgroundColor(Color.parseColor(it))
         }
-        listOf(R.id.ad_app_icon, R.id.ad_headline, R.id.ad_body, R.id.ad_call_to_action).forEach { viewId ->
-            if (viewId==R.id.ad_call_to_action){
-                container.findViewById<CardView>(viewId).setCardBackgroundColor(Color.parseColor(it))
-                return
-            }
+        container.findViewById<CardView>(R.id.ad_call_to_action).backgroundTintList = ColorStateList.valueOf(Color.parseColor(it))
+
+        listOf(R.id.ad_app_icon, R.id.ad_headline, R.id.ad_body).forEach { viewId ->
             container.findViewById<View>(viewId).setBackgroundColor(Color.parseColor(it))
         }
     }
