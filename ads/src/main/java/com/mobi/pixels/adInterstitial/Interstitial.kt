@@ -13,7 +13,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
         var isPreviousAdLoading = false
         var isShowingInterstitialAd = false
 
-        fun load(ctx: Activity, id: String,loadListener: AdInterstitialLoadListeners?) {
+        fun load(ctx: Activity, id: String,loadListener: AdInterstitialLoadListeners? = null) {
             if (mInterstitialAd != null) {
                 loadListener?.onLoaded()
                 return

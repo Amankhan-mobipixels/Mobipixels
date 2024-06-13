@@ -18,7 +18,7 @@ object Rewarded {
     var isPreviousAdLoading = false
     var isShowingRewardedAd = false
 
-    fun load(ctx: Activity, id: String,loadListener: AdRewardedLoadListeners?){
+    fun load(ctx: Activity, id: String,loadListener: AdRewardedLoadListeners? = null){
         if (rewardedAd !=null){
             loadListener?.onLoaded()
             return
@@ -49,7 +49,7 @@ object Rewarded {
     }
 
 
-    fun show(ctx: Activity,showListener: AdRewardedShowListeners?){
+    fun show(ctx: Activity,showListener: AdRewardedShowListeners? = null){
         if (rewardedAd ==null) {
             showListener?.onError()
             return

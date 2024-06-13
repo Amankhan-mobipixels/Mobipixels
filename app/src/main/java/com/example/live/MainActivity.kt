@@ -46,8 +46,8 @@ class MainActivity : AppCompatActivity(){
 //            Log.d("Fdsfsdfsdsavt", it.toString())
 //        }
 //
-     Interstitial.load(this,"ca-app-pub-3940256099942544/1033173712",null)
-        Interstitial.show(this,null)
+     Interstitial.load(this,"ca-app-pub-3940256099942544/1033173712")
+        Interstitial.show(this)
 
 //
 //
