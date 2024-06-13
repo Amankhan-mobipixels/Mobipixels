@@ -20,7 +20,7 @@ import com.mobi.pixels.adInterstitial.Interstitial
 import com.mobi.pixels.adRewarded.Rewarded
 import java.util.Date
 
-class InitializeOpenAd(val context: Context, val adUnit:String) : Application.ActivityLifecycleCallbacks,
+class InitializeOpenAd(val context: Context, val adUnit:String, val screenDoNotWantToShow:String? = null) : Application.ActivityLifecycleCallbacks,
     DefaultLifecycleObserver {
     private var appOpenAd: AppOpenAd? = null
     private var currentActivity: Activity? = null
@@ -67,6 +67,7 @@ class InitializeOpenAd(val context: Context, val adUnit:String) : Application.Ac
     }
 
     private fun showAdIfAvailable() {
+        Log.d("gsfgdf",context::class.java.simpleName)
         if (!isShowingOpenAd && isAdAvailable() && currentActivity!=null && !Interstitial.isShowingInterstitialAd && !Rewarded.isShowingRewardedAd) {
             val fullScreenContentCallback = object : FullScreenContentCallback() {
                 override fun onAdDismissedFullScreenContent() {
@@ -95,7 +96,7 @@ class InitializeOpenAd(val context: Context, val adUnit:String) : Application.Ac
     }
 
     override fun onActivityStarted(activity: Activity) {
-        if (!isShowingOpenAd) currentActivity = activity
+        if (!isShowingOpenAd && activity::class.java.simpleName != screenDoNotWantToShow) currentActivity = activity
     }
 
     override fun onActivityResumed(activity: Activity) {
