@@ -112,8 +112,7 @@ fragment:  requireActivity().inAppReview()
 
 
          // Interstitial AD
-         Interstitial.load(this,"ca-app-pub-3940256099942544/1033173712")
-         .adLoadListeners(object : AdInterstitialLoadListeners{
+	     Interstitial.load(this,"ca-app-pub-3940256099942544/1033173712",object : AdInterstitialLoadListeners {
              override fun onLoaded() {
                  Log.d("sdfjkhdsf","mainonLoaded")
              }
@@ -127,8 +126,7 @@ fragment:  requireActivity().inAppReview()
              }
 
          })
-
-           Interstitial.show(this).adShowListeners(object :AdInterstitialShowListeners{
+           Interstitial.show(this@Splash,object : AdInterstitialShowListeners{
             override fun onShowed() {
             }
 
@@ -136,6 +134,37 @@ fragment:  requireActivity().inAppReview()
             }
 
             override fun onDismissed() {
+            }
+
+        })
+
+
+    // Rewarded AD
+	        Rewarded.load(this,"123",object :AdRewardedLoadListeners{
+            override fun onFailedToLoad() {
+           
+            }
+
+            override fun onLoaded() {
+      
+            }
+
+            override fun onPreviousAdLoading() {
+            }
+
+        })
+	
+            Rewarded.show(this,object :AdRewardedShowListeners{
+            override fun onCompleted() {
+            }
+
+            override fun onDismissed() {
+            }
+
+            override fun onError() {
+            }
+
+            override fun onShowed() {
             }
 
         })
