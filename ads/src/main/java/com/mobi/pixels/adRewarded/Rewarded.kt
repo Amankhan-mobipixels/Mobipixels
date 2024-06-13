@@ -15,15 +15,13 @@ import com.mobi.pixels.adInterstitial.Interstitial
 object Rewarded {
 
     private var rewardedAd: RewardedAd? = null
-    var loadListener: AdRewardedLoadListeners? = null
-    var showListener: AdRewardedShowListeners? = null
     var isPreviousAdLoading = false
     var isShowingRewardedAd = false
 
-    fun load(ctx: Activity, id: String) = apply{
+    fun load(ctx: Activity, id: String,loadListener: AdRewardedLoadListeners?){
         if (rewardedAd !=null){
             loadListener?.onLoaded()
-            return@apply
+            return
         }
         val callback = object : RewardedAdLoadCallback() {
             override fun onAdLoaded(ad: RewardedAd) {
@@ -51,10 +49,10 @@ object Rewarded {
     }
 
 
-    fun show(ctx: Activity) = apply{
+    fun show(ctx: Activity,showListener: AdRewardedShowListeners?){
         if (rewardedAd ==null) {
             showListener?.onError()
-            return@apply
+            return
         }
 
         rewardedAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
@@ -85,13 +83,4 @@ object Rewarded {
 
     }
 
-
-
-
-    fun adLoadListeners(listener: AdRewardedLoadListeners?) = apply {
-        loadListener = listener
-    }
-    fun adShowListeners(listener: AdRewardedShowListeners?) = apply {
-       showListener = listener
-    }
 }

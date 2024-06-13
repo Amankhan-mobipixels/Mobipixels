@@ -10,27 +10,25 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 
     object Interstitial {
         var mInterstitialAd: InterstitialAd? = null
-        var LoadListener: AdInterstitialLoadListeners? = null
-        var ShowListener: AdInterstitialShowListeners? = null
         var isPreviousAdLoading = false
         var isShowingInterstitialAd = false
 
-        fun load(ctx: Activity, id: String) = apply {
+        fun load(ctx: Activity, id: String,loadListener: AdInterstitialLoadListeners?) {
             if (mInterstitialAd != null) {
-                LoadListener?.onLoaded()
-                return@apply
+                loadListener?.onLoaded()
+                return
             }
 
             val callback = object : InterstitialAdLoadCallback() {
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
                     isPreviousAdLoading = false
                     mInterstitialAd = interstitialAd
-                    LoadListener?.onLoaded()
+                    loadListener?.onLoaded()
                 }
 
                 override fun onAdFailedToLoad(loadAdError: LoadAdError) {
                     isPreviousAdLoading = false
-                    LoadListener?.onFailedToLoad()
+                    loadListener?.onFailedToLoad()
                 }
             }
             if (!isPreviousAdLoading){
@@ -39,40 +37,34 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
                 InterstitialAd.load(ctx, id, adRequest,callback)
             }
             else{
-                LoadListener?.onPreviousAdLoading()
+                loadListener?.onPreviousAdLoading()
             }
         }
 
-        fun show(ctx: Activity) = apply  {
+
+        fun show(ctx: Activity, showListener: AdInterstitialShowListeners? = null) {
             if (mInterstitialAd == null) {
-                ShowListener?.onError()
-                return@apply
+                showListener?.onError()
+                return
             }
             mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
                 override fun onAdDismissedFullScreenContent() {
                     super.onAdDismissedFullScreenContent()
                     isShowingInterstitialAd = false
-                    ShowListener?.onDismissed()
-
+                    showListener?.onDismissed()
                 }
 
                 override fun onAdShowedFullScreenContent() {
                     super.onAdShowedFullScreenContent()
                     isShowingInterstitialAd = true
                     mInterstitialAd = null
-                    ShowListener?.onShowed()
-
+                    showListener?.onShowed()
                 }
             }
 
             mInterstitialAd?.show(ctx)
         }
 
-        fun adLoadListeners(listener: AdInterstitialLoadListeners?) = apply {
-            LoadListener = listener
-        }
-        fun adShowListeners(listener: AdInterstitialShowListeners?) = apply {
-            ShowListener = listener
-        }
-
     }
+
+

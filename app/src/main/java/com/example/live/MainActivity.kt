@@ -46,21 +46,8 @@ class MainActivity : AppCompatActivity(){
 //            Log.d("Fdsfsdfsdsavt", it.toString())
 //        }
 //
-//     Interstitial.load(this,"ca-app-pub-3940256099942544/1033173712")
-//         .adLoadListeners(object : AdInterstitialLoadListeners{
-//             override fun onLoaded() {
-//                 Interstitial.show(this@MainActivity)
-//             }
-//
-//             override fun onFailedToLoad() {
-//                 Log.d("sdfjkhdsf","mainonFailedToLoad")
-//             }
-//
-//             override fun onPreviousAdLoading() {
-//                 Log.d("sdfjkhdsf","mainonPreviousAdLoading")
-//             }
-//
-//         })
+     Interstitial.load(this,"ca-app-pub-3940256099942544/1033173712",null)
+        Interstitial.show(this,null)
 
 //
 //
