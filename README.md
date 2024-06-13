@@ -13,7 +13,7 @@ allprojects {
 ````
 dependencies:
 {
-implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.3'
+implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.6'
 }
 ````
 **get user consent on splash or mainscreen (for European Economic Area (EEA) and the UK)**
