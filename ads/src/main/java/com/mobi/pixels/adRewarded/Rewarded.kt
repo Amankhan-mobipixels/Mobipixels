@@ -50,7 +50,7 @@ object Rewarded {
 
 
     fun show(ctx: Activity,showListener: AdRewardedShowListeners? = null){
-        if (rewardedAd ==null) {
+        if (rewardedAd ==null || !isShowingRewardedAd) {
             showListener?.onError()
             return
         }
