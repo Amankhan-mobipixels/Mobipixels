@@ -43,7 +43,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 
 
         fun show(ctx: Activity, showListener: AdInterstitialShowListeners? = null) {
-            if (mInterstitialAd == null ||  !isShowingInterstitialAd) {
+            if (mInterstitialAd == null ||  isShowingInterstitialAd) {
                 showListener?.onError()
                 return
             }
