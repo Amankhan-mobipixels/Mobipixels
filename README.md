@@ -110,19 +110,12 @@ fragment:  requireActivity().inAppReview()
 
          // Interstitial AD
 	     Interstitial.load(this,"ca-app-pub-3940256099942544/1033173712",object : AdInterstitialLoadListeners {
-             override fun onLoaded() {
-                 Log.d("sdfjkhdsf","mainonLoaded")
-             }
-
+             override fun onLoaded() { }
              override fun onFailedToLoad(error: LoadAdError) {
-                 Log.d("sdfjkhdsf","mainonFailedToLoad")
+                 Log.d("sdfjkhdsf",+error)
              }
-
-             override fun onPreviousAdLoading() {
-                 Log.d("sdfjkhdsf","mainonPreviousAdLoading")
-             }
-
-         })
+             override fun onPreviousAdLoading() { }
+             })
            Interstitial.show(this@Splash,object : AdInterstitialShowListeners{
             override fun onShowed() {
             }
@@ -139,17 +132,11 @@ fragment:  requireActivity().inAppReview()
     // Rewarded AD
 	        Rewarded.load(this,"123",object :AdRewardedLoadListeners{
             override fun onFailedToLoad(error: LoadAdError) {
-           
+                    Log.d("sdfjkhdsf",+error)
             }
-
-            override fun onLoaded() {
-      
-            }
-
-            override fun onPreviousAdLoading() {
-            }
-
-        })
+             override fun onLoaded() {  }
+             override fun onPreviousAdLoading() {  }
+            })
 	
             Rewarded.show(this,object :AdRewardedShowListeners{
             override fun onCompleted() {
