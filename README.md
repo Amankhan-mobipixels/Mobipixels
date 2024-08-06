@@ -117,17 +117,10 @@ fragment:  requireActivity().inAppReview()
              override fun onPreviousAdLoading() { }
              })
            Interstitial.show(this@Splash,object : AdInterstitialShowListeners{
-            override fun onShowed() {
-            }
-
-            override fun onError() {
-            }
-
-            override fun onDismissed() {
-            }
-
+            override fun onShowed() {   }
+            override fun onError() {  }
+            override fun onDismissed() {  }
         })
-
 
     // Rewarded AD
 	        Rewarded.load(this,"123",object :AdRewardedLoadListeners{
@@ -139,20 +132,12 @@ fragment:  requireActivity().inAppReview()
             })
 	
             Rewarded.show(this,object :AdRewardedShowListeners{
-            override fun onCompleted() {
-            }
-
-            override fun onDismissed() {
-            }
-
-            override fun onError() {
-            }
-
-            override fun onShowed() {
-            }
+            override fun onCompleted() {  }
+            override fun onDismissed() {  }
+            override fun onError() {  }
+            override fun onShowed() {   }
 
         })
-
 
            // Native AD
            loadOnDemandNativeAd(this, binding.nativeSmall, "ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeSmall)
