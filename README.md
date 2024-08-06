@@ -13,7 +13,7 @@ allprojects {
 ````
 dependencies:
 {
-implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.11'
+implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.12'
 }
 ````
 **get user consent on splash or mainscreen (for European Economic Area (EEA) and the UK)**
@@ -97,11 +97,8 @@ fragment:  requireActivity().inAppReview()
 ````
 **How to use ADS**
 
-        MobileAds.initialize(this)  //initialize ads in application class or onCreate of splash screen 
+     Ads.initialize(this)  //initialize ads in onCreate of splash screen 
 	
-       // you can also use mediation but you will initialize adapter for initialization instead of (MobileAds.initialize(this)) and the platform dependencies you want mediation with.
-       
-
       // Open App Ad
       class MyApplication:Application(){
            override fun onCreate() {
@@ -117,7 +114,7 @@ fragment:  requireActivity().inAppReview()
                  Log.d("sdfjkhdsf","mainonLoaded")
              }
 
-             override fun onFailedToLoad() {
+             override fun onFailedToLoad(error: LoadAdError) {
                  Log.d("sdfjkhdsf","mainonFailedToLoad")
              }
 
@@ -141,7 +138,7 @@ fragment:  requireActivity().inAppReview()
 
     // Rewarded AD
 	        Rewarded.load(this,"123",object :AdRewardedLoadListeners{
-            override fun onFailedToLoad() {
+            override fun onFailedToLoad(error: LoadAdError) {
            
             }
 
