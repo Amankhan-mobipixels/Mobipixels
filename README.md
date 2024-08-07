@@ -35,10 +35,12 @@ val consent = GDPRMessage(this)
 
     updateAppWithRemoteConfig(version)
 
-json example:
+Json example:
+
 //  UpdateType -1 means do not show in-app update for this version
 //  UpdateType 0 means show flexible in-app update for this version
 //  UpdateType 1 means show immediate or force in-app update for this version
+
 [
     {
       "VersionName": "1.0.0",
