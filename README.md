@@ -97,7 +97,7 @@ fragment:  requireActivity().inAppReview()
 ````
 **How to use ADS**
 
-     Ads.initialize(this)  //initialize ads in onCreate of splash screen 
+     Ads.initialize(this, true)  //initialize ads in onCreate of splash screen and if you want to disable ads in app you should set value as false (by default its true) 
 	
       // Open App Ad
       class MyApplication:Application(){
@@ -111,7 +111,7 @@ fragment:  requireActivity().inAppReview()
          // Interstitial AD
 	     Interstitial.load(this,"ca-app-pub-3940256099942544/1033173712",object : AdInterstitialLoadListeners {
              override fun onLoaded() { }
-             override fun onFailedToLoad(error: LoadAdError) {
+             override fun onFailedToLoad(error: String) {
                  Log.d("sdfjkhdsf",+error)
              }
              override fun onPreviousAdLoading() { }
@@ -124,7 +124,7 @@ fragment:  requireActivity().inAppReview()
 
     // Rewarded AD
 	        Rewarded.load(this,"123",object :AdRewardedLoadListeners{
-            override fun onFailedToLoad(error: LoadAdError) {
+            override fun onFailedToLoad(error: String) {
                     Log.d("sdfjkhdsf",+error)
             }
              override fun onLoaded() {  }
@@ -152,7 +152,7 @@ fragment:  requireActivity().inAppReview()
             .adListeners(object : AdNativeOnDemandListeners {
                 override fun onAdLoaded() {
                 }
-                override fun onAdFailedToLoad() {
+                override fun onAdFailedToLoad(error: String) {
                 }
             })
             .load()
@@ -166,7 +166,7 @@ fragment:  requireActivity().inAppReview()
             override fun onAdLoaded() {
 
             }
-            override fun onAdFailedToLoad() {
+            override fun onAdFailedToLoad(error: String) {
 
 
             }
