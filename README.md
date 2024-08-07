@@ -13,7 +13,7 @@ allprojects {
 ````
 dependencies:
 {
-implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.11'
+implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.12'
 }
 ````
 **get user consent on splash or mainscreen (for European Economic Area (EEA) and the UK)**
@@ -30,6 +30,30 @@ val consent = GDPRMessage(this)
  updateApp(UpdateType.Force){ onCancel ->
             finishAffinity()
         }
+
+// control in-app update with remote config you just have to pass remote config json as a string
+
+    updateAppWithRemoteConfig(version)
+
+Json example:
+
+//  UpdateType -1 means do not show in-app update for this version
+//  UpdateType 0 means show flexible in-app update for this version
+//  UpdateType 1 means show immediate or force in-app update for this version
+
+[
+    {
+      "VersionName": "1.0.0",
+      "VersionCode": 1,
+      "UpdateType": -1
+    },
+    {
+      "VersionName": "2.0.0",
+      "VersionCode": 3,          
+      "UpdateType": 1               
+    }
+  ]
+
 ````
 **How to use Firebase functionalities with default Crashlytics**
 ````
@@ -97,11 +121,8 @@ fragment:  requireActivity().inAppReview()
 ````
 **How to use ADS**
 
-        MobileAds.initialize(this)  //initialize ads in application class or onCreate of splash screen 
+     Ads.initialize(this, true)  //initialize ads in onCreate of splash screen and if you want to disable ads in app you should set value as false (by default its true) 
 	
-       // you can also use mediation but you will initialize adapter for initialization instead of (MobileAds.initialize(this)) and the platform dependencies you want mediation with.
-       
-
       // Open App Ad
       class MyApplication:Application(){
            override fun onCreate() {
@@ -113,62 +134,34 @@ fragment:  requireActivity().inAppReview()
 
          // Interstitial AD
 	     Interstitial.load(this,"ca-app-pub-3940256099942544/1033173712",object : AdInterstitialLoadListeners {
-             override fun onLoaded() {
-                 Log.d("sdfjkhdsf","mainonLoaded")
+             override fun onLoaded() { }
+             override fun onFailedToLoad(error: String) {
+                 Log.d("sdfjkhdsf",+error)
              }
-
-             override fun onFailedToLoad() {
-                 Log.d("sdfjkhdsf","mainonFailedToLoad")
-             }
-
-             override fun onPreviousAdLoading() {
-                 Log.d("sdfjkhdsf","mainonPreviousAdLoading")
-             }
-
-         })
+             override fun onPreviousAdLoading() { }
+             })
            Interstitial.show(this@Splash,object : AdInterstitialShowListeners{
-            override fun onShowed() {
-            }
-
-            override fun onError() {
-            }
-
-            override fun onDismissed() {
-            }
-
+            override fun onShowed() {   }
+            override fun onError() {  }
+            override fun onDismissed() {  }
         })
-
 
     // Rewarded AD
 	        Rewarded.load(this,"123",object :AdRewardedLoadListeners{
-            override fun onFailedToLoad() {
-           
+            override fun onFailedToLoad(error: String) {
+                    Log.d("sdfjkhdsf",+error)
             }
-
-            override fun onLoaded() {
-      
-            }
-
-            override fun onPreviousAdLoading() {
-            }
-
-        })
+             override fun onLoaded() {  }
+             override fun onPreviousAdLoading() {  }
+            })
 	
             Rewarded.show(this,object :AdRewardedShowListeners{
-            override fun onCompleted() {
-            }
-
-            override fun onDismissed() {
-            }
-
-            override fun onError() {
-            }
-
-            override fun onShowed() {
-            }
+            override fun onCompleted() {  }
+            override fun onDismissed() {  }
+            override fun onError() {  }
+            override fun onShowed() {   }
 
         })
-
 
            // Native AD
            loadOnDemandNativeAd(this, binding.nativeSmall, "ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeSmall)
@@ -183,7 +176,7 @@ fragment:  requireActivity().inAppReview()
             .adListeners(object : AdNativeOnDemandListeners {
                 override fun onAdLoaded() {
                 }
-                override fun onAdFailedToLoad() {
+                override fun onAdFailedToLoad(error: String) {
                 }
             })
             .load()
@@ -197,7 +190,7 @@ fragment:  requireActivity().inAppReview()
             override fun onAdLoaded() {
 
             }
-            override fun onAdFailedToLoad() {
+            override fun onAdFailedToLoad(error: String) {
 
 
             }
