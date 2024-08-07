@@ -2,5 +2,5 @@ package com.mobi.pixels.adNativeOnDemand
 
 interface AdNativeOnDemandListeners {
     fun onAdLoaded()
-    fun onAdFailedToLoad()
+    fun onAdFailedToLoad(error: String)
 }

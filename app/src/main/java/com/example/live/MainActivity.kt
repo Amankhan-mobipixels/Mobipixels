@@ -1,27 +1,22 @@
 package com.example.live
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.mobi.pixels.enums.BannerAdType
 import com.mobi.pixels.enums.ShimmerColor
-import com.mobi.pixels.isOnline
 import com.example.live.databinding.ActivityMainBinding
 import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
-import com.mobi.pixels.adBannerOnDemand.AdBannerOnDemandListeners
-import com.mobi.pixels.adBannerOnDemand.loadOnDemandBannerAd
 import com.mobi.pixels.adInterstitial.AdInterstitialLoadListeners
-import com.mobi.pixels.adInterstitial.AdInterstitialShowListeners
 import com.mobi.pixels.adInterstitial.Interstitial
 import com.mobi.pixels.adNativeOnDemand.AdNativeOnDemandListeners
 import com.mobi.pixels.adNativeOnDemand.loadOnDemandNativeAd
-import com.mobi.pixels.adRewarded.Rewarded
 import com.mobi.pixels.enums.NativeAdIcon
 import com.mobi.pixels.enums.NativeAdType
+import com.mobi.pixels.enums.UpdateType
 import com.mobi.pixels.firebase.InitializeRemoteConfig
+import com.mobi.pixels.initialize.Ads
+import com.mobi.pixels.updateAppWithRemoteConfig
 
 class MainActivity : AppCompatActivity(){
     private lateinit var binding: ActivityMainBinding
@@ -30,15 +25,21 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        InitializeRemoteConfig{
+
+        Ads.initialize(this,true)
+
+        InitializeRemoteConfig{
 //            val isInterEnabled = Firebase.remoteConfig.getBoolean("splashAd")
 //            val interValue = Firebase.remoteConfig.getString("splash")
-//            Log.d("fgjhdf", isInterEnabled.toString())
-//            Log.d("fgjhdf", interValue)
+            val version = Firebase.remoteConfig.getString("versions")
+            updateAppWithRemoteConfig(version)
+        }
+
+//        updateApp(UpdateType.Force){ onCancel ->
+//            finishAffinity()
 //        }
-//
-//
-//   MobileAds.initialize(this)
+
+
 //        isOnline(this@MainActivity)
 //        val consent = GDPRMessage(this)
 //        consent.consentMessageRequest("551C6DD69736913D8C23756B69E049E9",true)
@@ -46,7 +47,21 @@ class MainActivity : AppCompatActivity(){
 //            Log.d("Fdsfsdfsdsavt", it.toString())
 //        }
 //
-     Interstitial.load(this,"ca-app-pub-3940256099942544/1033173712")
+     Interstitial.load(this,"ca-app-pub-3940256099942544/1033173712", object : AdInterstitialLoadListeners{
+         override fun onLoaded() {
+
+         }
+
+         override fun onFailedToLoad(error: String) {
+
+         }
+
+         override fun onPreviousAdLoading() {
+
+         }
+
+
+     })
         Interstitial.show(this)
 
 //
@@ -94,7 +109,7 @@ class MainActivity : AppCompatActivity(){
                 override fun onAdLoaded() {
 
                 }
-                override fun onAdFailedToLoad() {
+                override fun onAdFailedToLoad(error: String) {
 
                 }
             })
@@ -113,7 +128,7 @@ class MainActivity : AppCompatActivity(){
                 override fun onAdLoaded() {
 
                 }
-                override fun onAdFailedToLoad() {
+                override fun onAdFailedToLoad(error: String) {
 
                 }
             })

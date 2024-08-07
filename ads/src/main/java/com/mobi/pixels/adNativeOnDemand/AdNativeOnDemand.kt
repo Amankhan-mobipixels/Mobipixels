@@ -2,7 +2,6 @@ package com.mobi.pixels.adNativeOnDemand
 
 import android.app.Activity
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.view.View
@@ -21,6 +20,7 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.admanager.AdManagerAdRequest
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
+import com.mobi.pixels.initialize.Ads
 import com.mobi.pixels.isOnline
 import com.mobi.pixels.shimmerNative
 
@@ -57,8 +57,15 @@ class AdNativeOnDemand(
     }
 
     fun load() {
+
         if (!isOnline(ctx)) {
             nativeAdContainer.visibility = View.GONE
+            adLoadListener?.onAdFailedToLoad("Internet connection not detected. Please check your connection and try again.")
+            return
+        }
+        if (!Ads.IsAdsAllowed) {
+            nativeAdContainer.visibility = View.GONE
+            adLoadListener?.onAdFailedToLoad("Ads disabled by developer")
             return
         }
 
@@ -72,13 +79,12 @@ class AdNativeOnDemand(
             .forNativeAd { nativeAd -> displayNativeAd(nativeAd) }
             .withAdListener(object : AdListener() {
                 override fun onAdLoaded() {
-
-                    adLoadListener?.onAdFailedToLoad()
+                    adLoadListener?.onAdLoaded()
                 }
 
                 override fun onAdFailedToLoad(loadAdError: LoadAdError) {
                     nativeAdContainer.visibility = View.GONE
-                    adLoadListener?.onAdLoaded()
+                    adLoadListener?.onAdFailedToLoad(loadAdError.message)
                 }
             })
             .build()

@@ -12,6 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "ADS"
+rootProject.name = "Mobipixels"
 include ':app'
 include ':ads'

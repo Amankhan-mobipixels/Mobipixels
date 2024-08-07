@@ -6,21 +6,28 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.OnUserEarnedRewardListener
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
-import com.mobi.pixels.adInterstitial.Interstitial
+import com.mobi.pixels.initialize.Ads
+import com.mobi.pixels.isOnline
 
 object Rewarded {
 
     private var rewardedAd: RewardedAd? = null
-    var isPreviousAdLoading = false
-    var isShowingRewardedAd = false
+    private var isPreviousAdLoading = false
+    internal var isShowingRewardedAd = false
 
     fun load(ctx: Activity, id: String,loadListener: AdRewardedLoadListeners? = null){
         if (rewardedAd !=null){
             loadListener?.onLoaded()
+            return
+        }
+        if (!isOnline(ctx)) {
+            loadListener?.onFailedToLoad("Internet connection not detected. Please check your connection and try again.")
+            return
+        }
+        if (!Ads.IsAdsAllowed) {
+            loadListener?.onFailedToLoad("Ads disabled by developer")
             return
         }
         val callback = object : RewardedAdLoadCallback() {
@@ -32,7 +39,7 @@ object Rewarded {
 
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 isPreviousAdLoading = false
-                loadListener?.onFailedToLoad()
+                loadListener?.onFailedToLoad(adError.message)
             } }
 
         if (!isPreviousAdLoading){
