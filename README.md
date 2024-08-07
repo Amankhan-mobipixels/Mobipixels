@@ -30,8 +30,28 @@ val consent = GDPRMessage(this)
  updateApp(UpdateType.Force){ onCancel ->
             finishAffinity()
         }
+
 // control in-app update with remote config you just have to pass remote config json as a string
-updateAppWithRemoteConfig(version)
+
+    updateAppWithRemoteConfig(version)
+
+json example:
+//  UpdateType -1 means do not show in-app update for this version
+//  UpdateType 0 means show flexible in-app update for this version
+//  UpdateType 1 means show immediate or force in-app update for this version
+[
+    {
+      "VersionName": "1.0.0",
+      "VersionCode": 1,
+      "UpdateType": -1
+    },
+    {
+      "VersionName": "2.0.0",
+      "VersionCode": 3,          
+      "UpdateType": 1               
+    }
+  ]
+
 ````
 **How to use Firebase functionalities with default Crashlytics**
 ````
