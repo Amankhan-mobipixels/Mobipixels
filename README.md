@@ -12,7 +12,7 @@ allprojects {
 **add dependency in module level gradle**
 ````
 dependencies: {
-        implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.13'
+        implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.14'
             }
 ````
 **get user consent on splash or mainscreen (for European Economic Area (EEA) and the UK)**
