@@ -94,8 +94,6 @@ Activity:  inAppReview()
 fragment:  requireActivity().inAppReview()
 ````
 **How to use ADS**
-````
-````
 **Ads Initialization**
 ````
       Ads.initialize(this, true  //initialize ads in onCreate of splash screen and if you want to disable ads in app you should set value as false (by default its true) 
