@@ -11,7 +11,7 @@ import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
-import com.google.common.reflect.TypeToken
+import com.google.gson.reflect.TypeToken
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.mobi.pixels.enums.UpdateType
@@ -81,6 +81,7 @@ fun Activity.updateAppWithRemoteConfig(jsonString: String) {
 }
 
 private fun Activity.fetchDataForCurrentVersion(jsonString: String): String? {
+    if (jsonString.isEmpty()) return "-1"
     val gson = Gson()
     val versionListType = object : TypeToken<List<JsonObject>>() {}.type
     val versionList: List<JsonObject> = gson.fromJson(jsonString, versionListType)
