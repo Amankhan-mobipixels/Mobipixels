@@ -11,14 +11,12 @@ allprojects {
 ````
 **add dependency in module level gradle**
 ````
-dependencies:
-{
-implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.13'
-}
+dependencies: {
+        implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.13'
+            }
 ````
 **get user consent on splash or mainscreen (for European Economic Area (EEA) and the UK)**
 ````
-//if consent is true load your ad
 val consent = GDPRMessage(this)
         consent.consentMessageRequest()
         consent.getConsent{
@@ -30,30 +28,6 @@ val consent = GDPRMessage(this)
  updateApp(UpdateType.Force){ onCancel ->
             finishAffinity()
         }
-
-// control in-app update with remote config you just have to pass remote config json as a string
-
-    updateAppWithRemoteConfig(version)
-
-Json example:
-
-//  UpdateType -1 means do not show in-app update for this version
-//  UpdateType 0 means show flexible in-app update for this version
-//  UpdateType 1 means show immediate or force in-app update for this version
-
-[
-    {
-      "VersionName": "1.0.0",
-      "VersionCode": 1,
-      "UpdateType": -1
-    },
-    {
-      "VersionName": "2.0.0",
-      "VersionCode": 3,          
-      "UpdateType": 1               
-    }
-  ]
-
 ````
 **How to use Firebase functionalities with default Crashlytics**
 ````
@@ -120,19 +94,18 @@ Activity:  inAppReview()
 fragment:  requireActivity().inAppReview()
 ````
 **How to use ADS**
-
-     Ads.initialize(this, true)  //initialize ads in onCreate of splash screen and if you want to disable ads in app you should set value as false (by default its true) 
-	
-      // Open App Ad
-      class MyApplication:Application(){
-           override fun onCreate() {
-            super.onCreate()
-             InitializeOpenAd(this@MyApplication,unitId,"Splash")
-           }
-         }
-
-
-         // Interstitial AD
+````
+````
+**Ads Initialization**
+````
+      Ads.initialize(this, true  //initialize ads in onCreate of splash screen and if you want to disable ads in app you should set value as false (by default its true) 
+````
+**How to use OpenAd**
+````
+     InitializeOpenAd(this@MyApplication,unitId,"Splash")        
+````
+**How to use Interstitial AD**
+````
 	     Interstitial.load(this,"ca-app-pub-3940256099942544/1033173712",object : AdInterstitialLoadListeners {
              override fun onLoaded() { }
              override fun onFailedToLoad(error: String) {
@@ -145,8 +118,9 @@ fragment:  requireActivity().inAppReview()
             override fun onError() {  }
             override fun onDismissed() {  }
         })
-
-    // Rewarded AD
+````
+**How to use Rewarded AD**
+````
 	        Rewarded.load(this,"123",object :AdRewardedLoadListeners{
             override fun onFailedToLoad(error: String) {
                     Log.d("sdfjkhdsf",+error)
@@ -162,8 +136,9 @@ fragment:  requireActivity().inAppReview()
             override fun onShowed() {   }
 
         })
-
-           // Native AD
+````
+**How to use Native AD**
+````
            loadOnDemandNativeAd(this, binding.nativeSmall, "ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeSmall)
             .setBackgroundColor("#61C6A2FF")
             .setTextColorButton("#ffffff")
@@ -180,8 +155,9 @@ fragment:  requireActivity().inAppReview()
                 }
             })
             .load()
-
-          // Banner AD
+````
+**How to use Banner AD**
+````
           val adReference = loadOnDemandBannerAd(this,binding.banner,"ca-app-pub-3940256099942544/6300978111", BannerAdType.Banner)
             .enableShimmerEffect(true)
             .setShimmerBackgroundColor("#000000")
@@ -206,5 +182,3 @@ fragment:  requireActivity().inAppReview()
         super.onResume()
         adReference?.resume()
     }
-   
-	
