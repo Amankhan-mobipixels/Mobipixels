@@ -153,6 +153,30 @@ fragment:  requireActivity().inAppReview()
             })
             .load()
 ````
+**How to use Native Preloaded AD**
+````
+// you can load on any screen
+ AdNativePreload.load(this,"ca-app-pub-3940256099942544/2247696110",object :AdNativePreloadListeners{
+            override fun onAdLoaded() {}
+            override fun onAdFailedToLoad(error: String) { }
+            override fun onPreviousAdLoading() { }
+        })
+
+// you can call this on any screen to show native preloaded ad
+showAdNativePreloaded(this,binding.nativeSmall,NativeAdType.NativeSmall)
+            .setBackgroundColor("#61C6A2FF")
+            .setTextColorButton("#ffffff")
+            .setButtonColor("#FF5589F1")
+            .setButtonRoundness(30)
+            .setAdIcon(NativeAdIcon.White)
+            .enableShimmerEffect(true)
+            .setShimmerBackgroundColor("#ffffff")
+            .setShimmerColor(ShimmerColor.Black)
+            .showListeners(object : AdNativePreloadShowListeners{
+                override fun onShowed() { }
+                override fun onError() { }
+            }).show()
+````
 **How to use Banner AD**
 ````
           val adReference = loadOnDemandBannerAd(this,binding.banner,"ca-app-pub-3940256099942544/6300978111", BannerAdType.Banner)
