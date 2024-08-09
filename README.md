@@ -15,19 +15,10 @@ dependencies: {
         implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.14'
             }
 ````
-**get user consent on splash or mainscreen (for European Economic Area (EEA) and the UK)**
+**How to use In-app review**
 ````
-val consent = GDPRMessage(this)
-        consent.consentMessageRequest()
-        consent.getConsent{
-             //load ad here
-            }
-````
-**How to use In-app updates**
-````
- updateApp(UpdateType.Force){ onCancel ->
-            finishAffinity()
-        }
+Activity:  inAppReview()
+fragment:  requireActivity().inAppReview()
 ````
 **How to use Firebase functionalities with default Crashlytics**
 ````
@@ -88,14 +79,48 @@ context.initializeFirebaseMessaging(subscribeToTopic)
             Log.d("fgjhdf", interValue)
         }
 ````
-**How to use In-app review**
+**How to use In-app updates**
 ````
-Activity:  inAppReview()
-fragment:  requireActivity().inAppReview()
+ updateApp(UpdateType.Force){ onCancel ->
+            finishAffinity()
+        }
+````
+**How to use In-app updates with remote config**
+````
+// control in-app update with remote config you just have to pass remote config json as a string
+
+    updateAppWithRemoteConfig(version)
+
+Json example:
+
+//  UpdateType -1 means do not show in-app update for this version
+//  UpdateType 0 means show flexible in-app update for this version
+//  UpdateType 1 means show immediate or force in-app update for this version
+
+[
+    {
+      "VersionName": "1.0.0",
+      "VersionCode": 1,
+      "UpdateType": -1
+    },
+    {
+      "VersionName": "2.0.0",
+      "VersionCode": 3,          
+      "UpdateType": 1               
+    }
+  ]
 ````
 **How to use ADS**
 ````
       Ads.initialize(this, true  //initialize ads in onCreate of splash screen and if you want to disable ads in app you should set value as false (by default its true) 
+````
+**get user consent on splash or mainscreen (for European Economic Area (EEA) and the UK)**
+````
+val consent = GDPRMessage(this)
+        consent.consentMessageRequest()
+        consent.getConsent{
+             //load ad here
+            }
 ````
 **How to use OpenAd**
 ````
