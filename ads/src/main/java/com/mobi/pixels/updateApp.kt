@@ -81,7 +81,7 @@ fun Activity.updateAppWithRemoteConfig(jsonString: String) {
 }
 
 private fun Activity.fetchDataForCurrentVersion(jsonString: String): String? {
-    if (jsonString.isEmpty() || jsonString == null) return "-1"
+    if (jsonString.isEmpty()) return "-1"
     val gson = Gson()
     val versionListType = object : TypeToken<List<JsonObject>>() {}.type
     val versionList: List<JsonObject> = gson.fromJson(jsonString, versionListType)
