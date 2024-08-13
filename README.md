@@ -101,12 +101,12 @@ Json example:
     {
       "VersionName": "1.0.0",
       "VersionCode": 1,
-      "UpdateType": -1
+      "UpdateType": "-1"
     },
     {
       "VersionName": "2.0.0",
       "VersionCode": 3,          
-      "UpdateType": 1               
+      "UpdateType": "1"               
     }
   ]
 ````
