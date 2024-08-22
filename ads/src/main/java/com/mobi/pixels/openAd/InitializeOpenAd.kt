@@ -47,7 +47,7 @@ class InitializeOpenAd(val context: Context, val adUnit:String, val screenDoNotW
     }
 
     fun fetchAd() {
-        if (isAdAvailable() && isAdLoadingInProgress) return
+        if (isAdAvailable() || isAdLoadingInProgress) return
         isAdLoadingInProgress = true
         val loadCallback = object : AppOpenAdLoadCallback() {
             override fun onAdLoaded(openAd: AppOpenAd) {
