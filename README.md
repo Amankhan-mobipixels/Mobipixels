@@ -12,7 +12,7 @@ allprojects {
 **add dependency in module level gradle**
 ````
 dependencies: {
-        implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.14'
+        implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.15'
             }
 ````
 **How to use In-app review**
@@ -81,9 +81,7 @@ context.initializeFirebaseMessaging(subscribeToTopic)
 ````
 **How to use In-app updates**
 ````
- updateApp(UpdateType.Force){ onCancel ->
-            finishAffinity()
-        }
+ updateApp(UpdateType.Force)
 ````
 **How to use In-app updates with remote config**
 ````
