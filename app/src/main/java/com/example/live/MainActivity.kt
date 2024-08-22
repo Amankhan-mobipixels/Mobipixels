@@ -21,6 +21,7 @@ import com.mobi.pixels.enums.NativeAdType
 import com.mobi.pixels.enums.UpdateType
 import com.mobi.pixels.firebase.InitializeRemoteConfig
 import com.mobi.pixels.initialize.Ads
+import com.mobi.pixels.updateApp
 import com.mobi.pixels.updateAppWithRemoteConfig
 
 class MainActivity : AppCompatActivity(){
@@ -40,9 +41,7 @@ class MainActivity : AppCompatActivity(){
             updateAppWithRemoteConfig(version)
         }
 
-//        updateApp(UpdateType.Force){ onCancel ->
-//            finishAffinity()
-//        }
+        updateApp(UpdateType.Force)
 
 
 //        isOnline(this@MainActivity)

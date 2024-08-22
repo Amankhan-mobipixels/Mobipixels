@@ -47,13 +47,13 @@ class InitializeOpenAd(val context: Context, val adUnit:String, val screenDoNotW
     }
 
     fun fetchAd() {
-        if (isAdAvailable()) return
+        if (isAdAvailable() && isAdLoadingInProgress) return
         isAdLoadingInProgress = true
         val loadCallback = object : AppOpenAdLoadCallback() {
-            override fun onAdLoaded(appOpenAd: AppOpenAd) {
-                super.onAdLoaded(appOpenAd)
+            override fun onAdLoaded(openAd: AppOpenAd) {
+                super.onAdLoaded(openAd)
                 Log.d("asfs","loaded")
-                this@InitializeOpenAd.appOpenAd = appOpenAd
+                appOpenAd = openAd
                 loadTime = Date().time
                 isAdLoadingInProgress = false
             }
@@ -70,7 +70,9 @@ class InitializeOpenAd(val context: Context, val adUnit:String, val screenDoNotW
 
     private fun showAdIfAvailable() {
         Log.d("gsfgdf",context::class.java.simpleName)
+
         if (Ads.IsAdsAllowed && !isShowingOpenAd && isAdAvailable() && currentActivity!=null && !Interstitial.isShowingInterstitialAd && !Rewarded.isShowingRewardedAd) {
+
             val fullScreenContentCallback = object : FullScreenContentCallback() {
                 override fun onAdDismissedFullScreenContent() {
                     super.onAdDismissedFullScreenContent()
@@ -83,6 +85,7 @@ class InitializeOpenAd(val context: Context, val adUnit:String, val screenDoNotW
                     super.onAdShowedFullScreenContent()
                     isShowingOpenAd = true
                 }
+
             }
             appOpenAd?.fullScreenContentCallback =fullScreenContentCallback
             appOpenAd?.show(currentActivity!!)
