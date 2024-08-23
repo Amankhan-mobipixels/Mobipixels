@@ -1,4 +1,4 @@
-# MobiPixels
+  # MobiPixels
 **add maven in your project level gradle**
 ````
 allprojects {
@@ -12,7 +12,7 @@ allprojects {
 **add dependency in module level gradle**
 ````
 dependencies: {
-        implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.16'
+        implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.17'
             }
 ````
 **How to use In-app review**
