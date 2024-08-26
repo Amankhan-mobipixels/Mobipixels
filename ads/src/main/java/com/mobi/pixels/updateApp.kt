@@ -67,24 +67,9 @@ fun Activity.updateAppWithRemoteConfig(jsonString: String) {
         appUpdateManager.appUpdateInfo.addOnSuccessListener { result ->
             if (result.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
                 try {
-                    if (value == "0") {
-                        appUpdateManager.startUpdateFlowForResult(
-                            result,
-                            AppUpdateType.FLEXIBLE,
-                            this,
-                            100
-                        )
-                    } else if (value == "1") {
-                        appUpdateManager?.startUpdateFlowForResult(
-                            result,
-                            AppUpdateType.IMMEDIATE,
-                            this,
-                            100
-                        )
-                    }
-                } catch (e: IntentSender.SendIntentException) {
-                    e.printStackTrace()
-                }
+                    if (value == "0") { appUpdateManager.startUpdateFlowForResult(result, AppUpdateType.FLEXIBLE, this, 100)
+                    } else if (value == "1") { appUpdateManager?.startUpdateFlowForResult(result, AppUpdateType.IMMEDIATE, this, 100) }
+                } catch (e: IntentSender.SendIntentException) { e.printStackTrace() }
             }
             appUpdateManager.registerListener(installStateUpdatedListener)
         }

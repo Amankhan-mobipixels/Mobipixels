@@ -10,6 +10,7 @@ import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.mobi.pixels.initialize.Ads
 import com.mobi.pixels.isOnline
+import com.mobi.pixels.openAd.InitializeOpenAd
 
 object Rewarded {
 
@@ -57,7 +58,7 @@ object Rewarded {
 
 
     fun show(ctx: Activity,showListener: AdRewardedShowListeners? = null){
-        if (rewardedAd ==null || isShowingRewardedAd) {
+        if (rewardedAd ==null || isShowingRewardedAd || InitializeOpenAd.isShowingOpenAd) {
             showListener?.onError()
             return
         }

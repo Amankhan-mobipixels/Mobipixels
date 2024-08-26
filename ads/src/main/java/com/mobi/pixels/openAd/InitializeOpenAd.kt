@@ -6,10 +6,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
@@ -19,14 +16,16 @@ import com.google.android.gms.ads.appopen.AppOpenAd.AppOpenAdLoadCallback
 import com.mobi.pixels.adInterstitial.Interstitial
 import com.mobi.pixels.adRewarded.Rewarded
 import com.mobi.pixels.initialize.Ads
-import com.mobi.pixels.isOnline
 import java.util.Date
 
 class InitializeOpenAd(val context: Context, val adUnit:String, val screenDoNotWantToShow:String? = null) : Application.ActivityLifecycleCallbacks,
     DefaultLifecycleObserver {
     private var appOpenAd: AppOpenAd? = null
     private var currentActivity: Activity? = null
-    private var isShowingOpenAd = false
+    companion object{
+        var isShowingOpenAd = false
+    }
+
     private var loadTime: Long = 0
     private  var isAdLoadingInProgress = false
 
@@ -72,7 +71,7 @@ class InitializeOpenAd(val context: Context, val adUnit:String, val screenDoNotW
         Log.d("gsfgdf",context::class.java.simpleName)
 
         if (Ads.IsAdsAllowed && !isShowingOpenAd && isAdAvailable() && currentActivity!=null && !Interstitial.isShowingInterstitialAd && !Rewarded.isShowingRewardedAd) {
-
+            isShowingOpenAd = true
             val fullScreenContentCallback = object : FullScreenContentCallback() {
                 override fun onAdDismissedFullScreenContent() {
                     super.onAdDismissedFullScreenContent()
@@ -81,16 +80,12 @@ class InitializeOpenAd(val context: Context, val adUnit:String, val screenDoNotW
                     if (!isAdLoadingInProgress) fetchAd()
                 }
 
-                override fun onAdShowedFullScreenContent() {
-                    super.onAdShowedFullScreenContent()
-                    isShowingOpenAd = true
-                }
-
             }
             appOpenAd?.fullScreenContentCallback =fullScreenContentCallback
             appOpenAd?.show(currentActivity!!)
-        } else {
-            if (!isAdLoadingInProgress && !isShowingOpenAd) fetchAd()
+        }
+        else {
+            if (!isAdLoadingInProgress) fetchAd()
         }
 
 
@@ -101,7 +96,7 @@ class InitializeOpenAd(val context: Context, val adUnit:String, val screenDoNotW
     }
 
     override fun onActivityStarted(activity: Activity) {
-        if (!isShowingOpenAd && activity::class.java.simpleName != screenDoNotWantToShow) currentActivity = activity
+        if (activity::class.java.simpleName != screenDoNotWantToShow) currentActivity = activity
     }
 
     override fun onActivityResumed(activity: Activity) {

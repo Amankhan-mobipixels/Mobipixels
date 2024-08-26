@@ -8,6 +8,8 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.mobi.pixels.initialize.Ads
 import com.mobi.pixels.isOnline
+import com.mobi.pixels.openAd.InitializeOpenAd
+import com.mobi.pixels.openAd.InitializeOpenAd.Companion.isShowingOpenAd
 
 object Interstitial {
         private var mInterstitialAd: InterstitialAd? = null
@@ -53,7 +55,7 @@ object Interstitial {
 
 
         fun show(ctx: Activity, showListener: AdInterstitialShowListeners? = null) {
-            if (mInterstitialAd == null ||  isShowingInterstitialAd) {
+            if (mInterstitialAd == null ||  isShowingInterstitialAd || isShowingOpenAd) {
                 showListener?.onError()
                 return
             }
