@@ -174,7 +174,7 @@ class AdNativeOnDemand(
                         cornerRadius = buttonRoundness.dpToPx(context).toFloat()
                         colorButton?.let { setColor(Color.parseColor(it)) }
                     }
-                    layoutParams.height = FrameLayout.LayoutParams.WRAP_CONTENT
+                    layoutParams.height = 40
                 }
             }
 
