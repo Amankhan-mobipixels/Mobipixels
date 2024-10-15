@@ -12,7 +12,7 @@ allprojects {
 **add dependency in module level gradle**
 ````
 dependencies: {
-        implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.20'
+        implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.21'
             }
 ````
 **How to use In-app review**
@@ -193,6 +193,7 @@ showAdNativePreloaded(this,binding.nativeSmall,NativeAdType.NativeSmall)
             .setButtonColor("#FF5589F1")
             .setButtonRoundness(30)
             .setAdIcon(NativeAdIcon.White)
+            .setButtonHeight(40)
             .enableShimmerEffect(true)
             .setShimmerBackgroundColor("#ffffff")
             .setShimmerColor(ShimmerColor.Black)
