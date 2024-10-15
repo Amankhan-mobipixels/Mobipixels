@@ -37,7 +37,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.Amankhan-mobipixels'
                 artifactId = 'MobiPixels'
-                version = '2.1.19'
+                version = '2.1.20'
             }
         }
     }
@@ -61,4 +61,5 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-process:2.8.6'
     implementation("com.google.android.play:app-update-ktx:2.1.0")
     implementation 'com.google.code.gson:gson:2.11.0'
+    implementation 'com.android.billingclient:billing:7.1.1'
 }

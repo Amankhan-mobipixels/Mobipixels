@@ -130,27 +130,7 @@ class MainActivity : AppCompatActivity(){
 
         })
 
-        showAdNativePreloaded(this,binding.nativeSmall,NativeAdType.NativeSmall)
-            .setBackgroundColor("#61C6A2FF")
-            .setTextColorButton("#ffffff")
-            .setButtonColor("#FF5589F1")
-            .setButtonRoundness(30)
-            .setAdIcon(NativeAdIcon.White)
-            .enableShimmerEffect(true)
-            .setShimmerBackgroundColor("#ffffff")
-            .setShimmerColor(ShimmerColor.Black)
-            .showListeners(object : AdNativePreloadShowListeners{
-                override fun onShowed() {
-                    Log.d("hdfgjkdf3454","onShowed")
-                }
-
-                override fun onError() {
-                    Log.d("hdfgjkdf3454","onError")
-                }
-
-            }).show()
-
-//        loadOnDemandNativeAd(this, binding.nativeSmall, "ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeSmall)
+//        showAdNativePreloaded(this,binding.nativeSmall,NativeAdType.NativeSmall)
 //            .setBackgroundColor("#61C6A2FF")
 //            .setTextColorButton("#ffffff")
 //            .setButtonColor("#FF5589F1")
@@ -159,15 +139,35 @@ class MainActivity : AppCompatActivity(){
 //            .enableShimmerEffect(true)
 //            .setShimmerBackgroundColor("#ffffff")
 //            .setShimmerColor(ShimmerColor.Black)
-//            .adListeners(object : AdNativeOnDemandListeners {
-//                override fun onAdLoaded() {
-//
+//            .showListeners(object : AdNativePreloadShowListeners{
+//                override fun onShowed() {
+//                    Log.d("hdfgjkdf3454","onShowed")
 //                }
-//                override fun onAdFailedToLoad(error: String) {
 //
+//                override fun onError() {
+//                    Log.d("hdfgjkdf3454","onError")
 //                }
-//            })
-//            .load()
+//
+//            }).show()
+
+        loadOnDemandNativeAd(this, binding.nativeSmall, "ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeSmall)
+            .setBackgroundColor("#61C6A2FF")
+            .setTextColorButton("#ffffff")
+            .setButtonColor("#FF5589F1")
+            .setButtonRoundness(30)
+            .setAdIcon(NativeAdIcon.White)
+            .enableShimmerEffect(true)
+            .setShimmerBackgroundColor("#ffffff")
+            .setShimmerColor(ShimmerColor.Black)
+            .adListeners(object : AdNativeOnDemandListeners {
+                override fun onAdLoaded() {
+
+                }
+                override fun onAdFailedToLoad(error: String) {
+
+                }
+            })
+            .load()
 //
 //        loadOnDemandNativeAd(this, binding.nativeAdvance, "ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeAdvance)
 //            .setBackgroundColor("#61C6A2FF")

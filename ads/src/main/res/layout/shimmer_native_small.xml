@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/shimmerBackground"
-        android:padding="10dp">
+        android:padding="5dp">
 
         <View
             android:id="@+id/ad_app_icon"
@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="5dp">
+            android:layout_marginStart="5dp">
 
             <View
                 android:id="@+id/ad_headline"
@@ -34,13 +34,13 @@
                 android:id="@+id/ad_body"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="3dp"
                 android:background="#C2C2C2" />
             <androidx.cardview.widget.CardView
                 android:id="@+id/ad_call_to_action"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="5dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="3dp"
                 android:backgroundTint="#C2C2C2"
                 app:cardCornerRadius="20dp"/>
 
