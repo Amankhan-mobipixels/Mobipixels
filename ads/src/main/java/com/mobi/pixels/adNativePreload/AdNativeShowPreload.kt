@@ -30,6 +30,7 @@ class ShowAdNativePreload(
     private var colorButton: String? = null
     private var backgroundColor: String? = null
     private var buttonRoundness: Int = 0
+    private var buttonHeight: Int = 40
     private var adIcon: NativeAdIcon? = null
     private var shimmerEffect: Boolean = false
     private var shimmerColor: ShimmerColor? = null
@@ -40,6 +41,7 @@ class ShowAdNativePreload(
     fun setTextColorDescription(color: String) = apply { textColorDescription = color }
     fun setTextColorButton(color: String) = apply { textColorButton = color }
     fun setButtonRoundness(buttonRound: Int) = apply { buttonRoundness = buttonRound }
+    fun setButtonHeight(buttonHt: Int) = apply { buttonHeight = buttonHt }
     fun setButtonColor(color: String) = apply { colorButton = color }
     fun setBackgroundColor(color: String) = apply { backgroundColor = color }
     fun setAdIcon(icon: NativeAdIcon) = apply { adIcon = icon }
@@ -127,7 +129,7 @@ class ShowAdNativePreload(
                         cornerRadius = buttonRoundness.dpToPx(context).toFloat()
                         colorButton?.let { setColor(Color.parseColor(it)) }
                     }
-                    layoutParams.height = FrameLayout.LayoutParams.WRAP_CONTENT
+                    layoutParams.height = buttonHeight.dpToPx(context)
                 }
             }
 

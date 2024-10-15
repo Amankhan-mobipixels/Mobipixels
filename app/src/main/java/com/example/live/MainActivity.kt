@@ -155,6 +155,7 @@ class MainActivity : AppCompatActivity(){
             .setTextColorButton("#ffffff")
             .setButtonColor("#FF5589F1")
             .setButtonRoundness(30)
+            .setButtonHeight(30)
             .setAdIcon(NativeAdIcon.White)
             .enableShimmerEffect(true)
             .setShimmerBackgroundColor("#ffffff")
