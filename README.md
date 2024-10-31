@@ -12,7 +12,7 @@ allprojects {
 **add dependency in module level gradle**
 ````
 dependencies: {
-        implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.1.21'
+        implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.2.0'
             }
 ````
 **How to use In-app review**
@@ -107,6 +107,50 @@ Json example:
       "UpdateType": "1"               
     }
   ]
+ ````
+**How to use In App Purchase**
+````
+
+// implement PurchaseListener with your activity 
+     class MainActivity : AppCompatActivity(),PurchaseListener{
+
+     var details :   List<ProductDetails>? = null
+     InAppPurchase.initialize(this, listOf("weekly,monthly"), PurchaseType.Subscription){
+        if (it.isNotEmpty()) {
+            details = it
+            it.forEach { productDetails ->
+                Log.d("Product Details", productDetails.toString())
+            }
+            // you can show all products in recyclerview here.
+        } else {
+            Log.d("Product Details", "No products found or an error occurred.")
+        }
+    }
+        
+  // launch your flow for specific product
+  InAppPurchase.launchPurchaseFlow(this,details!![0],this)
+  
+//Acknowledge pending transactions     
+   override fun onResume() {
+    super.onResume()
+   InAppPurchase.checkPendingTransactions(this,PurchaseType.InAppProduct,this)
+    }
+    
+ // purchase successful
+  override fun onPurchaseSuccess(value: String) {
+  // purchased version
+   Log.d("dsjflkj409fjd", "product id $value")
+    }
+
+}
+ 
+// check status on splash screen 
+     checkPurchaseStatus(this,PurchaseType.InAppProduct){
+      if (it.isNotEmpty()) {
+      // purchased version
+        Log.d("Purchased Product IDs", it.joinToString(", "))
+      }
+    }
 ````
 **How to use ADS**
 ````

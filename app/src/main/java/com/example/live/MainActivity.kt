@@ -3,11 +3,14 @@ package com.example.live
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.android.billingclient.api.ProductDetails
 import com.mobi.pixels.enums.ShimmerColor
 import com.example.live.databinding.ActivityMainBinding
 import com.google.android.gms.ads.AdView
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.mobi.pixels.adBannerOnDemand.AdBannerOnDemandListeners
+import com.mobi.pixels.adBannerOnDemand.loadOnDemandBannerAd
 import com.mobi.pixels.adInterstitial.AdInterstitialLoadListeners
 import com.mobi.pixels.adInterstitial.Interstitial
 import com.mobi.pixels.adNativeOnDemand.AdNativeOnDemandListeners
@@ -16,15 +19,20 @@ import com.mobi.pixels.adNativePreload.AdNativePreload
 import com.mobi.pixels.adNativePreload.AdNativePreloadListeners
 import com.mobi.pixels.adNativePreload.AdNativePreloadShowListeners
 import com.mobi.pixels.adNativePreload.showAdNativePreloaded
+import com.mobi.pixels.enums.BannerAdType
 import com.mobi.pixels.enums.NativeAdIcon
 import com.mobi.pixels.enums.NativeAdType
+import com.mobi.pixels.enums.PurchaseType
 import com.mobi.pixels.enums.UpdateType
 import com.mobi.pixels.firebase.InitializeRemoteConfig
+import com.mobi.pixels.inAppPurchase.InAppPurchase
+import com.mobi.pixels.inAppPurchase.InAppPurchase.checkPurchaseStatus
+import com.mobi.pixels.inAppPurchase.PurchaseListener
 import com.mobi.pixels.initialize.Ads
 import com.mobi.pixels.updateApp
 import com.mobi.pixels.updateAppWithRemoteConfig
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity(),PurchaseListener{
     private lateinit var binding: ActivityMainBinding
     var adReference:AdView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +51,26 @@ class MainActivity : AppCompatActivity(){
 
         updateApp(UpdateType.Force)
 
+        var details :   List<ProductDetails>? = null
+       InAppPurchase.initialize(this, listOf("hello,hi"), PurchaseType.Subscription){
+            if (it.isNotEmpty()) {
+                details = it
+
+                it.forEach { productDetails ->
+
+                    Log.d("Product Details", productDetails.toString())
+                }
+            } else {
+                Log.d("Product Details", "No products found or an error occurred.")
+            }
+        }
+//        InAppPurchase.launchPurchaseFlow(this,details!![0],this)
+
+        checkPurchaseStatus(this,PurchaseType.InAppProduct){
+            if (it.isNotEmpty()) {
+                Log.d("Purchased Product IDs", it.joinToString(", "))
+            }
+        }
 
 //        isOnline(this@MainActivity)
 //        val consent = GDPRMessage(this)
@@ -72,19 +100,20 @@ class MainActivity : AppCompatActivity(){
 //
 //
 //
-//         adReference = loadOnDemandBannerAd(this,binding.banner,"ca-app-pub-3940256099942544/6300978111", BannerAdType.Banner)
-//            .enableShimmerEffect(true)
-//            .setShimmerBackgroundColor("#000000")
-//            .setShimmerColor(ShimmerColor.White)
-//            .adListeners(object : AdBannerOnDemandListeners {
-//            override fun onAdLoaded() {
-//
-//            }
-//            override fun onAdFailedToLoad() {
-//
-//
-//            }
-//        }).load()
+         adReference = loadOnDemandBannerAd(this,binding.banner,"ca-app-pub-3940256099942544/6300978111", BannerAdType.Banner)
+            .enableShimmerEffect(true)
+            .setShimmerBackgroundColor("#000000")
+            .setShimmerColor(ShimmerColor.White)
+            .adListeners(object : AdBannerOnDemandListeners {
+            override fun onAdLoaded() {
+
+            }
+                override fun onAdFailedToLoad(error: String) {
+                    Log.d("fd4ef",error)
+                }
+
+
+        }).load()
 
 //        loadOnDemandBannerAd(this,binding.collapsibleBanner,"ca-app-pub-3940256099942544/6300978111", BannerAdType.CollapsibleBanner)
 //            .enableShimmerEffect(true)
@@ -165,7 +194,6 @@ class MainActivity : AppCompatActivity(){
 
                 }
                 override fun onAdFailedToLoad(error: String) {
-
                 }
             })
             .load()
@@ -208,5 +236,16 @@ class MainActivity : AppCompatActivity(){
 //        super.onResume()
 //        adReference?.resume()
 //    }
+
+    override fun onResume() {
+        super.onResume()
+        adReference?.resume()
+   InAppPurchase.checkPendingTransactions(this,PurchaseType.InAppProduct,this)
+
+    }
+
+    override fun onPurchaseSuccess(value: String) {
+        Log.d("dsjflkj409fjd", "product id $value")
+    }
 
 }
