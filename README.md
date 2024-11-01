@@ -115,7 +115,7 @@ Json example:
      class MainActivity : AppCompatActivity(),PurchaseListener{
 
      var details :   List<ProductDetails>? = null
-     InAppPurchase.initialize(this, listOf("weekly,monthly"), PurchaseType.Subscription){
+     InAppPurchase.initialize(this, listOf("weekly","monthly"), PurchaseType.Subscription){
         if (it.isNotEmpty()) {
             details = it
             it.forEach { productDetails ->
