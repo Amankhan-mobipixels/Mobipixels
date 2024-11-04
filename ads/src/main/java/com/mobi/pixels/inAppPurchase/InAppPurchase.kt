@@ -1,10 +1,6 @@
 package com.mobi.pixels.inAppPurchase
 
 import android.app.Activity
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
-import android.widget.Toast
 import com.android.billingclient.api.AcknowledgePurchaseParams
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
@@ -16,6 +12,9 @@ import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.QueryProductDetailsParams
 import com.android.billingclient.api.QueryPurchasesParams
 import com.mobi.pixels.enums.PurchaseType
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 object InAppPurchase {
@@ -69,15 +68,16 @@ object InAppPurchase {
             .build()
 
         client.queryProductDetailsAsync(params) { billingResult, prodDetailsList ->
-            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                Handler(Looper.getMainLooper()).postDelayed( {
-                    // Call the callback with the product details
-                    onResult(prodDetailsList)
-                },2000)
-            } else {
-                // Handle the error case if needed
-                onResult(emptyList()) // Or you can handle the error differently
+            CoroutineScope(Dispatchers.Main).launch {
+                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                        // Call the callback with the product details
+                        onResult(prodDetailsList)
+                } else {
+                    // Handle the error case if needed
+                    onResult(emptyList()) // Or you can handle the error differently
+                }
             }
+
         }
     }
 
@@ -89,7 +89,9 @@ object InAppPurchase {
 
         billingClient?.acknowledgePurchase(acknowledgePurchaseParams) { billingResult ->
             if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                listener?.onPurchaseSuccess(productIds.first())
+                CoroutineScope(Dispatchers.Main).launch {
+                    listener?.onPurchaseSuccess(productIds.first())
+                }
             }
         }
     }
@@ -144,20 +146,25 @@ object InAppPurchase {
                             if (purchases.isNotEmpty()) {
                                 // Activate premium features if needed
                                 purchases.forEach { purchase ->
-                                    Log.d("Purchase Info", purchase.originalJson)
                                     purchasedProductIds.add(purchase.products[0]) // Add the product ID to the list
                                 }
                             }
-                            // Return the list of purchased product IDs through the callback
-                            onResult(purchasedProductIds)
+                            CoroutineScope(Dispatchers.Main).launch {
+                                // Return the list of purchased product IDs through the callback
+                                onResult(purchasedProductIds)
+                            }
                         } else {
-                            // Handle query failure if needed
-                            onResult(emptyList()) // Return an empty list if query failed
+                            CoroutineScope(Dispatchers.Main).launch {
+                                // Handle query failure if needed
+                                onResult(emptyList()) // Return an empty list if query failed
+                            }
                         }
                     }
                 } else {
-                    // Handle billing setup failure if needed
-                    onResult(emptyList()) // Return an empty list if setup failed
+                    CoroutineScope(Dispatchers.Main).launch {
+                        // Handle billing setup failure if needed
+                        onResult(emptyList()) // Return an empty list if setup failed
+                    }
                 }
             }
 
