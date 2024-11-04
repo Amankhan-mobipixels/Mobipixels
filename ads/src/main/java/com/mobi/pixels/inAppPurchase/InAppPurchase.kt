@@ -1,6 +1,8 @@
 package com.mobi.pixels.inAppPurchase
 
 import android.app.Activity
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import com.android.billingclient.api.AcknowledgePurchaseParams
@@ -68,8 +70,10 @@ object InAppPurchase {
 
         client.queryProductDetailsAsync(params) { billingResult, prodDetailsList ->
             if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                // Call the callback with the product details
-                onResult(prodDetailsList)
+                Handler(Looper.getMainLooper()).postDelayed( {
+                    // Call the callback with the product details
+                    onResult(prodDetailsList)
+                },2000)
             } else {
                 // Handle the error case if needed
                 onResult(emptyList()) // Or you can handle the error differently
@@ -79,7 +83,6 @@ object InAppPurchase {
 
     private fun verifySubPurchase( purchase: Purchase) {
         val productIds = purchase.products
-
         val acknowledgePurchaseParams = AcknowledgePurchaseParams.newBuilder()
             .setPurchaseToken(purchase.purchaseToken)
             .build()
