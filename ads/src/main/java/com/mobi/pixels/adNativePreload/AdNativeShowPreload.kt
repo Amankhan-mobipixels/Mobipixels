@@ -16,7 +16,7 @@ import com.mobi.pixels.adNativePreload.AdNativePreload.preloadAd
 import com.mobi.pixels.enums.NativeAdIcon
 import com.mobi.pixels.enums.NativeAdType
 import com.mobi.pixels.enums.ShimmerColor
-
+import com.mobi.pixels.initialize.Ads
 
 class ShowAdNativePreload(
     private val ctx: Activity,
@@ -53,9 +53,15 @@ class ShowAdNativePreload(
     }
 
     fun show() {
-        if (preloadAd == null) {
+        if (!Ads.IsAdsAllowed) {
+            showListener?.onError("Ads disabled by developer.")
             nativeAdContainer.visibility = View.GONE
-            showListener?.onError()
+            return
+        }
+
+        if (preloadAd == null) {
+            showListener?.onError("Ad is not loaded yet.")
+            nativeAdContainer.visibility = View.GONE
             return
         }
 

@@ -17,17 +17,16 @@ object Interstitial {
         internal var isShowingInterstitialAd = false
 
         fun load(ctx: Activity, id: String,loadListener: AdInterstitialLoadListeners? = null) {
-            if (mInterstitialAd != null) {
-                loadListener?.onLoaded()
-                return
-            }
-
             if (!isOnline(ctx)) {
                 loadListener?.onFailedToLoad("Internet connection not detected. Please check your connection and try again.")
                 return
             }
-            if (!Ads.IsAdsAllowed) {
-                loadListener?.onFailedToLoad("Ads disabled by developer")
+             if (!Ads.IsAdsAllowed) {
+                loadListener?.onFailedToLoad("Ads disabled by developer.")
+                return
+            }
+            if (mInterstitialAd != null) {
+                loadListener?.onLoaded()
                 return
             }
 
@@ -55,10 +54,21 @@ object Interstitial {
 
 
         fun show(ctx: Activity, showListener: AdInterstitialShowListeners? = null) {
-            if (mInterstitialAd == null ||  isShowingInterstitialAd || isShowingOpenAd) {
-                showListener?.onError()
+
+            if (!Ads.IsAdsAllowed) {
+                showListener?.onError("Ads disabled by developer.")
                 return
             }
+
+            if (mInterstitialAd == null) {
+                showListener?.onError("Ad is not loaded yet.")
+                return
+            }
+            if (isShowingInterstitialAd || isShowingOpenAd){
+                showListener?.onError("Interstitial Ad or openAd is already showing on the screen.")
+                return
+            }
+
             mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
                 override fun onAdDismissedFullScreenContent() {
                     super.onAdDismissedFullScreenContent()

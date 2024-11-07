@@ -48,13 +48,14 @@ class AdBannerOnDemand(
     fun load():AdView? {
 
         if (!isOnline(context)) {
-            bannerAdContainer.visibility = View.GONE
             adLoadListener?.onAdFailedToLoad("Internet connection not detected. Please check your connection and try again.")
+            bannerAdContainer.visibility = View.GONE
             return null
         }
+
         if (!Ads.IsAdsAllowed) {
+            adLoadListener?.onAdFailedToLoad("Ads disabled by developer.")
             bannerAdContainer.visibility = View.GONE
-            adLoadListener?.onAdFailedToLoad("Ads disabled by developer")
             return null
         }
 

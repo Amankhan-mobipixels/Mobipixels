@@ -46,7 +46,7 @@ class InitializeOpenAd(val context: Context, val adUnit:String, val screenDoNotW
     }
 
     fun fetchAd() {
-        if (isAdAvailable() || isAdLoadingInProgress) return
+        if (isAdAvailable() || isAdLoadingInProgress || !Ads.IsAdsAllowed) return
         isAdLoadingInProgress = true
         val loadCallback = object : AppOpenAdLoadCallback() {
             override fun onAdLoaded(openAd: AppOpenAd) {
@@ -77,7 +77,7 @@ class InitializeOpenAd(val context: Context, val adUnit:String, val screenDoNotW
                     super.onAdDismissedFullScreenContent()
                     appOpenAd = null
                     isShowingOpenAd = false
-                    if (!isAdLoadingInProgress) fetchAd()
+                    fetchAd()
                 }
 
             }
@@ -85,7 +85,7 @@ class InitializeOpenAd(val context: Context, val adUnit:String, val screenDoNotW
             appOpenAd?.show(currentActivity!!)
         }
         else {
-            if (!isAdLoadingInProgress) fetchAd()
+             fetchAd()
         }
 
 

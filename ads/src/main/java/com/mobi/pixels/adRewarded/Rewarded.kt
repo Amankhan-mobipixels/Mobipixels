@@ -19,10 +19,6 @@ object Rewarded {
     internal var isShowingRewardedAd = false
 
     fun load(ctx: Activity, id: String,loadListener: AdRewardedLoadListeners? = null){
-        if (rewardedAd !=null){
-            loadListener?.onLoaded()
-            return
-        }
         if (!isOnline(ctx)) {
             loadListener?.onFailedToLoad("Internet connection not detected. Please check your connection and try again.")
             return
@@ -31,6 +27,11 @@ object Rewarded {
             loadListener?.onFailedToLoad("Ads disabled by developer")
             return
         }
+        if (rewardedAd !=null){
+            loadListener?.onLoaded()
+            return
+        }
+
         val callback = object : RewardedAdLoadCallback() {
             override fun onAdLoaded(ad: RewardedAd) {
                 isPreviousAdLoading = false
@@ -58,8 +59,16 @@ object Rewarded {
 
 
     fun show(ctx: Activity,showListener: AdRewardedShowListeners? = null){
-        if (rewardedAd ==null || isShowingRewardedAd || InitializeOpenAd.isShowingOpenAd) {
-            showListener?.onError()
+        if (!Ads.IsAdsAllowed) {
+            showListener?.onError("Ads disabled by developer.")
+            return
+        }
+        if (rewardedAd ==null) {
+            showListener?.onError("Ad is not loaded yet.")
+            return
+        }
+        if (isShowingRewardedAd || InitializeOpenAd.isShowingOpenAd){
+            showListener?.onError("Rewarded Ad or openAd is already showing on the screen.")
             return
         }
 

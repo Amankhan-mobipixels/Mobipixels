@@ -10,25 +10,23 @@ import com.mobi.pixels.initialize.Ads
 import com.mobi.pixels.isOnline
 
 object AdNativePreload {
-    private lateinit var ctx: Activity
     private lateinit var id: String
     internal var preloadAd: NativeAd? = null
     private var isPreviousAdLoading = false
 
     fun load(
-        context: Activity,
+        activity: Activity,
         nativeId: String,
         loadListener: AdNativePreloadListeners? = null
     ) {
-        ctx = context
         id = nativeId
 
-        if (!isOnline(ctx)) {
+        if (!isOnline(activity)) {
             loadListener?.onAdFailedToLoad("Internet connection not detected. Please check your connection and try again.")
             return
         }
         if (!Ads.IsAdsAllowed) {
-            loadListener?.onAdFailedToLoad("Ads disabled by developer")
+            loadListener?.onAdFailedToLoad("Ads disabled by developer.")
             return
         }
         if (preloadAd != null) {
@@ -38,7 +36,7 @@ object AdNativePreload {
 
         if (!isPreviousAdLoading) {
             isPreviousAdLoading = true
-            val adLoader = AdLoader.Builder(ctx, id)
+            val adLoader = AdLoader.Builder(activity, id)
                 .forNativeAd { nativeAd -> preloadAd = nativeAd }
                 .withAdListener(object : AdListener() {
                     override fun onAdLoaded() {

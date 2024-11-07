@@ -61,13 +61,14 @@ class AdNativeOnDemand(
     fun load() {
 
         if (!isOnline(ctx)) {
-            nativeAdContainer.visibility = View.GONE
             adLoadListener?.onAdFailedToLoad("Internet connection not detected. Please check your connection and try again.")
+            nativeAdContainer.visibility = View.GONE
             return
         }
+
         if (!Ads.IsAdsAllowed) {
+            adLoadListener?.onAdFailedToLoad("Ads disabled by developer.")
             nativeAdContainer.visibility = View.GONE
-            adLoadListener?.onAdFailedToLoad("Ads disabled by developer")
             return
         }
 
