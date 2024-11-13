@@ -39,7 +39,7 @@ fun Activity.updateApp(updateType: UpdateType) {
         if (result.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
             try {
                 if (type == AppUpdateType.FLEXIBLE) { appUpdateManager.startUpdateFlowForResult(result, AppUpdateType.FLEXIBLE, this, 100) }
-                else if (type == AppUpdateType.IMMEDIATE) { appUpdateManager.startUpdateFlowForResult(result, AppUpdateType.IMMEDIATE, this, 100)}
+                else if (type == AppUpdateType.IMMEDIATE) { appUpdateManager.startUpdateFlowForResult(result, AppUpdateType.IMMEDIATE, this, 200)}
             } catch (e: IntentSender.SendIntentException) { e.printStackTrace() } }
         appUpdateManager.registerListener(installStateUpdatedListener)
     }

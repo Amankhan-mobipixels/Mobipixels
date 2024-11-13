@@ -12,7 +12,7 @@ allprojects {
 **add dependency in module level gradle**
 ````
 dependencies: {
-        implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.2.3'
+        implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.2.4'
             }
 ````
 **How to use In-app review**
@@ -82,12 +82,17 @@ context.initializeFirebaseMessaging(subscribeToTopic)
 **How to use In-app updates**
 ````
  updateApp(UpdateType.Force)
+ // you can check user interaction status either cancelled or downloaded will trigger in onActivityResult()
+ // if you have defined in your activity, 100 request code for Flexible and 200 request code for immediate update
 ````
 **How to use In-app updates with remote config**
 ````
 // control in-app update with remote config you just have to pass remote config json as a string
 
     updateAppWithRemoteConfig(version)
+    
+// you can check user interaction status either cancelled or downloaded will trigger in onActivityResult()
+// if you have defined in your activity, 100 request code for Flexible and 200 request code for immediate update
 
 Json example:
 
