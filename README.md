@@ -83,7 +83,7 @@ context.initializeFirebaseMessaging(subscribeToTopic)
 ````
  updateApp(UpdateType.Force)
  // you can check user interaction status either cancelled or downloaded will trigger in onActivityResult()
- // if you have defined in your activity, 100 request code for Flexible and 200 request code for immediate update
+ // if you have defined in your activity, 100 request code for Flexible and 200 request code for Immediate/Force update
 ````
 **How to use In-app updates with remote config**
 ````
@@ -92,7 +92,7 @@ context.initializeFirebaseMessaging(subscribeToTopic)
     updateAppWithRemoteConfig(version)
     
 // you can check user interaction status either cancelled or downloaded will trigger in onActivityResult()
-// if you have defined in your activity, 100 request code for Flexible and 200 request code for immediate update
+// if you have defined in your activity, 100 request code for Flexible and 200 request code for Immediate/Force update
 
 Json example:
 
