@@ -21,6 +21,7 @@ import com.mobi.pixels.adNativePreload.AdNativePreloadShowListeners
 import com.mobi.pixels.adNativePreload.showAdNativePreloaded
 import com.mobi.pixels.enums.BannerAdType
 import com.mobi.pixels.enums.NativeAdIcon
+import com.mobi.pixels.firebase.initializeFirebaseMessaging
 import com.mobi.pixels.enums.NativeAdType
 import com.mobi.pixels.enums.PurchaseType
 import com.mobi.pixels.enums.UpdateType
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity(),PurchaseListener{
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        initializeFirebaseMessaging("demo", com.example.ads.R.drawable.ad_text_background_black)
         Ads.initialize(this,true)
 
         InitializeRemoteConfig{
@@ -184,7 +185,7 @@ class MainActivity : AppCompatActivity(),PurchaseListener{
             .setTextColorButton("#ffffff")
             .setButtonColor("#FF5589F1")
             .setButtonRoundness(30)
-            .setButtonHeight(30)
+            .setButtonHeight(50)
             .setAdIcon(NativeAdIcon.White)
             .enableShimmerEffect(true)
             .setShimmerBackgroundColor("#ffffff")

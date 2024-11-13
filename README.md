@@ -12,7 +12,7 @@ allprojects {
 **add dependency in module level gradle**
 ````
 dependencies: {
-        implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.2.4'
+        implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.2.5'
             }
 ````
 **How to use In-app review**
@@ -68,7 +68,7 @@ After adding these dependencies Crashlytics and Firebase analytics added by defa
 //notificationIcon shows at the time of notification in app
 // make sure you have post notification permission for android 13 and above
 
-context.initializeFirebaseMessaging(subscribeToTopic)
+context.initializeFirebaseMessaging(subscribeToTopic, R.drawable.appicon)
 ````
 **How to use Remote Config**
 ````

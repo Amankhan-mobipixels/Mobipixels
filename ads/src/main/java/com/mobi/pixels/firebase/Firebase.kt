@@ -11,6 +11,7 @@ import com.google.firebase.analytics.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.messaging.FirebaseMessaging
 import com.mobi.pixels.firebase.Messaging.Companion.channelId
+import com.mobi.pixels.firebase.Messaging.Companion.icon
 
 fun fireEvent(name: String) {
     Firebase.analytics.logEvent(name.trim()) {
@@ -18,7 +19,7 @@ fun fireEvent(name: String) {
     }
 }
 
-fun Context.initializeFirebaseMessaging(subscribeToTopic:String) {
+fun Context.initializeFirebaseMessaging(subscribeToTopic:String,appIcon:Int) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         val channel =
             NotificationChannel(
@@ -38,6 +39,7 @@ fun Context.initializeFirebaseMessaging(subscribeToTopic:String) {
         }
 
     channelId = subscribeToTopic
+    icon = appIcon
     startService(
         Intent(this, Messaging::class.java)
     )
