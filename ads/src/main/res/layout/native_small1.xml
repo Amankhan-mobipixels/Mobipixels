@@ -47,11 +47,11 @@
                     android:text="AD"
                     android:textStyle="bold"
                     android:textColor="#000000"
-                    android:textSize="8dp"
+                    android:textSize="11sp"
                     android:background="@drawable/ad_text_background_black"
                     android:paddingVertical="3dp"
                     android:paddingHorizontal="4dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:layout_gravity="start"/>
             </LinearLayout>
             <TextView

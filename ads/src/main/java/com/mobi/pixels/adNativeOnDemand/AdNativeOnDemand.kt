@@ -20,15 +20,18 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.admanager.AdManagerAdRequest
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
+import com.mobi.pixels.enums.NativeLayoutType
 import com.mobi.pixels.initialize.Ads
 import com.mobi.pixels.isOnline
 import com.mobi.pixels.shimmerNative
+import java.lang.annotation.Native
 
 class AdNativeOnDemand(
     private val ctx: Activity,
     private val nativeAdContainer: FrameLayout,
     private val id: String,
-    private val nativeAdType: NativeAdType
+    private val nativeAdType: NativeAdType,
+    private val nativeLayoutType: NativeLayoutType
 ) {
     private var textColorTitle: String? = null
     private var textColorDescription: String? = null
@@ -75,7 +78,7 @@ class AdNativeOnDemand(
         setupNativeContainer()
 
         if (shimmerEffect) {
-            shimmerNative(ctx, nativeAdContainer, nativeAdType, shimmerColor, shimmerBackgroundColor)
+            shimmerNative(ctx, nativeAdContainer, nativeAdType,nativeLayoutType, shimmerColor, shimmerBackgroundColor)
         }
 
         val adLoader = AdLoader.Builder(ctx, id)
@@ -115,9 +118,19 @@ class AdNativeOnDemand(
 
     private fun createNativeView(): NativeAdView {
         val layoutId = when (nativeAdType) {
-            NativeAdType.NativeSmall -> R.layout.native_small
+            NativeAdType.NativeSmall -> {
+                 when(nativeLayoutType){
+                    NativeLayoutType.Layout1 -> R.layout.native_small1
+                    NativeLayoutType.Layout2 -> R.layout.native_small2
+                }
 
-            NativeAdType.NativeAdvance -> R.layout.native_advance
+            }
+            NativeAdType.NativeAdvance -> {
+                 when(nativeLayoutType){
+                    NativeLayoutType.Layout1 -> R.layout.native_advance1
+                    NativeLayoutType.Layout2 -> R.layout.native_advance2
+                }
+            }
         }
         return ctx.layoutInflater.inflate(layoutId, null) as NativeAdView
     }
@@ -202,7 +215,8 @@ fun loadOnDemandNativeAd(
     ctx: Activity,
     nativeAdContainer: FrameLayout,
     id: String,
-    nativeAdType: NativeAdType
+    nativeAdType: NativeAdType,
+    nativeLayoutType: NativeLayoutType
 ): AdNativeOnDemand {
-    return AdNativeOnDemand(ctx, nativeAdContainer, id, nativeAdType)
+    return AdNativeOnDemand(ctx, nativeAdContainer, id, nativeAdType,nativeLayoutType)
 }

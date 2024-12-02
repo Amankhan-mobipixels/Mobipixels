@@ -23,6 +23,7 @@ import com.mobi.pixels.enums.BannerAdType
 import com.mobi.pixels.enums.NativeAdIcon
 import com.mobi.pixels.firebase.initializeFirebaseMessaging
 import com.mobi.pixels.enums.NativeAdType
+import com.mobi.pixels.enums.NativeLayoutType
 import com.mobi.pixels.enums.PurchaseType
 import com.mobi.pixels.enums.UpdateType
 import com.mobi.pixels.firebase.InitializeRemoteConfig
@@ -101,20 +102,20 @@ class MainActivity : AppCompatActivity(),PurchaseListener{
 //
 //
 //
-         adReference = loadOnDemandBannerAd(this,binding.banner,"ca-app-pub-3940256099942544/6300978111", BannerAdType.Banner)
-            .enableShimmerEffect(true)
-            .setShimmerBackgroundColor("#000000")
-            .setShimmerColor(ShimmerColor.White)
-            .adListeners(object : AdBannerOnDemandListeners {
-            override fun onAdLoaded() {
-
-            }
-                override fun onAdFailedToLoad(error: String) {
-                    Log.d("fd4ef",error)
-                }
-
-
-        }).load()
+//         adReference = loadOnDemandBannerAd(this,binding.banner,"ca-app-pub-3940256099942544/6300978111", BannerAdType.Banner)
+//            .enableShimmerEffect(true)
+//            .setShimmerBackgroundColor("#000000")
+//            .setShimmerColor(ShimmerColor.White)
+//            .adListeners(object : AdBannerOnDemandListeners {
+//            override fun onAdLoaded() {
+//
+//            }
+//                override fun onAdFailedToLoad(error: String) {
+//                    Log.d("fd4ef",error)
+//                }
+//
+//
+//        }).load()
 
 //        loadOnDemandBannerAd(this,binding.collapsibleBanner,"ca-app-pub-3940256099942544/6300978111", BannerAdType.CollapsibleBanner)
 //            .enableShimmerEffect(true)
@@ -130,72 +131,36 @@ class MainActivity : AppCompatActivity(),PurchaseListener{
 //                }
 //            }).load()
 
-        AdNativePreload.load(this,"ca-app-pub-3940256099942544/2247696110",object :AdNativePreloadListeners{
-            override fun onAdLoaded() {
-                Log.d("hdfgjkdf3454","onAdLoaded")
-            }
-
-            override fun onAdFailedToLoad(error: String) {
-                Log.d("hdfgjkdf3454","onAdFailedToLoad")
-            }
-
-            override fun onPreviousAdLoading() {
-                Log.d("hdfgjkdf3454","onPreviousAdLoading")
-            }
-
-        })
-
-        AdNativePreload.load(this,"ca-app-pub-3940256099942544/2247696110",object :AdNativePreloadListeners{
-            override fun onAdLoaded() {
-                Log.d("hdfgjkdf3454","onAdLoaded")
-            }
-
-            override fun onAdFailedToLoad(error: String) {
-                Log.d("hdfgjkdf3454","onAdFailedToLoad")
-            }
-
-            override fun onPreviousAdLoading() {
-                Log.d("hdfgjkdf3454","onPreviousAdLoading")
-            }
-
-        })
-
-//        showAdNativePreloaded(this,binding.nativeSmall,NativeAdType.NativeSmall)
+//        showAdNativePreloaded(this,binding.nativeSmall,NativeAdType.NativeSmall,NativeLayoutType.Layout1)
 //            .setBackgroundColor("#61C6A2FF")
 //            .setTextColorButton("#ffffff")
 //            .setButtonColor("#FF5589F1")
 //            .setButtonRoundness(30)
 //            .setAdIcon(NativeAdIcon.White)
-//            .enableShimmerEffect(true)
-//            .setShimmerBackgroundColor("#ffffff")
-//            .setShimmerColor(ShimmerColor.Black)
 //            .showListeners(object : AdNativePreloadShowListeners{
 //                override fun onShowed() {
 //                    Log.d("hdfgjkdf3454","onShowed")
 //                }
 //
-//                override fun onError() {
+//                override fun onError(error: String) {
 //                    Log.d("hdfgjkdf3454","onError")
 //                }
 //
 //            }).show()
 
-        loadOnDemandNativeAd(this, binding.nativeSmall, "ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeSmall)
+        loadOnDemandNativeAd(this, binding.nativeSmall, "ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeSmall,NativeLayoutType.Layout2)
             .setBackgroundColor("#61C6A2FF")
             .setTextColorButton("#ffffff")
             .setButtonColor("#FF5589F1")
             .setButtonRoundness(30)
-            .setButtonHeight(50)
-            .setAdIcon(NativeAdIcon.White)
+            .setButtonHeight(40)
+            .setAdIcon(NativeAdIcon.Black)
             .enableShimmerEffect(true)
             .setShimmerBackgroundColor("#ffffff")
             .setShimmerColor(ShimmerColor.Black)
             .adListeners(object : AdNativeOnDemandListeners {
-                override fun onAdLoaded() {
-
-                }
-                override fun onAdFailedToLoad(error: String) {
-                }
+                override fun onAdLoaded() {}
+                override fun onAdFailedToLoad(error: String) {}
             })
             .load()
 //

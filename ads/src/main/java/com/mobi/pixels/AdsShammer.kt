@@ -11,19 +11,33 @@ import androidx.cardview.widget.CardView
 import com.example.ads.R
 import com.google.android.gms.ads.nativead.MediaView
 import com.mobi.pixels.enums.NativeAdType
+import com.mobi.pixels.enums.NativeLayoutType
 import com.mobi.pixels.enums.ShimmerColor
 
 fun shimmerNative(
     activity: Activity,
     container: FrameLayout,
     nativeAdType: NativeAdType,
+    nativeLayoutType:NativeLayoutType,
     shimmerColor: ShimmerColor?,
     shimmerBackgroundColor: String?) {
     // Inflate the appropriate layout based on the nativeAdType
     val layoutId = when (nativeAdType) {
-        NativeAdType.NativeAdvance -> R.layout.shimmer_native_advance
-        NativeAdType.NativeSmall -> R.layout.shimmer_native_small
+        NativeAdType.NativeSmall -> {
+            when(nativeLayoutType){
+                NativeLayoutType.Layout1 -> R.layout.shimmer_native_small1
+                NativeLayoutType.Layout2 -> R.layout.shimmer_native_small2
+            }
+
+        }
+        NativeAdType.NativeAdvance -> {
+            when(nativeLayoutType){
+                NativeLayoutType.Layout1 -> R.layout.shimmer_native_advance1
+                NativeLayoutType.Layout2 -> R.layout.shimmer_native_advance2
+            }
+        }
     }
+
     container.addView(activity.layoutInflater.inflate(layoutId, null))
     // Set the shimmer background color if provided
     shimmerBackgroundColor?.let { container.findViewById<LinearLayout>(R.id.shimmerBackground).setBackgroundColor(Color.parseColor(it)) }

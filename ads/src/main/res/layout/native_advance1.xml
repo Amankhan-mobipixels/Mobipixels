@@ -53,11 +53,11 @@
                         android:text="AD"
                         android:textStyle="bold"
                         android:textColor="#000000"
-                        android:textSize="8dp"
+                        android:textSize="11sp"
                         android:background="@drawable/ad_text_background_black"
                         android:paddingVertical="3dp"
                         android:paddingHorizontal="4dp"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5sp"
                         android:layout_gravity="start" />
                 </LinearLayout>
                 <TextView
@@ -73,7 +73,7 @@
         <com.google.android.gms.ads.nativead.MediaView
             android:id="@+id/ad_media"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="180dp"
             android:layout_gravity="center" />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/ad_call_to_action"

@@ -12,7 +12,7 @@ allprojects {
 **add dependency in module level gradle**
 ````
 dependencies: {
-        implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.2.6'
+        implementation 'com.github.Amankhan-mobipixels:MobiPixels:2.2.7'
             }
 ````
 **How to use In-app review**
@@ -164,7 +164,7 @@ val consent = GDPRMessage(this)
 ````
 **How to use Native AD**
 ````
-           loadOnDemandNativeAd(this, binding.nativeSmall, "ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeSmall)
+           loadOnDemandNativeAd(this, binding.nativeSmall, "ca-app-pub-3940256099942544/2247696110", NativeAdType.NativeSmall,NativeLayoutType.Layout1)
             .setBackgroundColor("#61C6A2FF")
             .setTextColorButton("#ffffff")
             .setButtonColor("#FF5589F1")
@@ -192,16 +192,13 @@ val consent = GDPRMessage(this)
         })
 
 // you can call this on any screen to show native preloaded ad
-showAdNativePreloaded(this,binding.nativeSmall,NativeAdType.NativeSmall)
+showAdNativePreloaded(this,binding.nativeSmall,NativeAdType.NativeSmall,NativeLayoutType.Layout1)
             .setBackgroundColor("#61C6A2FF")
             .setTextColorButton("#ffffff")
             .setButtonColor("#FF5589F1")
             .setButtonRoundness(30)
             .setAdIcon(NativeAdIcon.White)
             .setButtonHeight(40)
-            .enableShimmerEffect(true)
-            .setShimmerBackgroundColor("#ffffff")
-            .setShimmerColor(ShimmerColor.Black)
             .showListeners(object : AdNativePreloadShowListeners{
                 override fun onShowed() { }
                 override fun onError() { }

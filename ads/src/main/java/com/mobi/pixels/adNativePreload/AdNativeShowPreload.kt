@@ -15,13 +15,15 @@ import com.google.android.gms.ads.nativead.NativeAdView
 import com.mobi.pixels.adNativePreload.AdNativePreload.preloadAd
 import com.mobi.pixels.enums.NativeAdIcon
 import com.mobi.pixels.enums.NativeAdType
+import com.mobi.pixels.enums.NativeLayoutType
 import com.mobi.pixels.enums.ShimmerColor
 import com.mobi.pixels.initialize.Ads
 
 class ShowAdNativePreload(
     private val ctx: Activity,
     private val nativeAdContainer: FrameLayout,
-    private val nativeAdType: NativeAdType
+    private val nativeAdType: NativeAdType,
+    private val nativeLayoutType: NativeLayoutType
 )
 {
     private var textColorTitle: String? = null
@@ -32,9 +34,6 @@ class ShowAdNativePreload(
     private var buttonRoundness: Int = 0
     private var buttonHeight: Int = 40
     private var adIcon: NativeAdIcon? = null
-    private var shimmerEffect: Boolean = false
-    private var shimmerColor: ShimmerColor? = null
-    private var shimmerBackgroundColor: String? = null
     private var showListener: AdNativePreloadShowListeners? = null
 
     fun setTextColorTitle(color: String) = apply { textColorTitle = color }
@@ -45,9 +44,6 @@ class ShowAdNativePreload(
     fun setButtonColor(color: String) = apply { colorButton = color }
     fun setBackgroundColor(color: String) = apply { backgroundColor = color }
     fun setAdIcon(icon: NativeAdIcon) = apply { adIcon = icon }
-    fun enableShimmerEffect(effect: Boolean) = apply { shimmerEffect = effect }
-    fun setShimmerColor(color: ShimmerColor) = apply { shimmerColor = color }
-    fun setShimmerBackgroundColor(color: String) = apply { shimmerBackgroundColor = color }
     fun showListeners(listener: AdNativePreloadShowListeners?) = apply {
         showListener = listener
     }
@@ -66,9 +62,19 @@ class ShowAdNativePreload(
         }
 
         val layoutId = when (nativeAdType) {
-            NativeAdType.NativeSmall -> R.layout.native_small
+            NativeAdType.NativeSmall -> {
+                when(nativeLayoutType){
+                    NativeLayoutType.Layout1 -> R.layout.native_small1
+                    NativeLayoutType.Layout2 -> R.layout.native_small2
+                }
 
-            NativeAdType.NativeAdvance -> R.layout.native_advance
+            }
+            NativeAdType.NativeAdvance -> {
+                when(nativeLayoutType){
+                    NativeLayoutType.Layout1 -> R.layout.native_advance1
+                    NativeLayoutType.Layout2 -> R.layout.native_advance2
+                }
+            }
         }
         val nativeView = ctx.layoutInflater.inflate(layoutId, null) as NativeAdView
 
@@ -160,7 +166,8 @@ class ShowAdNativePreload(
 fun showAdNativePreloaded(
     ctx: Activity,
     nativeAdContainer: FrameLayout,
-    nativeAdType: NativeAdType
+    nativeAdType: NativeAdType,
+    nativeLayoutType: NativeLayoutType
 ): ShowAdNativePreload {
-    return ShowAdNativePreload(ctx, nativeAdContainer, nativeAdType)
+    return ShowAdNativePreload(ctx, nativeAdContainer, nativeAdType,nativeLayoutType)
 }
