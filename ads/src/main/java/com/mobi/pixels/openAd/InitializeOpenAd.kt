@@ -30,6 +30,7 @@ class InitializeOpenAd(val context: Context, val adUnit:String, val screenDoNotW
     private  var isAdLoadingInProgress = false
 
     init {
+        isShowingOpenAd = false
         (context as Application).registerActivityLifecycleCallbacks(this)
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
     }
