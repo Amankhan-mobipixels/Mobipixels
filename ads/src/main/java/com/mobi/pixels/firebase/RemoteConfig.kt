@@ -10,13 +10,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class InitializeRemoteConfig(private val onFetchSuccess: () -> Unit) {
+class InitializeRemoteConfig(refreshTime:Long, private val onFetchSuccess: () -> Unit) {
 
     private val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
 
     init {
         val configSettings = remoteConfigSettings {
-            minimumFetchIntervalInSeconds = 86400
+            minimumFetchIntervalInSeconds = refreshTime
         }
         remoteConfig.setConfigSettingsAsync(configSettings)
 

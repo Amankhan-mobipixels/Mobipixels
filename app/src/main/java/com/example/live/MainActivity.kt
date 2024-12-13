@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(),PurchaseListener{
         initializeFirebaseMessaging("demo", com.example.ads.R.drawable.ad_text_background_black)
         Ads.initialize(this,true)
 
-        InitializeRemoteConfig{
+        InitializeRemoteConfig(0){
 //            val isInterEnabled = Firebase.remoteConfig.getBoolean("splashAd")
 //            val interValue = Firebase.remoteConfig.getString("splash")
             val version = Firebase.remoteConfig.getString("versions")
