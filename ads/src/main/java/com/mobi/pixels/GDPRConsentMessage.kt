@@ -58,6 +58,7 @@ class GDPRMessage(activity: Activity){
 
         },
             {requestConsentError ->
+                callback(false)
                 // error
                 Log.w("fail", String.format("%s: %s", requestConsentError.errorCode, requestConsentError.message))
             })
