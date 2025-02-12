@@ -12,7 +12,7 @@ allprojects {
 **add dependency in module level gradle**
 ````
 dependencies: {
-        implementation 'com.github.Amankhan-mobipixels:Mobipixels:2.2.10'
+        implementation 'com.github.Amankhan-mobipixels:Mobipixels:2.2.11'
             }
 ````
 **How to use In-app review**
