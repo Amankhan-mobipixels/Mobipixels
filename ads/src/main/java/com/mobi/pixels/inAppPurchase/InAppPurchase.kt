@@ -96,15 +96,21 @@ object InAppPurchase {
         }
     }
 
-    fun launchPurchaseFlow(activity: Activity, productDetail: ProductDetails,purchaseListener: PurchaseListener) {
+    fun launchPurchaseFlow(activity: Activity, productDetail: ProductDetails,type: PurchaseType, purchaseListener: PurchaseListener) {
          listener = purchaseListener
         val client = getOrCreateBillingClient(activity)
-        val productDetailsParamsList = listOf(
+        val productDetailsParamsList = if (type == PurchaseType.Subscription){listOf(
             ProductDetailsParams.newBuilder()
                 .setProductDetails(productDetail)
                 .setOfferToken(productDetail.subscriptionOfferDetails!![0].offerToken)
                 .build()
-        )
+        )} else {
+            listOf(
+                ProductDetailsParams.newBuilder()
+                    .setProductDetails(productDetail)
+                    .build()
+            )
+        }
 
         val billingFlowParams = BillingFlowParams.newBuilder()
             .setProductDetailsParamsList(productDetailsParamsList)
